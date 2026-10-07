@@ -3,6 +3,7 @@
 // Safe LocalStorage Helpers
 function safeGetStorage(key, fallback) {
   try {
+    if (typeof localStorage === "undefined") return fallback;
     const val = localStorage.getItem(key);
     return val ? JSON.parse(val) : fallback;
   } catch (e) {
@@ -12,7 +13,9 @@ function safeGetStorage(key, fallback) {
 
 function safeSetStorage(key, value) {
   try {
-    localStorage.setItem(key, JSON.stringify(value));
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
   } catch (e) {
     console.warn("Storage write skipped:", e);
   }
@@ -47,7 +50,9 @@ const AppState = {
 
 // Web Speech / Audio Controller
 const VoiceGuide = {
-  synth: window.speechSynthesis,
+  getSynth: function() {
+    return (typeof window !== "undefined" && "speechSynthesis" in window) ? window.speechSynthesis : null;
+  },
   utterance: null,
   isPlaying: false,
   timerInterval: null,
@@ -55,16 +60,21 @@ const VoiceGuide = {
 
   play: function(text, onEnd) {
     this.stop();
-    if (!this.synth) return;
+    const synth = this.getSynth();
+    if (!synth || typeof SpeechSynthesisUtterance === "undefined") return;
 
     this.utterance = new SpeechSynthesisUtterance(text);
     this.utterance.rate = 0.95;
     this.utterance.pitch = 1.0;
     
     // Pick an English voice if available
-    const voices = this.synth.getVoices();
-    const englishVoice = voices.find(v => v.lang.includes("en-IN") || v.lang.includes("en-GB") || v.lang.includes("en-US"));
-    if (englishVoice) this.utterance.voice = englishVoice;
+    try {
+      const voices = synth.getVoices();
+      const englishVoice = voices.find(v => v.lang.includes("en-IN") || v.lang.includes("en-GB") || v.lang.includes("en-US"));
+      if (englishVoice) this.utterance.voice = englishVoice;
+    } catch (err) {
+      console.warn("Voice selection error:", err);
+    }
 
     this.isPlaying = true;
     this.secondsElapsed = 0;
@@ -82,14 +92,19 @@ const VoiceGuide = {
       updateAudioPlayerUI();
     };
 
-    this.synth.speak(this.utterance);
-    this.startInterval();
-    updateAudioPlayerUI();
+    try {
+      synth.speak(this.utterance);
+      this.startInterval();
+      updateAudioPlayerUI();
+    } catch (err) {
+      console.warn("Speech synthesis error:", err);
+    }
   },
 
   pause: function() {
-    if (this.synth && this.isPlaying) {
-      this.synth.pause();
+    const synth = this.getSynth();
+    if (synth && this.isPlaying) {
+      synth.pause();
       this.isPlaying = false;
       this.clearInterval();
       updateAudioPlayerUI();
@@ -97,8 +112,9 @@ const VoiceGuide = {
   },
 
   resume: function() {
-    if (this.synth && !this.isPlaying && this.utterance) {
-      this.synth.resume();
+    const synth = this.getSynth();
+    if (synth && !this.isPlaying && this.utterance) {
+      synth.resume();
       this.isPlaying = true;
       this.startInterval();
       updateAudioPlayerUI();
@@ -106,8 +122,9 @@ const VoiceGuide = {
   },
 
   stop: function() {
-    if (this.synth) {
-      this.synth.cancel();
+    const synth = this.getSynth();
+    if (synth) {
+      try { synth.cancel(); } catch(e) {}
       this.isPlaying = false;
       this.clearInterval();
       this.secondsElapsed = 0;
@@ -134,11 +151,19 @@ const VoiceGuide = {
 };
 
 // Initializer
-document.addEventListener("DOMContentLoaded", () => {
-  initNavigation();
-  renderApp();
-  renderSmartMatchRecommendation();
-});
+if (typeof document !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      initNavigation();
+      renderApp();
+      renderSmartMatchRecommendation();
+    });
+  } else {
+    initNavigation();
+    renderApp();
+    renderSmartMatchRecommendation();
+  }
+}
 
 // Navigation Controller
 function initNavigation() {
