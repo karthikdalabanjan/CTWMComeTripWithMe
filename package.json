@@ -1,0 +1,14 @@
+{
+  "name": "cometripwithme",
+  "version": "1.0.0",
+  "description": "ComeTripWithMe - India's 1st Creator Tour Operator. Curated travel itineraries, interactive live audio tour guide, spot recommendations, smart planner and master app controller.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "npx -y serve . -p 3000"
+  },
+  "keywords": ["travel", "audio-guide", "itinerary", "curated-travel", "cometripwithme"],
+  "author": "ComeTripWithMe",
+  "license": "MIT"
+}

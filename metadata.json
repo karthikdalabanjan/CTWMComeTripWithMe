@@ -1,0 +1,6 @@
+{
+  "name": "ComeTripWithMe",
+  "description": "Creator-led curated travel itineraries, interactive live audio tour guide, spot recommendations and smart trip companion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "ComeTripWithMe",
+  "short_name": "ComeTripWithMe",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080A0F",
+  "theme_color": "#080A0F",
+  "description": "India's 1st Creator-Led Tour Operator. Curated travel itineraries & live audio guide.",
+  "icons": [
+    {
+      "src": "https://ai.google.dev/static/site-assets/images/share-ais-513315318.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
