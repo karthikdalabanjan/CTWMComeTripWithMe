@@ -67,17 +67,7 @@ import com.example.ui.components.GoldPillBadge
 import com.example.ui.components.MarqueeTicker
 import com.example.ui.components.RatingStars
 import com.example.ui.components.VibeBadge
-import com.example.ui.theme.AccentGreen
-import com.example.ui.theme.BgDark
-import com.example.ui.theme.BgDarkCard
-import com.example.ui.theme.BgDarkElevated
-import com.example.ui.theme.BgDarkSurface
-import com.example.ui.theme.GlassBorder
-import com.example.ui.theme.GlassBorderGold
-import com.example.ui.theme.GlassBorderStrong
-import com.example.ui.theme.GlassSurface
-import com.example.ui.theme.GoldContainer
-import com.example.ui.theme.GoldDark
+import com.example.ui.theme.*
 import com.example.ui.theme.GoldPrimary
 import com.example.ui.theme.GoldSecondary
 import com.example.ui.theme.TextMuted
@@ -111,7 +101,7 @@ fun ExploreScreen(
         // 1. Hero Banner
         item {
             HeroHeaderSection(
-                onPlanClick = { viewModel.setTab(AppTab.TRIP_PLANNER) },
+                onPlanClick = { viewModel.setTab(AppTab.AI_CHAT_PLANNER) },
                 onExploreClick = { /* scroll down */ },
                 onSurpriseClick = { viewModel.surpriseTrip() }
             )
@@ -237,8 +227,23 @@ fun ExploreScreen(
             DestinationSpotlightsSection(
                 spotlights = spotlights,
                 onSpotlightClick = { spot ->
-                    val matchingTrip = trips.find { it.id.contains(spot.id, ignoreCase = true) }
+                    val matchingTrip = trips.find { 
+                        it.id.contains(spot.id, ignoreCase = true) || spot.id.contains(it.id, ignoreCase = true) 
+                    } ?: trips.firstOrNull()
                     matchingTrip?.let { viewModel.selectTrip(it) }
+                },
+                onBookClick = { spot ->
+                    viewModel.startBookingForDestinationId(spot.id)
+                },
+                onAiPlanClick = { spot ->
+                    viewModel.sendAiChatMessage("Can you build a custom offbeat itinerary for ${spot.title} with secret spots and food recommendations?")
+                    viewModel.setTab(AppTab.AI_CHAT_PLANNER)
+                },
+                onGuideClick = { spot ->
+                    val matchingTrip = trips.find { 
+                        it.id.contains(spot.id, ignoreCase = true) || spot.id.contains(it.id, ignoreCase = true) 
+                    } ?: trips.firstOrNull()
+                    matchingTrip?.let { viewModel.startLivePocketGuide(it) }
                 },
                 modifier = Modifier.padding(horizontal = 20.dp)
             )
@@ -257,7 +262,7 @@ fun ExploreScreen(
         // 10. Direct CTA Band
         item {
             CtaBandSection(
-                onPlanTrip = { viewModel.setTab(AppTab.TRIP_PLANNER) },
+                onPlanTrip = { viewModel.setTab(AppTab.AI_CHAT_PLANNER) },
                 onWhatsAppClick = { viewModel.openWhatsApp() },
                 onCallClick = { viewModel.callPhone() },
                 onEmailClick = { viewModel.openEmail() },
@@ -432,6 +437,7 @@ fun SmartTripFinderCard(
     val destinations = listOf(
         "goa" to "Goa 🎉",
         "thailand" to "Thailand 🌴",
+        "srilanka" to "Sri Lanka 🇱🇰",
         "himachal" to "Himachal 🏔️",
         "pondicherry" to "Pondicherry 🛕",
         "malaysia" to "Malaysia 🌆",
@@ -624,14 +630,15 @@ fun TrendingChipsSection(
 ) {
     val scrollState = rememberScrollState()
     val chips = listOf(
-        Triple("thailand", 15000, "🌴 Thailand <₹15k"),
-        Triple("goa", 5000, "🎉 Goa weekend"),
-        Triple("himachal", 15000, "🏔️ Himachal vibes"),
-        Triple("krabi", 30000, "🏝️ Krabi escape"),
-        Triple("pondicherry", 5000, "🛕 Pondicherry chill"),
-        Triple("gokarna", 5000, "🏖️ Gokarna coves"),
-        Triple("malaysia", 30000, "🌆 Malaysia+Penang")
-    )
+        "thailand" to 15000 to "🌴 Thailand <₹15k",
+        "srilanka" to 30000 to "🇱🇰 Sri Lanka Circuit",
+        "goa" to 5000 to "🎉 Goa weekend",
+        "himachal" to 15000 to "🏔️ Himachal vibes",
+        "krabi" to 30000 to "🏝️ Krabi escape",
+        "pondicherry" to 5000 to "🛕 Pondicherry chill",
+        "gokarna" to 5000 to "🏖️ Gokarna coves",
+        "malaysia" to 30000 to "🌆 Malaysia+Penang"
+    ).map { Triple(it.first.first, it.first.second, it.second) }
 
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(
@@ -841,74 +848,324 @@ fun TripCard(
 fun DestinationSpotlightsSection(
     spotlights: List<DestinationSpotlight>,
     onSpotlightClick: (DestinationSpotlight) -> Unit,
+    onBookClick: (DestinationSpotlight) -> Unit,
+    onAiPlanClick: (DestinationSpotlight) -> Unit,
+    onGuideClick: (DestinationSpotlight) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        GoldPillBadge(text = "Where I've Been")
+    var selectedTagFilter by remember { mutableStateOf("All Underrated") }
 
-        Text(
-            text = "Documented. Not imagined.",
-            style = MaterialTheme.typography.headlineMedium.copy(
-                fontWeight = FontWeight.Bold,
-                color = TextPrimary
+    val filterTags = listOf(
+        "✨ All Underrated",
+        "🏔️ Spiti Valley",
+        "🌧️ Meghalaya",
+        "🌲 Tirthan & Jibhi",
+        "🌊 Gokarna Coast",
+        "🇱🇰 Sri Lanka",
+        "🏝️ Krabi Lagoons",
+        "🏔️ Kasol & Parvati",
+        "🛕 Pondicherry",
+        "🎉 Goa Secret",
+        "🌆 Penang Woks"
+    )
+
+    val filteredSpotlights = remember(selectedTagFilter, spotlights) {
+        if (selectedTagFilter == "✨ All Underrated" || selectedTagFilter == "All Underrated") {
+            spotlights
+        } else {
+            val keyword = when {
+                selectedTagFilter.contains("Spiti", ignoreCase = true) -> "spiti"
+                selectedTagFilter.contains("Meghalaya", ignoreCase = true) -> "meghalaya"
+                selectedTagFilter.contains("Tirthan", ignoreCase = true) -> "tirthan"
+                selectedTagFilter.contains("Gokarna", ignoreCase = true) -> "gokarna"
+                selectedTagFilter.contains("Sri Lanka", ignoreCase = true) -> "srilanka"
+                selectedTagFilter.contains("Krabi", ignoreCase = true) -> "krabi"
+                selectedTagFilter.contains("Kasol", ignoreCase = true) || selectedTagFilter.contains("Parvati", ignoreCase = true) -> "himachal"
+                selectedTagFilter.contains("Pondicherry", ignoreCase = true) -> "pondicherry"
+                selectedTagFilter.contains("Goa", ignoreCase = true) -> "goa"
+                selectedTagFilter.contains("Penang", ignoreCase = true) -> "malaysia"
+                else -> selectedTagFilter.lowercase()
+            }
+            spotlights.filter { spot ->
+                spot.id.contains(keyword, ignoreCase = true) ||
+                spot.title.contains(keyword, ignoreCase = true) ||
+                spot.region.contains(keyword, ignoreCase = true) ||
+                spot.tags.any { it.contains(keyword, ignoreCase = true) }
+            }
+        }
+    }
+
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        GoldPillBadge(text = "✦ WHERE I'VE BEEN · VERIFIED ON GROUND")
+
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(
+                text = "Discovered. Not imagined.",
+                style = MaterialTheme.typography.headlineMedium.copy(
+                    fontWeight = FontWeight.Bold,
+                    color = TextPrimary
+                )
             )
-        )
+            Text(
+                text = "Researched offbeat & underrated places personally verified by ComeTripWithMe. Tap any tag or destination to explore secret spots, launch your live guide, or book the route directly.",
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    color = TextSecondary,
+                    fontSize = 13.sp,
+                    lineHeight = 19.sp
+                )
+            )
+        }
 
-        spotlights.forEach { spot ->
+        // Location Tags Filter Bar
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            filterTags.forEach { tag ->
+                val isSelected = selectedTagFilter == tag || (tag == "✨ All Underrated" && selectedTagFilter == "All Underrated")
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(if (isSelected) GoldPrimary else BgDarkSurface)
+                        .border(
+                            width = 1.dp,
+                            color = if (isSelected) GoldPrimary else GlassBorderStrong,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clickable {
+                            selectedTagFilter = if (isSelected && tag != "✨ All Underrated") "✨ All Underrated" else tag
+                        }
+                        .padding(horizontal = 14.dp, vertical = 8.dp)
+                ) {
+                    Text(
+                        text = tag,
+                        style = MaterialTheme.typography.labelMedium.copy(
+                            color = if (isSelected) BgDark else TextPrimary,
+                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                            fontSize = 12.sp
+                        )
+                    )
+                }
+            }
+        }
+
+        // Render Spotlights
+        filteredSpotlights.forEach { spot ->
             GlassCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onSpotlightClick(spot) },
-                borderColor = GlassBorder,
+                borderColor = GlassBorderGold,
                 backgroundColor = BgDarkCard
             ) {
-                Row(
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(14.dp),
-                    horizontalArrangement = Arrangement.spacedBy(14.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    AsyncImage(
-                        model = spot.imageUrl,
-                        contentDescription = spot.title,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(76.dp)
-                            .clip(RoundedCornerShape(12.dp))
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(14.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        AsyncImage(
+                            model = spot.imageUrl,
+                            contentDescription = spot.title,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(82.dp)
+                                .clip(RoundedCornerShape(14.dp))
+                                .border(1.dp, GlassBorderStrong, RoundedCornerShape(14.dp))
+                        )
 
-                    Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                        Text(
-                            text = spot.region.uppercase(),
-                            style = MaterialTheme.typography.labelSmall.copy(
-                                color = GoldPrimary,
-                                fontSize = 8.sp,
-                                letterSpacing = 1.sp
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = spot.region.uppercase(),
+                                    style = MaterialTheme.typography.labelSmall.copy(
+                                        color = GoldPrimary,
+                                        fontSize = 9.sp,
+                                        fontWeight = FontWeight.SemiBold,
+                                        letterSpacing = 1.sp
+                                    )
+                                )
+                                Box(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(6.dp))
+                                        .background(AccentEmerald.copy(alpha = 0.15f))
+                                        .padding(horizontal = 6.dp, vertical = 2.dp)
+                                ) {
+                                    Text(
+                                        text = "VERIFIED",
+                                        style = MaterialTheme.typography.labelSmall.copy(
+                                            color = AccentEmerald,
+                                            fontSize = 8.sp,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    )
+                                }
+                            }
+
+                            Text(
+                                text = spot.title,
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    color = TextPrimary,
+                                    fontSize = 16.sp
+                                )
                             )
-                        )
-                        Text(
-                            text = spot.title,
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                fontWeight = FontWeight.Bold,
-                                color = TextPrimary
+
+                            Text(
+                                text = spot.subtitle,
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    color = TextSecondary,
+                                    fontSize = 11.sp,
+                                    lineHeight = 15.sp
+                                ),
+                                maxLines = 2
                             )
-                        )
-                        Text(
-                            text = spot.documentedSpotsCount,
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                color = TextSecondary,
-                                fontSize = 12.sp
+
+                            Text(
+                                text = "📍 ${spot.documentedSpotsCount}",
+                                style = MaterialTheme.typography.labelSmall.copy(
+                                    color = GoldSecondary,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Medium
+                                )
                             )
-                        )
+                        }
                     }
 
-                    Icon(
-                        imageVector = Icons.Default.ArrowForward,
-                        contentDescription = null,
-                        tint = GoldPrimary,
-                        modifier = Modifier.size(18.dp)
-                    )
+                    // Interactive Location Spot Tags
+                    if (spot.tags.isNotEmpty()) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            spot.tags.forEach { spotTag ->
+                                Box(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(BgDarkSurface)
+                                        .border(0.5.dp, GlassBorder, RoundedCornerShape(8.dp))
+                                        .clickable {
+                                            onSpotlightClick(spot)
+                                        }
+                                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                                ) {
+                                    Text(
+                                        text = "📍 $spotTag",
+                                        style = MaterialTheme.typography.labelSmall.copy(
+                                            color = TextSecondary,
+                                            fontSize = 10.sp
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    // Action Buttons Row
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        // 1. View Plan Button
+                        Box(
+                            modifier = Modifier
+                                .weight(1.1f)
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(GoldPrimary)
+                                .clickable { onSpotlightClick(spot) }
+                                .padding(vertical = 9.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "View Plan ✦",
+                                style = MaterialTheme.typography.labelMedium.copy(
+                                    color = BgDark,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 12.sp
+                                )
+                            )
+                        }
+
+                        // 2. Book Route Button
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(AccentEmerald.copy(alpha = 0.2f))
+                                .border(1.dp, AccentEmerald, RoundedCornerShape(10.dp))
+                                .clickable { onBookClick(spot) }
+                                .padding(vertical = 9.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "Book 🎟️",
+                                style = MaterialTheme.typography.labelMedium.copy(
+                                    color = AccentEmerald,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 12.sp
+                                )
+                            )
+                        }
+
+                        // 3. AI Copilot
+                        Box(
+                            modifier = Modifier
+                                .weight(0.9f)
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(BgDarkSurface)
+                                .border(1.dp, GlassBorderStrong, RoundedCornerShape(10.dp))
+                                .clickable { onAiPlanClick(spot) }
+                                .padding(vertical = 9.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "AI Plan 🤖",
+                                style = MaterialTheme.typography.labelMedium.copy(
+                                    color = TextPrimary,
+                                    fontWeight = FontWeight.Medium,
+                                    fontSize = 11.sp
+                                )
+                            )
+                        }
+
+                        // 4. Guide
+                        Box(
+                            modifier = Modifier
+                                .weight(0.85f)
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(BgDarkSurface)
+                                .border(1.dp, GlassBorderStrong, RoundedCornerShape(10.dp))
+                                .clickable { onGuideClick(spot) }
+                                .padding(vertical = 9.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "Guide 🧭",
+                                style = MaterialTheme.typography.labelMedium.copy(
+                                    color = TextPrimary,
+                                    fontWeight = FontWeight.Medium,
+                                    fontSize = 11.sp
+                                )
+                            )
+                        }
+                    }
                 }
             }
         }

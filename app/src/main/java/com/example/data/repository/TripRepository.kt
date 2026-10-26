@@ -271,6 +271,9 @@ class TripRepository(
             "mumbai" -> "Maximum Mumbai Experience — ₹6,499" to "3 nights. South Bombay heritage walk, Bandra café crawl, and Marine Drive 2 AM conversations."
             "srilanka" -> "Sri Lanka Island Odyssey — ₹29,999" to "6 nights. Colombo street food, Sigiriya fortress, Ella scenic train, and Mirissa surf."
             "gokarna" -> "Gokarna Slow Escape — ₹4,499" to "3 nights. Om Beach cliff trail, Half Moon cove trek, and beach campfire acoustic nights."
+            "spiti" -> "Spiti Valley High Altitude Expedition — ₹18,999" to "7 nights. Key Gompa fortress, world's highest post office in Hikkim & Chandratal Lake camping."
+            "meghalaya" -> "Meghalaya Living Root & Glass River — ₹16,999" to "5 nights. Nongriat double decker root bridges, Mawryngkhang bamboo cliff & Shnongpdeng kayaking."
+            "tirthan" -> "Tirthan & Jibhi Secret Pine Escape — ₹9,999" to "4 nights. Riverside timber cottage, Jalori pass Serolsar lake & 1500-year Chehni Kothi tower."
             else -> "Curated Creator Trip" to "Handpicked route verified with 800GB of video proof. No tourist traps."
         }
     }
@@ -1111,45 +1114,948 @@ class TripRepository(
                         creatorSecretTip = "Start the 5-beach trek (Kudle -> Om -> Half Moon -> Paradise -> God's Own) early at 6:30 AM."
                     )
                 )
+            ),
+            Trip(
+                id = "srilanka",
+                name = "Sri Lanka",
+                headline = "Misty tea hills, blue train rides, Sigiriya citadel & coastal surf.",
+                description = "6 days discovering the teardrop island. Climb the ancient rock citadel of Sigiriya, ride the legendary blue train through misty tea estates in Ella, cross the Nine Arches Demodara bridge, watch blue whales in Mirissa, and wander through 400-year-old Galle Dutch Fort ramparts.",
+                vibe = TripVibe.BACKPACKING,
+                duration = "6D / 5N",
+                price = "₹29,999",
+                budgetValue = 29999,
+                imageUrl = "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=800&q=80",
+                heroTags = listOf("Sigiriya Fortress", "Ella Blue Train", "Nine Arches Bridge", "Mirissa Whale Bay", "Galle Dutch Fort"),
+                totalEstimateDetails = "₹29,999 / person (Hill country stays, scenic train tickets, heritage passes & coastal transfers)",
+                creatorNote = "Sri Lanka has the world's most scenic mountain train journey between Kandy and Ella. Book the 2nd class reserved ticket on the right side and do not miss fresh Kottu Roti with clay-pot black curries.",
+                youtubeVideoId = "Cometripwithme",
+                days = listOf(
+                    DayPlan(
+                        dayNumber = 1,
+                        title = "Colombo to Sigiriya: The Lion Rock Citadel",
+                        summary = "Arrive in Colombo, transfer to the Cultural Triangle, and climb the ancient Sigiriya rock fortress rising 200m from the jungle.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "sl_d1_s1",
+                                name = "Sigiriya Lion Rock Citadel",
+                                timing = "8:00 AM",
+                                category = "UNESCO World Wonder",
+                                description = "5th-century sky palace built atop a massive granite monolith with ancient water gardens and frescoed mirror walls.",
+                                insiderTip = "Start the climb early at 8:00 AM to avoid the midday sun and long stair queues at the Lion Paws gate.",
+                                photoUrl = "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=600&q=80",
+                                lat = 7.9570,
+                                lng = 80.7603,
+                                audioStory = AudioStory(
+                                    title = "The Citadel in the Sky: Story of King Kashyapa",
+                                    durationSeconds = 125,
+                                    scriptText = "You are gazing up at Sigiriya, an ancient rock fortress towering 200 meters above the central jungle. Built in the 5th century AD by King Kashyapa, this summit held a lavish sky palace, surrounded by revolutionary hydraulic water gardens that still function today during monsoons."
+                                )
+                            ),
+                            StopLocation(
+                                id = "sl_d1_s2",
+                                name = "Pidurangala Rock Sunset Point",
+                                timing = "4:30 PM",
+                                category = "Sunset Viewpoint",
+                                description = "Adjoining ancient monastery hill offering the ultimate 360-degree panoramic view directly looking at Sigiriya rock face in golden light.",
+                                insiderTip = "The last 10 minutes involve clambering over large boulders. Wear sturdy sneakers and carry a flashlight for the hike down after sunset.",
+                                photoUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&q=80",
+                                lat = 7.9678,
+                                lng = 80.7656
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Pradeep Traditional Kitchen Sigiriya",
+                                specialty = "Authentic village cooking with 10 clay pot curries",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Young Jackfruit (Polos) Curry & Coconut Sambol",
+                                approxCostForTwo = "1,800 LKR for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&q=80",
+                                reelUrl = "https://www.instagram.com/beyondbengalurufoods/",
+                                reelCaption = "10 clay pot curries cooked on slow woodfire in Sigiriya village 🍛",
+                                reelViews = "84K views 🎥"
+                            )
+                        ),
+                        creatorSecretTip = "Climb Pidurangala for sunset rather than Sigiriya itself—the view of Sigiriya monolith framed against the sunset glow is unmatched."
+                    ),
+                    DayPlan(
+                        dayNumber = 2,
+                        title = "Kandy Cultural Capital & Sacred Relic",
+                        summary = "Travel through the green hills to Kandy. Visit the Sacred Tooth Temple and stroll the Royal Botanical Gardens.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "sl_d2_s1",
+                                name = "Temple of the Sacred Tooth Relic (Sri Dalada Maligawa)",
+                                timing = "9:30 AM",
+                                category = "Sacred Heritage",
+                                description = "Golden-roofed temple complex housing the venerated left canine tooth of Lord Buddha.",
+                                insiderTip = "Attend the morning Thevava ritual at 9:30 AM when traditional drumming reverberates through the inner sanctum.",
+                                photoUrl = "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=600&q=80",
+                                lat = 7.2936,
+                                lng = 80.6413
+                            ),
+                            StopLocation(
+                                id = "sl_d2_s2",
+                                name = "Peradeniya Royal Botanical Gardens",
+                                timing = "2:30 PM",
+                                category = "Lush Flora",
+                                description = "Expansive 147-acre royal garden famous for its avenue of royal palms and giant Javan fig tree spanning 2,500 sq meters.",
+                                insiderTip = "Don't miss the National Orchid House showcasing over 400 species of rare tropical orchids.",
+                                photoUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&q=80",
+                                lat = 7.2718,
+                                lng = 80.5960
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Kandy Muslim Hotel Local Eatery",
+                                specialty = "Iconic sizzling Kottu Roti chopped live on iron griddle",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Cheese Egg Chicken Kottu with Spicy Gravy",
+                                approxCostForTwo = "1,200 LKR for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80",
+                                reelUrl = "https://www.instagram.com/beyondbengalurufoods/",
+                                reelCaption = "The rhythmic chopping of hot sizzling Kottu Roti on Kandy streets 🥘",
+                                reelViews = "62K views 🎥"
+                            )
+                        ),
+                        creatorSecretTip = "Strict dress code applies at Temple of Tooth: shoulders and knees must be fully covered, and white clothing is appreciated."
+                    ),
+                    DayPlan(
+                        dayNumber = 3,
+                        title = "The Legendary Blue Train & Nine Arches Bridge",
+                        summary = "Board the world's most scenic mountain train from Kandy to Ella through mist-draped tea valleys and cloud forests.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "sl_d3_s1",
+                                name = "Kandy to Ella Mountain Railway",
+                                timing = "8:45 AM",
+                                category = "Scenic Train Ride",
+                                description = "Winding through emerald green Ceylon tea plantations, over deep mountain gorges and cascading waterfalls.",
+                                insiderTip = "Book 2nd class reserved seats on the right-hand side for the dramatic ravines and tea pickers' vistas.",
+                                photoUrl = "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=600&q=80",
+                                lat = 6.8728,
+                                lng = 81.0465,
+                                audioStory = AudioStory(
+                                    title = "The Miracle of the Ceylon Hill Railway",
+                                    durationSeconds = 115,
+                                    scriptText = "Built in the 1860s by the British to transport Ceylon tea from high mountain plantations to Colombo port, this railway spans tunnels blasted through granite and trestle viaducts standing 30 meters above tea valleys."
+                                )
+                            ),
+                            StopLocation(
+                                id = "sl_d3_s2",
+                                name = "Nine Arches Demodara Viaduct",
+                                timing = "3:30 PM",
+                                category = "Architectural Wonder",
+                                description = "Spectacular colonial brick and stone arch bridge nestled inside dense tropical jungle with trains passing directly overhead.",
+                                insiderTip = "Check the daily train schedule at Ella station; the 3:30 PM and 5:20 PM trains crossing the bridge create incredible photo frames.",
+                                photoUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&q=80",
+                                lat = 6.8768,
+                                lng = 81.0608
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Café Chill Ella",
+                                specialty = "Bamboo-framed multi-level hill retreat",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Lamprais (Dutch-Burgher spiced rice baked in banana leaf)",
+                                approxCostForTwo = "2,400 LKR for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",
+                                reelUrl = "https://www.instagram.com/beyondbengalurufoods/",
+                                reelCaption = "Warm banana-leaf Lamprais & fresh passion fruit spritzers in misty Ella 🍃",
+                                reelViews = "95K views 🎥"
+                            )
+                        ),
+                        creatorSecretTip = "Walk along the train tracks from Ella town for 20 minutes to reach Nine Arches Bridge from the top jungle trail."
+                    ),
+                    DayPlan(
+                        dayNumber = 4,
+                        title = "Little Adam's Peak Sunrise & Ravana Falls",
+                        summary = "Catch the dawn cloud inversion at Little Adam's Peak, swim at Ravana Falls, and experience Ceylon tea factory tastings.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "sl_d4_s1",
+                                name = "Little Adam's Peak Sunrise Ridge",
+                                timing = "5:45 AM",
+                                category = "Sunrise Trek",
+                                description = "Gentle 45-minute mountain trail leading to a sharp ridge with 360-degree views across Ella Gap.",
+                                insiderTip = "Start the hike in the dark with phone flashlights at 5:30 AM to catch the sea of clouds filling the valley below.",
+                                photoUrl = "https://images.unsplash.com/photo-1588598198321-9735fd52455b?w=600&q=80",
+                                lat = 6.8617,
+                                lng = 81.0560
+                            ),
+                            StopLocation(
+                                id = "sl_d4_s2",
+                                name = "Ravana Falls & Secret Natural Pools",
+                                timing = "11:00 AM",
+                                category = "Cascading Waterfall",
+                                description = "Towering 82-foot multi-tiered cascading waterfall named after the legendary king Ravana.",
+                                insiderTip = "Visit the tea factory 2 km down the road for fresh unblended Pekoe and Orange Pekoe Ceylon tea tasting.",
+                                photoUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&q=80",
+                                lat = 6.8407,
+                                lng = 81.0535
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Ella Spice Garden Kitchen",
+                                specialty = "Crispy lace egg hoppers & pol sambol",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Crispy Egg Hoppers with Sweet Onion Seeni Sambol",
+                                approxCostForTwo = "1,400 LKR for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80",
+                                reelUrl = "https://www.instagram.com/beyondbengalurufoods/",
+                                reelCaption = "Crispy bowl-shaped egg hoppers straight off the clay wok 🍳",
+                                reelViews = "53K views 🎥"
+                            )
+                        ),
+                        creatorSecretTip = "Drink fresh golden king coconut water from roadside stalls at the base of Ravana Falls for 150 LKR."
+                    ),
+                    DayPlan(
+                        dayNumber = 5,
+                        title = "Mirissa Southern Coast & Whale Watching",
+                        summary = "Descend from the misty mountains down to the golden palm-fringed beaches of Mirissa. Climb Coconut Tree Hill and swim with sea turtles.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "sl_d5_s1",
+                                name = "Coconut Tree Hill Promontory",
+                                timing = "4:45 PM",
+                                category = "Iconic Coastal Vista",
+                                description = "Red-soil dome hill covered in bent palm trees jutting straight into the turquoise Indian Ocean.",
+                                insiderTip = "Arrive 1 hour before sunset to see the reflection of palms on the tidal waters and sky turn deep purple.",
+                                photoUrl = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+                                lat = 5.9436,
+                                lng = 80.4637
+                            ),
+                            StopLocation(
+                                id = "sl_d5_s2",
+                                name = "Secret Beach Mirissa & Turtle Bay",
+                                timing = "10:00 AM",
+                                category = "Hidden Cove",
+                                description = "Secluded cove flanked by natural rock tide pools where wild green sea turtles swim near the shoreline.",
+                                insiderTip = "Rent snorkel gear on the beach for 500 LKR to swim alongside green sea turtles in the shallow coral lagoon.",
+                                photoUrl = "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80",
+                                lat = 5.9482,
+                                lng = 80.4520
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Zephyr Restaurant & Beach Bar Mirissa",
+                                specialty = "Oceanfront barbecue fresh catch seafood",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Garlic Butter Jumbo Prawns & Sri Lankan Crab Curry",
+                                approxCostForTwo = "3,200 LKR for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80",
+                                reelUrl = "https://www.instagram.com/beyondbengalurufoods/",
+                                reelCaption = "Garlic butter jumbo ocean prawns grilled right on Mirissa sand 🦀",
+                                reelViews = "71K views 🎥"
+                            )
+                        ),
+                        creatorSecretTip = "Book whale watching tours from Mirissa harbour with ethical operators who maintain 100m engine-idle distance from blue whales."
+                    ),
+                    DayPlan(
+                        dayNumber = 6,
+                        title = "Galle Dutch Fort Heritage & Coastal Return",
+                        summary = "Explore the cobblestone alleys of the 17th-century UNESCO Galle Dutch Fort, boutique spice shops, and return via the coastal expressway.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "sl_d6_s1",
+                                name = "Galle Dutch Fort Ramparts & Lighthouse",
+                                timing = "9:00 AM",
+                                category = "UNESCO Colonial Fortress",
+                                description = "400-year-old living fortress with intact bastions, Dutch-colonial merchant houses, and white sea-facing lighthouse.",
+                                insiderTip = "Walk along the ocean rampart from Flag Rock bastion to the Lighthouse for the best ocean breeze and cliff divers.",
+                                photoUrl = "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?w=600&q=80",
+                                lat = 6.0270,
+                                lng = 80.2170
+                            ),
+                            StopLocation(
+                                id = "sl_d6_s2",
+                                name = "Unawatuna Japanese Peace Pagoda",
+                                timing = "2:00 PM",
+                                category = "Ocean Shrine",
+                                description = "White domed Buddhist monument situated on Rumassala hill with panoramic views of Galle Bay.",
+                                insiderTip = "Explore the nearby Jungle Beach trail through the Rumassala nature sanctuary.",
+                                photoUrl = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+                                lat = 6.0100,
+                                lng = 80.2490
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "A Minute by Tuk Tuk (Old Dutch Hospital)",
+                                specialty = "Heritage sea-view dining in 400-year-old hospital",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Spicy Ceylon Black Pepper Crab with Pol Roti",
+                                approxCostForTwo = "3,600 LKR for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80",
+                                reelUrl = "https://www.instagram.com/beyondbengalurufoods/",
+                                reelCaption = "Black pepper crab overlooking crashing Indian Ocean waves in Galle Fort 🌊",
+                                reelViews = "88K views 🎥"
+                            )
+                        ),
+                        creatorSecretTip = "Take the Southern Expressway AC express bus from Galle to Colombo Bandaranaike International Airport in just 2 hours."
+                    )
+                )
+            ),
+            Trip(
+                id = "spiti",
+                name = "Spiti Valley",
+                headline = "The Middle Land: 1000-year-old monasteries, Chandratal & fossil villages.",
+                description = "7 days across the high-altitude cold desert of Spiti. Visit Key Monastery cliff fortress, send letters from the world's highest post office in Hikkim (14,567 ft), hunt marine fossils in Langza, and camp under the Milky Way at crescent moon Chandratal Lake.",
+                vibe = TripVibe.BACKPACKING,
+                duration = "7D / 6N",
+                price = "₹18,999",
+                budgetValue = 18999,
+                imageUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+                heroTags = listOf("Key Monastery", "Chandratal Lake", "Hikkim Post Office", "Langza Fossils", "Dhankar Cliff"),
+                totalEstimateDetails = "₹18,999 / person (4x4 mountain SUV transit, local homestays, inner line permits & camp gear)",
+                creatorNote = "Acclimatize in Kalpa and Kaza before ascending above 14,000 ft. Hydrate with sea-buckthorn berry tea and carry cash since mountain ATMs frequently run out.",
+                youtubeVideoId = "Cometripwithme",
+                days = listOf(
+                    DayPlan(
+                        dayNumber = 1,
+                        title = "Shimla to Kalpa: Kinnaur Apple Orchards",
+                        summary = "Traverse the Hindustan-Tibet road carved into sheer granite gorges, reaching Kalpa facing holy Kinner Kailash peak.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "spiti_d1_s1",
+                                name = "Roghi Cliff & Suicide Point",
+                                timing = "4:30 PM",
+                                category = "High Altitude Vista",
+                                description = "Thrilling sheer vertical drop cliff overlooking Sutlej river gorge and snowbound Kinner Kailash massif.",
+                                insiderTip = "Walk the 2 km pine road from Kalpa to Roghi for sweeping apple blossom views.",
+                                photoUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&q=80",
+                                lat = 31.5370,
+                                lng = 78.2560
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Kalpa Folk Kitchen",
+                                specialty = "Pahari woodfire cuisine",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Steamed Walnut Siddu with Ghee & Chutney",
+                                approxCostForTwo = "₹600 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80",
+                                reelCaption = "Hot steaming walnut-stuffed siddu dipped in melted pahari ghee 🥟"
+                            )
+                        ),
+                        creatorSecretTip = "Wake up at 5:30 AM to catch the first ray of pink sunlight hitting the crest of Kinner Kailash."
+                    ),
+                    DayPlan(
+                        dayNumber = 2,
+                        title = "Kalpa to Tabo: 996 AD Mud Monastery & Caves",
+                        summary = "Cross the confluence at Khab into the arid moonscape of Spiti and explore the ancient Tabo mud monastery.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "spiti_d2_s1",
+                                name = "Tabo Monastery (The Ajanta of the Himalayas)",
+                                timing = "10:30 AM",
+                                category = "UNESCO Sacred Heritage",
+                                description = "Founded in 996 AD, housing priceless 1000-year-old Buddhist frescoes and stucco statues preserved in sun-dried mud brick.",
+                                insiderTip = "Hike up to the ancient meditation caves carved into the mud cliffs above the monastery.",
+                                photoUrl = "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80",
+                                lat = 32.0950,
+                                lng = 78.3790
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Tabo Monastery Kitchen Café",
+                                specialty = "Tibetan butter tea and fresh tingmo",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Tibetan Tingmo & Spicy Vegetable Thukpa",
+                                approxCostForTwo = "₹450 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&q=80",
+                                reelCaption = "Hot butter tea & comforting noodle soup in 1000-year-old Tabo ☕"
+                            )
+                        ),
+                        creatorSecretTip = "Photography is strictly forbidden inside the ancient inner prayer chambers to protect centuries-old mineral pigment murals."
+                    ),
+                    DayPlan(
+                        dayNumber = 3,
+                        title = "Dhankar Monastery & High Altitude Dhankar Lake",
+                        summary = "Perched dramatically on razor-sharp mud spires, Dhankar monastery overlooks the confluence of Spiti and Pin rivers.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "spiti_d3_s1",
+                                name = "Dhankar Cliff Monastery & Meditation Perch",
+                                timing = "9:00 AM",
+                                category = "Cliff Fortress",
+                                description = "Dramatic 12th-century fortress monastery built atop towering wind-eroded pinnacles 300m above the valley floor.",
+                                insiderTip = "Take the 1-hour uphill trail from the monastery to pristine sacred Dhankar Lake.",
+                                photoUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&q=80",
+                                lat = 32.0160,
+                                lng = 78.2140
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Dhankar Fort View Homestay",
+                                specialty = "Home-cooked Spitian tsampa porridge",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Yak Cheese Momos & Spitian Wild Herbal Tea",
+                                approxCostForTwo = "₹500 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",
+                                reelCaption = "Crisp fried yak cheese momos with chili paste on cliff edge 🥟"
+                            )
+                        ),
+                        creatorSecretTip = "Drink plenty of water before starting the Dhankar Lake trek; the steep ascent at 13,500 ft demands steady pacing."
+                    ),
+                    DayPlan(
+                        dayNumber = 4,
+                        title = "World's Highest Villages: Hikkim, Komic & Langza",
+                        summary = "Drive the highest motorable circuit in the world. Post a handwritten letter from Hikkim and search for ancient marine fossils in Langza.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "spiti_d4_s1",
+                                name = "Hikkim Post Office (14,567 ft)",
+                                timing = "10:00 AM",
+                                category = "World Record Landmark",
+                                description = "The highest functioning post office on Earth, run in a rustic mud house by postmaster Rinchen Chhering.",
+                                insiderTip = "Buy vintage postcards in Kaza beforehand and get them stamped with the official Hikkim round seal.",
+                                photoUrl = "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80",
+                                lat = 32.2270,
+                                lng = 78.0770
+                            ),
+                            StopLocation(
+                                id = "spiti_d4_s2",
+                                name = "Langza Golden Buddha & Fossil Valley",
+                                timing = "2:30 PM",
+                                category = "Geological Wonder",
+                                description = "Colossal 1000-year-old Buddha statue gazing at Chau Chau Kang Nilda peak with shale beds containing prehistoric marine fossils.",
+                                insiderTip = "Local children will show you million-year-old ammonite fossils (Chaudua) embedded in the slate.",
+                                photoUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&q=80",
+                                lat = 32.2610,
+                                lng = 78.0950
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "The Himalayan Café Kaza",
+                                specialty = "Spitian organic sea-buckthorn drinks and sourdough",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Wild Sea-Buckthorn Herbal Splash & Mutton Thentuk",
+                                approxCostForTwo = "₹850 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80",
+                                reelCaption = "Warm hand-pulled Thentuk pasta soup in cozy Kaza wood café 🍲"
+                            )
+                        ),
+                        creatorSecretTip = "Support local villagers by buying hand-knitted yak wool socks in Komic village."
+                    ),
+                    DayPlan(
+                        dayNumber = 5,
+                        title = "Key Monastery Fortress & Chicham Asia's Highest Bridge",
+                        summary = "Visit the iconic 11th-century Key Monastery perched on a conical hill and cross the suspension bridge over a 1000-ft gorge.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "spiti_d5_s1",
+                                name = "Key Gompa (11th Century Fort Monastery)",
+                                timing = "8:30 AM",
+                                category = "Spiritual Fortress",
+                                description = "Multi-tiered whitewashed monastery resembling a fantasy citadel rising 4,166m above Spiti river.",
+                                insiderTip = "Join the monks in the ancient woodfire kitchen for warm herbal tea and quiet blessing.",
+                                photoUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&q=80",
+                                lat = 32.2980,
+                                lng = 78.0120
+                            ),
+                            StopLocation(
+                                id = "spiti_d5_s2",
+                                name = "Chicham Suspension Bridge (13,596 ft)",
+                                timing = "2:00 PM",
+                                category = "Engineering Marvel",
+                                description = "Suspension bridge spanning across a 1,000-foot deep canyon connecting Kibber with isolated Chicham village.",
+                                insiderTip = "Look down through the metal grating into the vertical gorge below for an adrenaline rush.",
+                                photoUrl = "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80",
+                                lat = 32.3380,
+                                lng = 77.9860
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Kibber Wildlife Homestay Diner",
+                                specialty = "High altitude organic barley bread",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Hand-Rolled Kothey Momos with Garlic Dip",
+                                approxCostForTwo = "₹550 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80",
+                                reelCaption = "Pan-seared Kothey momos with spicy red dip at 14,200 ft 🏔️"
+                            )
+                        ),
+                        creatorSecretTip = "Scan the craggy cliffs around Kibber Sanctuary with binoculars; snow leopards and Himalayan ibex roam here."
+                    ),
+                    DayPlan(
+                        dayNumber = 6,
+                        title = "Kunzum Pass (14,931 ft) & Chandratal Lake Camping",
+                        summary = "Cross the windswept Kunzum Pass with Tibetan prayer flags and hike to the enchanting crescent moon lake of Chandratal.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "spiti_d6_s1",
+                                name = "Chandratal Crescent Moon Lake",
+                                timing = "3:30 PM",
+                                category = "Sacred Glacial Lake",
+                                description = "Hypnotic turquoise glacial lake at 14,100 ft changing color from aquamarine to deep emerald as the sun shifts.",
+                                insiderTip = "Trek the 2-hour circumference trail around the lake for surreal reflection of snow peaks.",
+                                photoUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&q=80",
+                                lat = 32.4820,
+                                lng = 77.6180
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Chacha Chachi Dhaba Batal",
+                                specialty = "Legendary life-saving mountain dhaba run by Dorje uncle",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Unlimited Steaming Rajma Chawal & Masala Chai",
+                                approxCostForTwo = "₹350 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80",
+                                reelCaption = "The warm hug of hot rajma chawal at the legendary Batal mountain pass 🍛"
+                            )
+                        ),
+                        creatorSecretTip = "Temperatures at Chandratal campsite plummet to -5°C at night. Step outside at 11 PM for an unbelievable view of the Milky Way core."
+                    ),
+                    DayPlan(
+                        dayNumber = 7,
+                        title = "Atal Tunnel Passage & Return via Old Manali",
+                        summary = "Drive the rugged boulder route through Gramphu, cross into the green Kullu valley via Atal Tunnel, and celebrate in Old Manali.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "spiti_d7_s1",
+                                name = "Atal Tunnel North Portal",
+                                timing = "11:30 AM",
+                                category = "Modern Marvel",
+                                description = "World's longest highway tunnel above 10,000 ft connecting cold desert Lahaul to lush green Kullu Valley.",
+                                insiderTip = "Witness the shocking instant transformation from barren desert to green pine forests in 9.02 kilometers.",
+                                photoUrl = "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80",
+                                lat = 32.3640,
+                                lng = 77.1680
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Café 1947 Old Manali",
+                                specialty = "Riverside live acoustics and woodfire pizzas",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Pesto Woodfire Pizza & Himalayan Trout Fish",
+                                approxCostForTwo = "₹1,400 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",
+                                reelCaption = "Celebratory riverfront dinner with live guitar music in Old Manali 🎸"
+                            )
+                        ),
+                        creatorSecretTip = "Celebrate the completion of the high-altitude circuit with freshly brewed apple cider in Old Manali."
+                    )
+                )
+            ),
+            Trip(
+                id = "meghalaya",
+                name = "Meghalaya Hidden Canyons",
+                headline = "Living root bridges, crystal clear rivers & bamboo skywalks.",
+                description = "5 days in the Abode of Clouds. Descend 3,500 stairs into Nongriat rainforest to swim beneath double-decker living root bridges, walk the hair-raising Mawryngkhang bamboo cliff trail, and kayak on the glass-transparent waters of Shnongpdeng.",
+                vibe = TripVibe.BACKPACKING,
+                duration = "5D / 4N",
+                price = "₹16,999",
+                budgetValue = 16999,
+                imageUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=800&q=80",
+                heroTags = listOf("Double Decker Root Bridge", "Wei Sawdong Falls", "Mawryngkhang Skywalk", "Shnongpdeng Glass River", "Laitlum Canyons"),
+                totalEstimateDetails = "₹16,999 / person (Private SUV transfers, village homestays, river kayaks & guide permits)",
+                creatorNote = "Meghalaya is best explored by staying in village homestays run by Khasi tribes. Carry sturdy gripping footwear for wet rainforest stair descents.",
+                youtubeVideoId = "Cometripwithme",
+                days = listOf(
+                    DayPlan(
+                        dayNumber = 1,
+                        title = "Guwahati to Shillong: Laitlum Canyons Edge",
+                        summary = "Drive up misty pine hills, visit Umiam Lake, and stand at the edge of the breathtaking Laitlum Canyons.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "mg_d1_s1",
+                                name = "Laitlum Canyons (The End of the World)",
+                                timing = "3:30 PM",
+                                category = "Canyon Viewpoint",
+                                description = "Endless rolling green plateaus terminating in 2,000-ft vertical amphitheatre gorges.",
+                                insiderTip = "Arrive before 3 PM before rolling cloud blankets obscure the canyon floor.",
+                                photoUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&q=80",
+                                lat = 25.4480,
+                                lng = 91.8980
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Dylan's Café Shillong",
+                                specialty = "Artisanal coffee and music culture",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Khasi Pork Ribs & Signature Hot Chocolate",
+                                approxCostForTwo = "₹900 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",
+                                reelCaption = "Rich steaming hot chocolate & slow acoustics in rainy Shillong ☕"
+                            )
+                        ),
+                        creatorSecretTip = "Spend the night at a local bed & breakfast in Police Bazar to experience Shillong's live rock music scene."
+                    ),
+                    DayPlan(
+                        dayNumber = 2,
+                        title = "Cherrapunji & Wei Sawdong 3-Tier Turquoise Cascades",
+                        summary = "Trek through dense bamboo forest to discover the hidden 3-tier emerald pools of Wei Sawdong and Nohkalikai falls.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "mg_d2_s1",
+                                name = "Wei Sawdong 3-Tier Waterfall",
+                                timing = "10:00 AM",
+                                category = "Hidden Waterfall",
+                                description = "Three tiered stepped natural turquoise plunge pools hidden inside a secluded rainforest gorge.",
+                                insiderTip = "Climb down using the makeshift bamboo ladders cautiously; wear shoes with strong tread.",
+                                photoUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&q=80",
+                                lat = 25.3260,
+                                lng = 91.7120
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Orange Roots Cherrapunji",
+                                specialty = "Pure vegetarian Khasi and South Indian dining",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Meghalaya Pineapple Juice & Thali",
+                                approxCostForTwo = "₹650 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80",
+                                reelCaption = "Freshly squeezed Meghalaya mountain pineapples & crisp snacks 🍍"
+                            )
+                        ),
+                        creatorSecretTip = "Visit Nohkalikai Falls in the morning before 11 AM when the sun illuminates the cyan water pool at the base."
+                    ),
+                    DayPlan(
+                        dayNumber = 3,
+                        title = "The Living Root Bridges of Nongriat Rainforest",
+                        summary = "Descend 3,500 stone stairs into the rainforest valley to cross ancient living root bridges grown by Khasi ancestors.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "mg_d3_s1",
+                                name = "Double Decker Living Root Bridge Nongriat",
+                                timing = "11:00 AM",
+                                category = "Bio-Engineering Wonder",
+                                description = "200-year-old living bridges woven from the aerial roots of Ficus elastica trees spanning over roaring jungle streams.",
+                                insiderTip = "Hike an extra 1.5 hours past Nongriat to reach the awe-inspiring turquoise Rainbow Falls.",
+                                photoUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&q=80",
+                                lat = 25.2480,
+                                lng = 91.6740
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Serene Homestay Nongriat Kitchen",
+                                specialty = "Organic village meals cooked over wood embers",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Khasi Jungle Herb Dal & Organic Wild Rice",
+                                approxCostForTwo = "₹450 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80",
+                                reelCaption = "Rejuvenating organic banana leaf meal after 3,500 stairs in Nongriat 🌿"
+                            )
+                        ),
+                        creatorSecretTip = "Stay overnight in Nongriat village homestay; the natural fish spa in the river at dawn with zero day-tourists is pure magic."
+                    ),
+                    DayPlan(
+                        dayNumber = 4,
+                        title = "Mawryngkhang Bamboo Skywalk Trail",
+                        summary = "Known as the scariest and most exhilarating trek in Meghalaya, walk across cantilevered bamboo bridges pinned to sheer cliff faces.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "mg_d4_s1",
+                                name = "Mawryngkhang King Rock Trail (Wahkhen)",
+                                timing = "8:30 AM",
+                                category = "Extreme Bamboo Skywalk",
+                                description = "Handcrafted bamboo bridges suspended hundreds of feet above Wahkhen river gorge ending at King Rock monolith.",
+                                insiderTip = "Engineered entirely by Wahkhen villagers with bamboo and cane without a single metal nail.",
+                                photoUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&q=80",
+                                lat = 25.3210,
+                                lng = 91.8290
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Wahkhen Village Community Tea Shack",
+                                specialty = "Local red tea and sesame pitha",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Smoked Khasi Pork with Bamboo Shoot",
+                                approxCostForTwo = "₹400 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80",
+                                reelCaption = "Hot cardamom red tea after conquering the King Rock bamboo cliff ☕"
+                            )
+                        ),
+                        creatorSecretTip = "Hire a local youth guide from Wahkhen village for ₹500 to support community eco-tourism."
+                    ),
+                    DayPlan(
+                        dayNumber = 5,
+                        title = "Shnongpdeng Glass Water Kayaking & Dawki",
+                        summary = "Kayak on the crystal clear waters of Umngot river where boats appear to float in mid-air, cliff jump and return via Guwahati.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "mg_d5_s1",
+                                name = "Shnongpdeng Umngot Crystal River",
+                                timing = "7:30 AM",
+                                category = "Glass Water River",
+                                description = "Transparent riverbed where you can see fish swimming 20 feet deep through glass-like water.",
+                                insiderTip = "Go kayaking at 7:30 AM before motorized boats disturb the water surface tension.",
+                                photoUrl = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+                                lat = 25.2010,
+                                lng = 92.0520
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Riverside Shnongpdeng Kitchen",
+                                specialty = "Fresh river catch fish curry",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Umngot River Fish Fry & Sticky Hill Rice",
+                                approxCostForTwo = "₹600 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80",
+                                reelCaption = "Crispy golden river fish fried fresh on the pebble beach of Shnongpdeng 🐟"
+                            )
+                        ),
+                        creatorSecretTip = "Camp on the pebble beach in Shnongpdeng with a riverfront bonfire under the star-lit sky."
+                    )
+                )
+            ),
+            Trip(
+                id = "tirthan",
+                name = "Tirthan & Jibhi Valley",
+                headline = "Pine forest cottages, Himalayan trout streams & ancient timber towers.",
+                description = "4 days discovering Himachal's quietest river valley. Stay in riverside wooden homestays in Tirthan, angle for wild Himalayan trout, trek to sacred Serolsar Lake across Jalori Pass at 10,800 ft, and explore the 1,500-year-old Chehni Kothi timber fortress.",
+                vibe = TripVibe.CHILL,
+                duration = "4D / 3N",
+                price = "₹9,999",
+                budgetValue = 9999,
+                imageUrl = "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800&q=80",
+                heroTags = listOf("Tirthan Trout River", "Jalori Pass", "Serolsar Lake", "Chehni Kothi Tower", "Jibhi Waterfalls"),
+                totalEstimateDetails = "₹9,999 / person (Riverside wooden cottages, SUV transfers, trout angling pass & bonfire nights)",
+                creatorNote = "Tirthan Valley is the anti-tourist Himachal. Zero mall roads, crystal pure glacial rivers, and authentic Himachali hospitality.",
+                youtubeVideoId = "Cometripwithme",
+                days = listOf(
+                    DayPlan(
+                        dayNumber = 1,
+                        title = "Aut Tunnel to Tirthan: Riverside Timber Homestay",
+                        summary = "Arrive in Tirthan Valley, check into wooden riverfront cottage, and stroll along the pristine trout stream.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "tv_d1_s1",
+                                name = "Gushaini Tirthan Riverfront Trail",
+                                timing = "3:00 PM",
+                                category = "Pristine River Trail",
+                                description = "Crystal-clear glacial stream flowing past deodar pine forests with secluded pebble beaches.",
+                                insiderTip = "Dip your feet in the ice-cold glacial pools and listen to the river roar.",
+                                photoUrl = "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=600&q=80",
+                                lat = 31.6420,
+                                lng = 77.4120
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Tirthan Pine Valley Kitchen",
+                                specialty = "Freshly caught Himalayan brown trout",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Pan-Seared Lemon Butter Trout with Roasted Herbs",
+                                approxCostForTwo = "₹1,100 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80",
+                                reelCaption = "Freshly grilled brown trout cooked with mountain garlic butter 🐟"
+                            )
+                        ),
+                        creatorSecretTip = "Ask the homestay host to arrange an angling permit (₹100) for fly fishing in the river."
+                    ),
+                    DayPlan(
+                        dayNumber = 2,
+                        title = "Jalori Pass (10,800 ft) & Sacred Serolsar Lake Trek",
+                        summary = "Ascend the steep switchbacks of Jalori Pass and embark on a magical 5 km forest walk to sacred Serolsar Lake.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "tv_d2_s1",
+                                name = "Serolsar Lake & Buddhi Nagin Temple",
+                                timing = "11:00 AM",
+                                category = "Sacred Alpine Lake",
+                                description = "Hidden emerald lake surrounded by ancient kharsu oak forest where birds are said to keep the water crystal clean.",
+                                insiderTip = "Enjoy hot Pahari chai and kadhi chawal at the rustic wooden shacks near the lake.",
+                                photoUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&q=80",
+                                lat = 31.5340,
+                                lng = 77.4360
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Jalori Pass Ridge Dhaba",
+                                specialty = "Comforting high-altitude mountain food",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Steaming Rajma Rice & Desi Pahari Ghee Khichdi",
+                                approxCostForTwo = "₹350 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80",
+                                reelCaption = "Hot kadhi chawal at 10,800 ft Jalori Pass overlooking snowy Pir Panjal 🏔️"
+                            )
+                        ),
+                        creatorSecretTip = "Start the Serolsar Lake hike early at 9 AM to return before afternoon mountain clouds envelop the ridge."
+                    ),
+                    DayPlan(
+                        dayNumber = 3,
+                        title = "Chehni Kothi 1500-Year Timber Tower & Jibhi Waterfalls",
+                        summary = "Trek through apple orchards to a 12-story earthquake-resistant timber tower and relax by Jibhi wooden bridges.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "tv_d3_s1",
+                                name = "Chehni Kothi Ancient Tower Fortress",
+                                timing = "10:00 AM",
+                                category = "1500-Year Heritage Wonder",
+                                description = "Towering 45-meter fortress built entirely with alternate layers of deodar wood beams and stone without cement.",
+                                insiderTip = "Climb the single carved wood log ladder to the upper shrine with respectful socks on.",
+                                photoUrl = "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?w=600&q=80",
+                                lat = 31.6210,
+                                lng = 77.3480
+                            ),
+                            StopLocation(
+                                id = "tv_d3_s2",
+                                name = "Jibhi Hidden Waterfall & Stone Bridges",
+                                timing = "3:30 PM",
+                                category = "Forest Waterfall",
+                                description = "Picturesque waterfall inside a thick pine canyon criss-crossed by Japanese-style wooden bridges.",
+                                insiderTip = "Visit at 3:30 PM when the sun rays filter through the pine canopy creating magical light rays.",
+                                photoUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&q=80",
+                                lat = 31.6370,
+                                lng = 77.3790
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "The Mudhouse Café Jibhi",
+                                specialty = "Bohemian riverside café with homemade desserts",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Warm Apple Cinnamon Pie with Vanilla Ice Cream",
+                                approxCostForTwo = "₹700 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",
+                                reelCaption = "Warm freshly baked apple cinnamon pie with roaring river sounds in Jibhi 🥧"
+                            )
+                        ),
+                        creatorSecretTip = "Walk the small forest pathway from Jibhi town to the waterfall instead of taking the road."
+                    ),
+                    DayPlan(
+                        dayNumber = 4,
+                        title = "Great Himalayan National Park & Chhoie Waterfall",
+                        summary = "Short hike into the UNESCO buffer zone to Chhoie waterfall and riverside bonfire finale.",
+                        stops = listOf(
+                            StopLocation(
+                                id = "tv_d4_s1",
+                                name = "Chhoie Waterfall Trek (GHNP Buffer)",
+                                timing = "10:30 AM",
+                                category = "Cascading Waterfall",
+                                description = "Pristine waterfall cascading down sheer rock face worshipped as a local deity by Sai Ropa villagers.",
+                                insiderTip = "The 40-minute uphill hike begins near Sai Ropa forest rest house.",
+                                photoUrl = "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=600&q=80",
+                                lat = 31.6510,
+                                lng = 77.3980
+                            )
+                        ),
+                        foodSpots = listOf(
+                            FoodSpot(
+                                name = "Sai Ropa Local Kitchen",
+                                specialty = "Traditional Himachali Dham festive platter",
+                                recommendedBy = "@beyondbengalurufoods",
+                                mustTryDish = "Himachali Madra, Sepu Vadi & Sweet Rice",
+                                approxCostForTwo = "₹550 for two",
+                                reelThumbnailUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80",
+                                reelCaption = "Authentic Himachali Dham served on leaf plates in Tirthan Valley 🍃"
+                            )
+                        ),
+                        creatorSecretTip = "Board the evening luxury Volvo bus from Aut tunnel back to Delhi or Chandigarh with memories of crisp mountain air."
+                    )
+                )
             )
         )
 
         private val SPOTLIGHTS = listOf(
             DestinationSpotlight(
-                id = "bengaluru",
-                title = "Bengaluru & Beyond",
-                subtitle = "Urban culture, heritage lanes & secret dosas",
-                region = "Karnataka · Urban Culture",
-                documentedSpotsCount = "15+ documented spots",
-                imageUrl = "https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?w=800&q=80",
-                tags = listOf("Food Walks", "Malleswaram Heritage", "Cubbon Park", "Secret Filter Coffee")
+                id = "spiti",
+                title = "Spiti & Pin Valley",
+                subtitle = "High altitude 1000-year monastery fortress, Mudh village & milky way galaxies",
+                region = "Himachal Pradesh · Trans-Himalayas",
+                documentedSpotsCount = "22+ verified spots & homestays",
+                imageUrl = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+                tags = listOf("Key Gompa", "Chandratal Lake", "Mudh Pin Valley", "Hikkim Post Office", "Langza Fossils", "Demul Village")
             ),
             DestinationSpotlight(
-                id = "coorg",
-                title = "Coorg & Chikmagalur",
-                subtitle = "Coffee estates, misty mountain sunrises & waterfalls",
-                region = "Western Ghats · Hill Stations",
-                documentedSpotsCount = "12+ verified trails",
+                id = "meghalaya",
+                title = "Meghalaya Living Roots & Bamboo Trails",
+                subtitle = "Bio-engineered bridges, transparent crystal rivers & jaw-dropping bamboo cliff walks",
+                region = "Northeast India · Abode of Clouds",
+                documentedSpotsCount = "19+ rainforest locations",
+                imageUrl = "https://images.unsplash.com/photo-1546708973-b339540b5162?w=800&q=80",
+                tags = listOf("Double Decker Root Bridge", "Mawryngkhang Bamboo Skywalk", "Shnongpdeng Glass River", "Wei Sawdong Falls", "Kongthong Whistling Village")
+            ),
+            DestinationSpotlight(
+                id = "tirthan",
+                title = "Tirthan & Jibhi Secret Pine Escape",
+                subtitle = "1,500-year-old timber fortress towers, Serolsar high lake & river trout feasts",
+                region = "Himachal Pradesh · GHNP Buffer",
+                documentedSpotsCount = "16+ verified trails",
                 imageUrl = "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800&q=80",
-                tags = listOf("Coffee Plantations", "Mullayanagiri Peak", "Abbi Falls", "Homestay Dinners")
+                tags = listOf("Chehni Kothi Fortress", "Serolsar Lake & Jalori Pass", "Great Himalayan Nat. Park", "Jibhi Pine Bridges", "Fresh River Trout")
             ),
             DestinationSpotlight(
-                id = "hampi",
-                title = "Hampi & Badami Ruins",
-                subtitle = "Boulders, Vijayanagara empire & Tungabhadra sunsets",
-                region = "Ancient · UNESCO World Heritage",
-                documentedSpotsCount = "18+ historical spots",
-                imageUrl = "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?w=800&q=80",
-                tags = listOf("Virupaksha Temple", "Matanga Hill", "Coracle Boat", "Hippie Island")
+                id = "gokarna",
+                title = "Gokarna & Honnavar Secret Coast",
+                subtitle = "5-beach cliff trails, mangrove boat safaris & bioluminescent secluded coves",
+                region = "Coastal Karnataka · Arabian Sea",
+                documentedSpotsCount = "18+ coastal gems",
+                imageUrl = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+                tags = listOf("Half Moon Cove", "Paradise Cliff Trail", "Honnavar Mangrove Safari", "Nirvana Beach Glow", "Mangalore Fish Curry")
             ),
             DestinationSpotlight(
-                id = "thailand_spot",
-                title = "Thailand & Islands",
-                subtitle = "Bangkok street food woks & Krabi emerald lagoons",
-                region = "Southeast Asia · Tropical",
-                documentedSpotsCount = "24+ verified locations",
-                imageUrl = "https://images.unsplash.com/photo-1528181304800-259b08848526?w=800&q=80",
-                tags = listOf("Railay Beach", "Wat Arun", "Maya Bay", "Yaowarat Chinatown")
+                id = "srilanka",
+                title = "Sri Lanka Highlands & Secret Coast",
+                subtitle = "Nine Arch tea mountains, secret surf coves & Pidurangala dawn climb",
+                region = "Sri Lanka · Indian Ocean",
+                documentedSpotsCount = "21+ island spots",
+                imageUrl = "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=800&q=80",
+                tags = listOf("Ella Nine Arch Bridge", "Pidurangala Dawn Climb", "Hiriketiya Horseshoe Bay", "Mirissa Secret Beach", "Ceylon Crab Curry")
+            ),
+            DestinationSpotlight(
+                id = "krabi",
+                title = "Krabi Secret Lagoons & Koh Yao Noi",
+                subtitle = "Hidden emerald caves, unpaved island bike paths & cliff kayaking",
+                region = "Thailand · Andaman Sea",
+                documentedSpotsCount = "20+ island locations",
+                imageUrl = "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+                tags = listOf("Phra Nang Hidden Lagoon", "Koh Yao Noi Island", "Ao Thalane Mangrove Kayak", "Hong Island 360 View", "Southern Thai Massaman")
+            ),
+            DestinationSpotlight(
+                id = "himachal",
+                title = "Kasol, Tosh & Parvati Valley Secret Trails",
+                subtitle = "Riverside wooden cabins, natural hot springs & high-altitude apple orchards",
+                region = "Himachal Pradesh · Parvati Valley",
+                documentedSpotsCount = "17+ mountain spots",
+                imageUrl = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+                tags = listOf("Kheerganga Hot Springs", "Tosh Alpine Village", "Chalal Riverside Trail", "Old Manali Cafés", "Apple Strudel")
+            ),
+            DestinationSpotlight(
+                id = "pondicherry",
+                title = "Pondicherry & Auroville French Coast",
+                subtitle = "White Town heritage lanes, quiet surfing beaches & artisanal organic bakeries",
+                region = "Tamil Nadu & Pondicherry · Coromandel Coast",
+                documentedSpotsCount = "14+ coastal spots",
+                imageUrl = "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=800&q=80",
+                tags = listOf("White Town Heritage Walk", "Serenity Beach Surf", "Auroville Sourdough Bakery", "Promenade Sunrise", "French Crepes")
+            ),
+            DestinationSpotlight(
+                id = "goa",
+                title = "Goa Secret Backwaters & South Coves",
+                subtitle = "Hidden riverside shacks, cliffside chapel sunsets & serene Palolem silence",
+                region = "Goa · Konkan Coast",
+                documentedSpotsCount = "25+ creator-tested spots",
+                imageUrl = "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80",
+                tags = listOf("Chapora Fort Sunset", "Cola Beach Lagoon", "Divar Island Ferry Trail", "Fontainhas Heritage", "Butter Garlic Kingfish")
+            ),
+            DestinationSpotlight(
+                id = "malaysia",
+                title = "Penang Heritage Woks & KL Secret Bars",
+                subtitle = "World heritage street food woks, hidden speakeasies & Cameron tea hills",
+                region = "Malaysia · Southeast Asia",
+                documentedSpotsCount = "18+ food & culture spots",
+                imageUrl = "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=80",
+                tags = listOf("George Town Asam Laksa", "Chulia Street Night Woks", "KTM Scenic Express Train", "Cameron Highlands", "Penang Heritage Murals")
             )
         )
 

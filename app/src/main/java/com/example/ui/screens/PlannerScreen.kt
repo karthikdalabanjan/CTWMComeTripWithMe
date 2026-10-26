@@ -131,7 +131,7 @@ fun PlannerScreen(
                         )
                     )
 
-                    val destinations = listOf("Goa", "Thailand", "Himachal", "Pondicherry", "Krabi", "Malaysia", "Gokarna", "Coorg", "Hampi")
+                    val destinations = listOf("Goa", "Sri Lanka", "Thailand", "Himachal", "Pondicherry", "Krabi", "Malaysia", "Gokarna", "Coorg", "Hampi")
                     val scrollState = rememberScrollState()
 
                     Row(

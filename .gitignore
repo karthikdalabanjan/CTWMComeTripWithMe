@@ -16,3 +16,19 @@
 local.properties
 .env
 debug.keystore
+
+# Python & FastAPI
+__pycache__/
+*.py[cod]
+*$py.class
+*.db
+*.sqlite3
+cometripwithme.db
+.venv/
+venv/
+ENV/
+
+# Build and distribution archives
+dist/
+*.zip
+*.tar.gz

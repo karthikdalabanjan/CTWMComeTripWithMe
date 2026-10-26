@@ -361,11 +361,11 @@ fun TripDetailDialog(
                         }
                     }
 
-                    // Book via WhatsApp
+                    // Book Itinerary
                     GoldButton(
-                        text = "Book Trip ✦",
+                        text = "Book Itinerary ✦",
                         onClick = {
-                            viewModel.openWhatsApp("Hey ComeTripWithMe! I want to book the ${trip.name} (${trip.duration}) trip.")
+                            viewModel.startBookingForTrip(trip)
                             onDismiss()
                         },
                         modifier = Modifier.weight(1f),

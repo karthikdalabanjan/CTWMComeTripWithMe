@@ -26,12 +26,12 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Bookmark
-import androidx.compose.material.icons.filled.EditCalendar
+import androidx.compose.material.icons.filled.ConfirmationNumber
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Headphones
-import androidx.compose.material.icons.filled.PlayCircle
-import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.filled.ShoppingBag
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -51,26 +51,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.ui.screens.ContentScreen
+import com.example.ui.screens.AiChatbotScreen
+import com.example.ui.screens.BookingScreen
 import com.example.ui.screens.ExploreScreen
-import com.example.ui.screens.PlannerScreen
 import com.example.ui.screens.PocketGuideScreen
 import com.example.ui.screens.SavedTripsScreen
 import com.example.ui.screens.TripDetailDialog
-import com.example.ui.theme.BgDark
-import com.example.ui.theme.BgDarkCard
-import com.example.ui.theme.BgDarkElevated
-import com.example.ui.theme.GlassBorder
-import com.example.ui.theme.GlassBorderGold
-import com.example.ui.theme.GlassSurface
-import com.example.ui.theme.GoldContainer
-import com.example.ui.theme.GoldPrimary
-import com.example.ui.theme.GoldSecondary
-import com.example.ui.theme.MyApplicationTheme
-import com.example.ui.theme.TextMuted
-import com.example.ui.theme.TextPrimary
-import com.example.ui.theme.TextSecondary
-import com.example.ui.theme.TextTertiary
+import com.example.ui.theme.*
 import com.example.ui.viewmodel.AppTab
 import com.example.ui.viewmodel.MainViewModel
 
@@ -125,9 +112,9 @@ fun ComeTripWithMeApp(
                 ) { tab ->
                     when (tab) {
                         AppTab.EXPLORE -> ExploreScreen(viewModel = viewModel)
+                        AppTab.BOOK_ITINERARY -> BookingScreen(viewModel = viewModel)
+                        AppTab.AI_CHAT_PLANNER -> AiChatbotScreen(viewModel = viewModel)
                         AppTab.POCKET_GUIDE -> PocketGuideScreen(viewModel = viewModel)
-                        AppTab.CREATOR_HUB -> ContentScreen(viewModel = viewModel)
-                        AppTab.TRIP_PLANNER -> PlannerScreen(viewModel = viewModel)
                         AppTab.SAVED_TRIPS -> SavedTripsScreen(viewModel = viewModel)
                     }
                 }
@@ -154,24 +141,24 @@ fun LuxuryTopAppBar(
         modifier = Modifier
             .fillMaxWidth()
             .statusBarsPadding()
-            .background(BgDark.copy(alpha = 0.95f))
+            .background(BgDark.copy(alpha = 0.96f))
             .border(0.5.dp, GlassBorder)
-            .padding(horizontal = 20.dp, vertical = 12.dp),
+            .padding(horizontal = 20.dp, vertical = 14.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Brand Logo + Title
+        // Minimalist Brand Monogram + Typography
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Box(
                 modifier = Modifier
-                    .size(34.dp)
-                    .clip(CircleShape)
+                    .size(32.dp)
+                    .clip(RoundedCornerShape(8.dp))
                     .background(
-                        Brush.radialGradient(
-                            listOf(GoldPrimary, GoldSecondary)
+                        Brush.linearGradient(
+                            listOf(GoldPrimary, GoldDark)
                         )
                     ),
                 contentAlignment = Alignment.Center
@@ -179,57 +166,59 @@ fun LuxuryTopAppBar(
                 Text(
                     text = "✦",
                     color = BgDark,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Black
                 )
             }
 
-            Column {
+            Column(verticalArrangement = Arrangement.spacedBy(1.dp)) {
                 Text(
                     text = "COMETRIPWITHME",
                     style = MaterialTheme.typography.labelLarge.copy(
-                        color = GoldPrimary,
-                        fontWeight = FontWeight.ExtraBold,
-                        letterSpacing = 1.6.sp
+                        color = TextPrimary,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 2.sp,
+                        fontSize = 13.sp
                     )
                 )
                 Text(
-                    text = "India's 1st Creator Tour Operator",
+                    text = "Curated Offbeat Journeys",
                     style = MaterialTheme.typography.labelSmall.copy(
-                        color = TextTertiary,
-                        fontSize = 8.sp,
-                        letterSpacing = 0.8.sp
+                        color = GoldPrimary,
+                        fontSize = 9.sp,
+                        letterSpacing = 0.8.sp,
+                        fontWeight = FontWeight.Medium
                     )
                 )
             }
         }
 
-        // Action icons (Direct WhatsApp inquiry & Instagram)
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        // Minimalist Circular Action Icons
+        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Box(
                 modifier = Modifier
                     .size(36.dp)
                     .clip(CircleShape)
-                    .background(GlassSurface)
-                    .border(1.dp, GlassBorder, CircleShape)
+                    .background(BgDarkSurface)
+                    .border(0.8.dp, GlassBorder, CircleShape)
                     .clickable { onInstagramClick() }
                     .testTag("top_instagram_btn"),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = "📸", fontSize = 14.sp)
+                Text(text = "📸", fontSize = 13.sp)
             }
 
             Box(
                 modifier = Modifier
                     .size(36.dp)
                     .clip(CircleShape)
-                    .background(Color(0x33E8C97A))
-                    .border(1.dp, GlassBorderGold, CircleShape)
+                    .background(GoldPrimary.copy(alpha = 0.12f))
+                    .border(0.8.dp, GlassBorderGold, CircleShape)
                     .clickable { onWhatsAppClick() }
                     .testTag("top_whatsapp_btn"),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = "💬", fontSize = 14.sp)
+                Text(text = "💬", fontSize = 13.sp)
             }
         }
     }
@@ -242,47 +231,65 @@ fun LuxuryBottomNavBar(
 ) {
     val items = listOf(
         Triple(AppTab.EXPLORE, "Explore", Icons.Default.Explore),
+        Triple(AppTab.BOOK_ITINERARY, "Book", Icons.Default.ShoppingBag),
+        Triple(AppTab.AI_CHAT_PLANNER, "Copilot", Icons.Default.AutoAwesome),
         Triple(AppTab.POCKET_GUIDE, "Guide", Icons.Default.Headphones),
-        Triple(AppTab.CREATOR_HUB, "Proof", Icons.Default.PlayCircle),
-        Triple(AppTab.TRIP_PLANNER, "Custom", Icons.Default.EditCalendar),
         Triple(AppTab.SAVED_TRIPS, "Saved", Icons.Default.Bookmark)
     )
 
-    Row(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .navigationBarsPadding()
-            .background(BgDarkElevated.copy(alpha = 0.98f))
-            .border(1.dp, GlassBorder, RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
-            .padding(horizontal = 8.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceAround,
-        verticalAlignment = Alignment.CenterVertically
+            .padding(horizontal = 16.dp, vertical = 10.dp)
     ) {
-        items.forEach { (tab, label, icon) ->
-            val isSelected = selectedTab == tab
-            Column(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(12.dp))
-                    .clickable { onTabSelected(tab) }
-                    .padding(horizontal = 10.dp, vertical = 6.dp)
-                    .testTag("nav_tab_${tab.name.lowercase()}"),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(3.dp)
-            ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = label,
-                    tint = if (isSelected) GoldPrimary else TextMuted,
-                    modifier = Modifier.size(22.dp)
-                )
-                Text(
-                    text = label,
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        color = if (isSelected) GoldPrimary else TextMuted,
-                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-                        fontSize = 10.sp
-                    )
-                )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(24.dp))
+                .background(BgDarkElevated.copy(alpha = 0.95f))
+                .border(1.dp, GlassBorder, RoundedCornerShape(24.dp))
+                .padding(horizontal = 6.dp, vertical = 6.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            items.forEach { (tab, label, icon) ->
+                val isSelected = selectedTab == tab
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(18.dp))
+                        .background(if (isSelected) GoldPrimary.copy(alpha = 0.14f) else Color.Transparent)
+                        .border(
+                            width = if (isSelected) 0.8.dp else 0.dp,
+                            color = if (isSelected) GlassBorderGold else Color.Transparent,
+                            shape = RoundedCornerShape(18.dp)
+                        )
+                        .clickable { onTabSelected(tab) }
+                        .padding(horizontal = 14.dp, vertical = 8.dp)
+                        .testTag("nav_tab_${tab.name.lowercase()}"),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(3.dp)
+                    ) {
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = label,
+                            tint = if (isSelected) GoldPrimary else TextSecondary.copy(alpha = 0.5f),
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Text(
+                            text = label,
+                            style = MaterialTheme.typography.labelSmall.copy(
+                                color = if (isSelected) GoldPrimary else TextSecondary.copy(alpha = 0.5f),
+                                fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
+                                fontSize = 10.sp,
+                                letterSpacing = 0.3.sp
+                            )
+                        )
+                    }
+                }
             }
         }
     }

@@ -52,21 +52,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.data.model.TripVibe
-import com.example.ui.theme.AccentGreen
-import com.example.ui.theme.BgDark
-import com.example.ui.theme.BgDarkCard
-import com.example.ui.theme.GlassBorder
-import com.example.ui.theme.GlassBorderGold
-import com.example.ui.theme.GlassBorderStrong
-import com.example.ui.theme.GlassSurface
-import com.example.ui.theme.GoldDark
-import com.example.ui.theme.GoldGlow
-import com.example.ui.theme.GoldPrimary
-import com.example.ui.theme.GoldSecondary
-import com.example.ui.theme.TextMuted
-import com.example.ui.theme.TextPrimary
-import com.example.ui.theme.TextSecondary
-import com.example.ui.theme.TextTertiary
+import com.example.ui.theme.*
 
 @Composable
 fun GoldPillBadge(
@@ -79,21 +65,20 @@ fun GoldPillBadge(
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         modifier = modifier
             .background(
-                brush = Brush.horizontalGradient(
-                    listOf(Color(0x33E8C97A), Color(0x1AE8C97A))
-                ),
+                color = GoldPrimary.copy(alpha = 0.10f),
                 shape = RoundedCornerShape(100.dp)
             )
-            .border(1.dp, GlassBorderGold, RoundedCornerShape(100.dp))
-            .padding(horizontal = 12.dp, vertical = 6.dp)
+            .border(0.8.dp, GlassBorderGold, RoundedCornerShape(100.dp))
+            .padding(horizontal = 12.dp, vertical = 5.dp)
     ) {
         leadingIcon?.invoke()
         Text(
             text = text.uppercase(),
             style = MaterialTheme.typography.labelSmall.copy(
                 letterSpacing = 1.2.sp,
-                fontWeight = FontWeight.Bold,
-                color = GoldSecondary
+                fontWeight = FontWeight.SemiBold,
+                color = GoldPrimary,
+                fontSize = 9.sp
             )
         )
     }
@@ -108,15 +93,17 @@ fun VibeBadge(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         modifier = modifier
-            .background(Color(vibe.badgeColorHex).copy(alpha = 0.85f), RoundedCornerShape(100.dp))
+            .background(Color(vibe.badgeColorHex).copy(alpha = 0.20f), RoundedCornerShape(100.dp))
+            .border(0.8.dp, Color(vibe.badgeColorHex).copy(alpha = 0.50f), RoundedCornerShape(100.dp))
             .padding(horizontal = 10.dp, vertical = 4.dp)
     ) {
         Text(text = vibe.emoji, fontSize = 11.sp)
         Text(
             text = vibe.label,
             style = MaterialTheme.typography.labelSmall.copy(
-                color = if (vibe == TripVibe.LUXURY) BgDark else Color.White,
-                fontWeight = FontWeight.Bold
+                color = TextPrimary,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 10.sp
             )
         )
     }
@@ -142,9 +129,9 @@ fun MarqueeTicker(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color(0x1FE8C97A))
-            .border(1.dp, Color(0x26E8C97A))
-            .padding(vertical = 10.dp)
+            .background(BgDarkElevated)
+            .border(0.5.dp, GlassBorder)
+            .padding(vertical = 8.dp)
     ) {
         Row(
             modifier = Modifier.horizontalScroll(scrollState),
@@ -155,20 +142,21 @@ fun MarqueeTicker(
             fullList.forEach { text ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
                         text = text.uppercase(),
                         style = MaterialTheme.typography.labelSmall.copy(
-                            color = GoldPrimary,
-                            fontWeight = FontWeight.Bold,
-                            letterSpacing = 1.4.sp
+                            color = TextSecondary,
+                            fontWeight = FontWeight.Medium,
+                            letterSpacing = 1.2.sp,
+                            fontSize = 10.sp
                         )
                     )
                     Text(
                         text = "✦",
-                        color = GoldPrimary.copy(alpha = 0.5f),
-                        fontSize = 10.sp
+                        color = GoldPrimary.copy(alpha = 0.6f),
+                        fontSize = 9.sp
                     )
                 }
             }
@@ -179,14 +167,14 @@ fun MarqueeTicker(
 @Composable
 fun GlassCard(
     modifier: Modifier = Modifier,
-    shape: RoundedCornerShape = RoundedCornerShape(20.dp),
+    shape: RoundedCornerShape = RoundedCornerShape(16.dp),
     borderColor: Color = GlassBorder,
-    backgroundColor: Color = GlassSurface,
+    backgroundColor: Color = BgDarkElevated,
     content: @Composable () -> Unit
 ) {
     Card(
         modifier = modifier
-            .border(1.dp, borderColor, shape),
+            .border(0.8.dp, borderColor, shape),
         shape = shape,
         colors = CardDefaults.cardColors(containerColor = backgroundColor)
     ) {
@@ -210,7 +198,7 @@ fun GoldButton(
         ),
         shape = RoundedCornerShape(100.dp),
         modifier = modifier
-            .height(48.dp)
+            .height(46.dp)
             .testTag(testTag)
     ) {
         Row(
@@ -219,16 +207,18 @@ fun GoldButton(
         ) {
             Text(
                 text = text.uppercase(),
-                style = MaterialTheme.typography.labelLarge.copy(
-                    fontWeight = FontWeight.ExtraBold,
-                    letterSpacing = 1.sp
+                style = MaterialTheme.typography.labelMedium.copy(
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 1.sp,
+                    fontSize = 12.sp,
+                    color = BgDark
                 )
             )
             icon?.let {
                 Icon(
                     imageVector = it,
                     contentDescription = null,
-                    modifier = Modifier.size(16.dp),
+                    modifier = Modifier.size(15.dp),
                     tint = BgDark
                 )
             }
