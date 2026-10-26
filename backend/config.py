@@ -1,5 +1,8 @@
 import os
 from typing import List
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Settings:
     PROJECT_NAME: str = "ComeTripWithMe Backend API"
