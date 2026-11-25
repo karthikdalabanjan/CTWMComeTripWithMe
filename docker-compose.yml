@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: cometripwithme_app
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/cometripwithme
+      - RAZORPAY_KEY_ID=${RAZORPAY_KEY_ID:-rzp_test_TsZLsyJjlAVbHZ}
+      - RAZORPAY_KEY_SECRET=${RAZORPAY_KEY_SECRET:-xRkTIQ4NDlRpUowLKeTjKj05}
+      - SECRET_KEY=${SECRET_KEY:-cometripwithme-super-secret-beta-key-2026}
+      - ALLOW_MOCK_PAYMENTS=true
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:16-alpine
+    container_name: cometripwithme_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cometripwithme
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+

@@ -1613,6 +1613,315 @@ html_template = """<!DOCTYPE html>
             gap: 8px;
             margin: 16px 0;
         }
+    
+        /* User Profile & Auth Elements */
+        .user-profile-header-pill {
+            background: rgba(232, 201, 122, 0.12);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .user-profile-header-pill:hover {
+            background: var(--gold-primary);
+            color: var(--bg-dark);
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+        .user-avatar-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Auth Modal Tabs & Forms */
+        .auth-tab-row {
+            display: flex;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px;
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+        }
+        .auth-tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .auth-tab-btn.active {
+            background: var(--gold-primary);
+            color: var(--bg-dark);
+            box-shadow: 0 2px 8px rgba(232, 201, 122, 0.3);
+        }
+        .auth-form-group {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+        .auth-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .auth-input {
+            width: 100%;
+            background: var(--bg-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            color: #fff;
+            font-size: 13px;
+            font-family: var(--font-body);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .auth-input:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        /* Complete Itinerary Modal Enhancements */
+        .prebooking-day-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--glass-border-subtle);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+        .prebooking-stop-item {
+            background: rgba(22, 28, 42, 0.6);
+            border-left: 3px solid var(--gold-primary);
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        /* Razorpay Payment Modal */
+        .payment-box-header {
+            background: linear-gradient(135deg, #0C1E3C 0%, #0F131C 100%);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 16px;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .payment-method-tile {
+            background: var(--bg-dark);
+            border: 1px solid var(--glass-border-subtle);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .payment-method-tile:hover, .payment-method-tile.selected {
+            border-color: var(--gold-primary);
+            background: rgba(232, 201, 122, 0.08);
+        }
+        .payment-qr-wrapper {
+            background: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 12px 0;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        }
+
+        /* Live Trip Tracking Mission Control */
+        .tracker-hud-banner {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(7, 9, 14, 0.98));
+            border: 1px solid var(--glass-border-strong);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .tracker-hud-banner::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; width: 140px; height: 140px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .trip-leg-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            margin-bottom: 14px;
+            position: relative;
+            transition: all 0.25s ease;
+        }
+        .trip-leg-card.active-leg {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+        }
+        .trip-leg-card.completed-leg {
+            border-color: rgba(60, 160, 130, 0.5);
+            opacity: 0.85;
+        }
+        .leg-status-badge {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .leg-status-ASSIGNED { background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .leg-status-DRIVER_EN_ROUTE { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .leg-status-SCHEDULED { background: rgba(148, 163, 184, 0.15); color: #94A3B8; border: 1px solid rgba(148, 163, 184, 0.3); }
+        .leg-status-COMPLETED { background: rgba(60, 160, 130, 0.15); color: #3CA082; border: 1px solid rgba(60, 160, 130, 0.3); }
+
+        .driver-info-box {
+            background: var(--bg-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .driver-phone-chip {
+            background: rgba(232, 201, 122, 0.15);
+            color: var(--gold-light);
+            border: 1px solid var(--gold-primary);
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* In-App Driver Chat Window */
+        .driver-chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 380px;
+            background: var(--bg-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        .driver-chat-header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--glass-border-subtle);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .driver-chat-messages {
+            flex: 1;
+            padding: 14px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chat-bubble {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 12px;
+            line-height: 1.4;
+            position: relative;
+        }
+        .chat-bubble.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #E8C97A, #D4AF37);
+            color: #000;
+            font-weight: 500;
+            border-bottom-right-radius: 3px;
+        }
+        .chat-bubble.driver {
+            align-self: flex-start;
+            background: var(--bg-card-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            border-bottom-left-radius: 3px;
+        }
+        .chat-chip-row {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding: 8px 12px;
+            background: rgba(0,0,0,0.3);
+            border-top: 1px solid var(--glass-border-subtle);
+        }
+        .chat-quick-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border-subtle);
+            color: var(--gold-light);
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .chat-quick-chip:hover {
+            border-color: var(--gold-primary);
+            background: var(--gold-container);
+        }
+        .chat-input-bar {
+            display: flex;
+            padding: 10px 12px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--glass-border-subtle);
+            gap: 8px;
+        }
+        .chat-input-field {
+            flex: 1;
+            background: var(--bg-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 8px 12px;
+            color: #fff;
+            font-size: 12px;
+            outline: none;
+        }
+        .chat-send-btn {
+            background: var(--gold-primary);
+            color: #000;
+            border: none;
+            padding: 8px 14px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -1627,9 +1936,18 @@ html_template = """<!DOCTYPE html>
         <button class="control-btn" id="btnViewDesktop" onclick="toggleViewportMode('desktop')">
             <i class="fa-solid fa-desktop"></i> Desktop View
         </button>
-        <button class="control-btn live-pass-btn" id="btnLivePass" onclick="openActiveBoardingPassModal()">
-            <i class="fa-solid fa-ticket"></i> Live Pass & HUD
+        <button class="control-btn" id="btnMasterAccount" onclick="handleHeaderAuthClick()" style="border-color:var(--gold-primary); color:var(--gold-light);">
+            <i class="fa-solid fa-user-circle"></i> <span id="masterUserLabel">Login / Profile</span>
         </button>
+        <button class="control-btn" id="btnMasterLiveTracker" onclick="openTripLiveTrackingModal()" style="background:rgba(56,189,248,0.15); border-color:rgba(56,189,248,0.4); color:#38BDF8;">
+            <i class="fa-solid fa-route"></i> Live Trip Updates
+        </button>
+        <button class="control-btn live-pass-btn" id="btnLivePass" onclick="openActiveBoardingPassModal()">
+            <i class="fa-solid fa-ticket"></i> Pass & QR
+        </button>
+        <a href="/platform" target="_blank" class="control-btn" style="border-color:var(--accent-purple); color:#C084FC; text-decoration:none;">
+            <i class="fa-solid fa-cloud"></i> Cloud Platform
+        </a>
         <button class="control-btn admin-toggle" id="btnCmsTrigger" onclick="toggleCmsDrawer()">
             <i class="fa-solid fa-sliders"></i> Master Controller
         </button>
@@ -1660,6 +1978,11 @@ html_template = """<!DOCTYPE html>
                     </div>
                 </div>
                 <div class="header-action-row">
+                    <button class="user-profile-header-pill" id="headerAuthBtn" onclick="handleHeaderAuthClick()" title="Profile & Account">
+                        <span class="user-avatar-dot"></span>
+                        <i class="fa-solid fa-user"></i>
+                        <span id="headerAuthLabel">Login</span>
+                    </button>
                     <button class="icon-circle-btn" onclick="openInstagramChannel('@cometriipwme')" title="Instagram">
                         <i class="fa-brands fa-instagram"></i>
                     </button>
@@ -2365,6 +2688,254 @@ html_template = """<!DOCTYPE html>
     </div>
 </div>
 
+
+<!-- ================= MODAL: USER AUTHENTICATION (LOGIN / REGISTER) ================= -->
+<div class="modal-backdrop" id="authModal">
+    <div class="modal-dialog" style="max-width:440px;">
+        <div class="modal-header">
+            <div>
+                <span class="gold-badge" style="margin-bottom:4px;">✦ COME TRIP WITH ME PASSENGER ACCOUNT</span>
+                <h3 class="modal-title" id="authModalTitle">Sign In to Book Trips</h3>
+            </div>
+            <button class="modal-close-btn" onclick="closeModal('authModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="auth-tab-row">
+                <button class="auth-tab-btn active" id="authTabLogin" onclick="switchAuthTab('login')">Sign In</button>
+                <button class="auth-tab-btn" id="authTabRegister" onclick="switchAuthTab('register')">Create Account</button>
+            </div>
+
+            <div id="authAlertBox" style="display:none; padding:10px 12px; border-radius:var(--radius-md); font-size:12px; margin-bottom:12px;"></div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleAuthLoginSubmit(event)">
+                <div class="auth-form-group">
+                    <label class="auth-label">Email or Phone Number</label>
+                    <input type="text" class="auth-input" id="loginIdInput" placeholder="karthik.traveler@example.com / 9876543210" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Password</label>
+                    <input type="password" class="auth-input" id="loginPasswordInput" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="gold-btn" style="width:100%; margin-top:8px;">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In to Account
+                </button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" onsubmit="handleAuthRegisterSubmit(event)" style="display:none;">
+                <div class="auth-form-group">
+                    <label class="auth-label">Full Name</label>
+                    <input type="text" class="auth-input" id="regNameInput" placeholder="e.g. Karthik Dalabanjan" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Email Address</label>
+                    <input type="email" class="auth-input" id="regEmailInput" placeholder="name@example.com" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Phone Number (with WhatsApp)</label>
+                    <input type="tel" class="auth-input" id="regPhoneInput" placeholder="+91 98765 43210" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Departure City</label>
+                    <select class="auth-input" id="regCityInput">
+                        <option value="Bengaluru">Bengaluru (BLR)</option>
+                        <option value="Delhi">Delhi (DEL)</option>
+                        <option value="Mumbai">Mumbai (BOM)</option>
+                    </select>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Create Password</label>
+                    <input type="password" class="auth-input" id="regPasswordInput" placeholder="Min. 6 characters" required>
+                </div>
+                <button type="submit" class="gold-btn" style="width:100%; margin-top:8px;">
+                    <i class="fa-solid fa-user-plus"></i> Register & Continue Booking
+                </button>
+            </form>
+
+            <!-- 1-Click Fast Demo Login for Testers -->
+            <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--glass-border-subtle); text-align:center;">
+                <span style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:8px;">Fast Beta Tester Access:</span>
+                <button type="button" class="glass-btn" style="width:100%; font-size:12px; border-color:rgba(232, 201, 122, 0.4);" onclick="quickFillDemoUser()">
+                    ⚡ Quick Login as Karthik (Beta Traveler)
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL: USER PROFILE & BOOKINGS DASHBOARD ================= -->
+<div class="modal-backdrop" id="userProfileModal">
+    <div class="modal-dialog" style="max-width:540px;">
+        <div class="modal-header">
+            <div>
+                <span class="gold-badge" style="margin-bottom:4px;">✦ VERIFIED TRAVELER PROFILE</span>
+                <h3 class="modal-title" id="profileModalUserName">My Profile & Account</h3>
+            </div>
+            <button class="modal-close-btn" onclick="closeModal('userProfileModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body" id="profileModalBody">
+            <!-- Injected by renderUserProfileModal() -->
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL: PRE-BOOKING COMPLETE ITINERARY & CHECKOUT ================= -->
+<div class="modal-backdrop" id="preBookingModal">
+    <div class="modal-dialog" style="max-width:680px;">
+        <div class="modal-header">
+            <div>
+                <span class="gold-badge" style="margin-bottom:4px;">✦ COMPLETE VERIFIED ROUTE ITINERARY</span>
+                <h3 class="modal-title" id="preBookTripTitle">Trip Itinerary & Booking</h3>
+            </div>
+            <button class="modal-close-btn" onclick="closeModal('preBookingModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body" id="preBookingModalBody">
+            <!-- Full day-by-day stops, inclusions, traveler inputs, and realistic pricing breakdown -->
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL: RAZORPAY PAYMENT GATEWAY ================= -->
+<div class="modal-backdrop" id="paymentGatewayModal">
+    <div class="modal-dialog" style="max-width:480px;">
+        <div class="payment-box-header">
+            <div>
+                <div style="font-size:10px; color:#38BDF8; font-weight:800; letter-spacing:1px; text-transform:uppercase;">Razorpay Smart Gateway</div>
+                <h3 style="font-family:var(--font-heading); font-size:18px; font-weight:800; color:#fff;" id="rzpModalAmountTitle">Pay ₹0.00</h3>
+            </div>
+            <div style="text-align:right;">
+                <span class="gold-badge" style="font-size:10px;" id="rzpOrderRefBadge">CTWM-ORDER</span>
+            </div>
+        </div>
+        <div class="modal-body" id="paymentGatewayModalBody" style="padding:18px;">
+            <!-- Injected by renderPaymentModal() -->
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL: LIVE TRIP TRACKING & DRIVER MISSION CONTROL ================= -->
+<div class="modal-backdrop" id="tripLiveTrackingModal">
+    <div class="modal-dialog" style="max-width:680px;">
+        <div class="modal-header">
+            <div>
+                <span class="gold-badge" style="margin-bottom:4px; background:rgba(56,189,248,0.2); color:#38BDF8; border-color:rgba(56,189,248,0.4);">
+                    <i class="fa-solid fa-satellite-dish"></i> LIVE MISSION CONTROL · REAL-TIME DISPATCH
+                </span>
+                <h3 class="modal-title" id="liveTrackingTripTitle">Live Trip Tracking & Driver Updates</h3>
+            </div>
+            <button class="modal-close-btn" onclick="closeModal('tripLiveTrackingModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body" id="tripLiveTrackingModalBody">
+            <!-- Injected by renderLiveTrackingHUD() -->
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL: IN-APP DRIVER TEXT MESSAGING ================= -->
+<div class="modal-backdrop" id="driverChatModal">
+    <div class="modal-dialog" style="max-width:500px;">
+        <div class="modal-header">
+            <div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="user-avatar-dot"></span>
+                    <h3 class="modal-title" id="chatDriverName">Driver</h3>
+                </div>
+                <span style="font-size:11px; color:var(--gold-light);" id="chatDriverSub">Toyota Innova Crysta · Online</span>
+            </div>
+            <button class="modal-close-btn" onclick="closeModal('driverChatModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body" style="padding:12px;">
+            <div class="driver-chat-container">
+                <div class="driver-chat-messages" id="chatMessagesFeed">
+                    <!-- Dynamic chat bubbles -->
+                </div>
+                <div class="chat-chip-row">
+                    <span class="chat-quick-chip" onclick="sendQuickChatMessage('I have arrived at the pickup gate!')">👋 I've arrived</span>
+                    <span class="chat-quick-chip" onclick="sendQuickChatMessage('Where are you parked?')">📍 Where are you?</span>
+                    <span class="chat-quick-chip" onclick="sendQuickChatMessage('Please turn on the AC')">❄️ Turn on AC</span>
+                    <span class="chat-quick-chip" onclick="sendQuickChatMessage('Running 5 mins late with luggage')">⏳ Running 5 mins late</span>
+                </div>
+                <form class="chat-input-bar" onsubmit="handleSendDriverChatMessage(event)">
+                    <input type="text" class="chat-input-field" id="chatMessageInput" placeholder="Message your chauffeur directly..." autocomplete="off">
+                    <button type="submit" class="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL: OPERATOR DRIVER & PHONE NUMBER UPDATE ================= -->
+<div class="modal-backdrop" id="operatorDriverModal">
+    <div class="modal-dialog" style="max-width:480px;">
+        <div class="modal-header">
+            <div>
+                <span class="gold-badge" style="margin-bottom:4px; background:rgba(245, 158, 11, 0.2); color:#F59E0B; border-color:rgba(245, 158, 11, 0.4);">
+                    <i class="fa-solid fa-user-pen"></i> OPERATOR DISPATCH OVERRIDE
+                </span>
+                <h3 class="modal-title">Update Driver for Destination</h3>
+            </div>
+            <button class="modal-close-btn" onclick="closeModal('operatorDriverModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p style="font-size:12px; color:var(--text-secondary); margin-bottom:14px;">
+                Update the driver's contact details, phone number, and vehicle according to the trip destination.
+            </p>
+            <form id="operatorDriverForm" onsubmit="handleOperatorDriverSubmit(event)">
+                <input type="hidden" id="opLegId">
+                <div class="auth-form-group">
+                    <label class="auth-label">Trip Instance / Leg Title</label>
+                    <input type="text" class="auth-input" id="opLegTitle" readonly style="opacity:0.7;">
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Driver Name</label>
+                    <input type="text" class="auth-input" id="opDriverName" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Driver Phone Number (Destination Contact)</label>
+                    <input type="tel" class="auth-input" id="opDriverPhone" placeholder="+91 98765 43210" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Vehicle Model</label>
+                    <input type="text" class="auth-input" id="opVehicleModel" placeholder="e.g. Toyota Innova Crysta / Ertiga AC" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Vehicle Plate / Registration</label>
+                    <input type="text" class="auth-input" id="opVehicleNumber" placeholder="e.g. GA-03-AA-4491" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Dispatch Status</label>
+                    <select class="auth-input" id="opLegStatus">
+                        <option value="ASSIGNED">ASSIGNED (Chauffeur Confirmed)</option>
+                        <option value="DRIVER_EN_ROUTE">DRIVER EN ROUTE (On the way)</option>
+                        <option value="SCHEDULED">SCHEDULED (Upcoming)</option>
+                        <option value="COMPLETED">COMPLETED (Dropped off)</option>
+                    </select>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">Driver Dispatch Note</label>
+                    <input type="text" class="auth-input" id="opNotes" placeholder="e.g. Waiting with passenger placard outside arrival gate.">
+                </div>
+                <button type="submit" class="gold-btn" style="width:100%; margin-top:8px;">
+                    <i class="fa-solid fa-floppy-disk"></i> Save & Update Driver Info
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Toast Container -->
 <div class="toast-container" id="toastContainer"></div>
 
@@ -2457,8 +3028,8 @@ const FACTORY_DATA = {
             tiers: {
                 "budget": {
                     tierName: "🎒 Budget Backpacker",
-                    price: "₹3,999",
-                    budgetValue: 3999,
+                    price: "₹7,999",
+                    budgetValue: 7999,
                     transportType: "🚌 AC Sleeper Bus / 🚆 Express Train",
                     transportDetails: "Multi-Axle AC Sleeper Bus / Vasco Express 3AC",
                     departureHub: "Majestic / Kashmere Gate / Borivali Private Stand",
@@ -2472,8 +3043,8 @@ const FACTORY_DATA = {
                 },
                 "mid": {
                     tierName: "✨ Mid-Tier Best Value",
-                    price: "₹8,999",
-                    budgetValue: 8999,
+                    price: "₹49,999",
+                    budgetValue: 49999,
                     transportType: "✈️ Direct Flight + 🚖 AC Sedan Cab",
                     transportDetails: "IndiGo / Akasa Air Direct Flight (BLR/DEL/BOM ➔ GOX)",
                     departureHub: "Airport T2 (BLR) / T3 (DEL) / T2 (BOM) Departure Gate",
@@ -2573,8 +3144,8 @@ const FACTORY_DATA = {
             tiers: {
                 "budget": {
                     tierName: "🎒 Budget Backpacker",
-                    price: "₹14,999",
-                    budgetValue: 14999,
+                    price: "₹38,999",
+                    budgetValue: 38999,
                     transportType: "✈️ Economy Flight + 🚆 MRT/BTS & Ferry",
                     transportDetails: "AirAsia Economy + Airport Rail Link & Shared Krabi Express Ferry",
                     departureHub: "T2 International (BLR/BOM) / T3 (DEL)",
@@ -2588,8 +3159,8 @@ const FACTORY_DATA = {
                 },
                 "mid": {
                     tierName: "✨ Mid-Tier Best Value",
-                    price: "₹24,999",
-                    budgetValue: 24999,
+                    price: "₹68,999",
+                    budgetValue: 68999,
                     transportType: "✈️ Direct Flight + 🚐 VIP Van & Longtail",
                     transportDetails: "Thai Airways / IndiGo Direct Flight + VIP Commuter Van",
                     departureHub: "T2 / T3 International Terminal",
@@ -2603,8 +3174,8 @@ const FACTORY_DATA = {
                 },
                 "luxury": {
                     tierName: "🌟 Luxury Creator Escape",
-                    price: "₹48,999",
-                    budgetValue: 48999,
+                    price: "₹1,48,000",
+                    budgetValue: 148000,
                     transportType: "✈️ Premium Business Flight + 🛥️ Private Yacht",
                     transportDetails: "Thai Airways Royal Silk / Flex + Luxury Toyota Vellfire & Private Speedboat",
                     departureHub: "Airport VIP Business Class Lounge",
@@ -2677,8 +3248,8 @@ const FACTORY_DATA = {
             tiers: {
                 "budget": {
                     tierName: "🎒 Budget Backpacker",
-                    price: "₹4,999",
-                    budgetValue: 4999,
+                    price: "₹8,999",
+                    budgetValue: 8999,
                     transportType: "🚌 Volvo 9600 Multi-Axle Sleeper",
                     transportDetails: "Overnight Luxury AC Volvo from Delhi Kashmere Gate / Chandigarh",
                     departureHub: "ISBT Kashmere Gate Platform 18 / Tribune Chowk",
@@ -2692,8 +3263,8 @@ const FACTORY_DATA = {
                 },
                 "mid": {
                     tierName: "✨ Mid-Tier Best Value",
-                    price: "₹11,999",
-                    budgetValue: 11999,
+                    price: "₹24,999",
+                    budgetValue: 24999,
                     transportType: "✈️ Flight to Chandigarh + 🚖 Private Mountain Cab",
                     transportDetails: "Direct Flight to IXC + Dedicated Private Dzire/Ertiga Cab",
                     departureHub: "Airport T2 (BLR) / T3 (DEL) / T2 (BOM)",
@@ -2707,8 +3278,8 @@ const FACTORY_DATA = {
                 },
                 "luxury": {
                     tierName: "🌟 Luxury Creator Escape",
-                    price: "₹22,999",
-                    budgetValue: 22999,
+                    price: "₹1,39,000",
+                    budgetValue: 139000,
                     transportType: "✈️ Direct Flight to Bhuntar (KUU) + 🚖 4x4 Scorpio",
                     transportDetails: "Alliance Air Direct to KUU + 4x4 Scorpio Chauffeur for all 5 Days",
                     departureHub: "IGI Delhi T2 / Airport Gateway",
@@ -2781,8 +3352,8 @@ const FACTORY_DATA = {
             tiers: {
                 "budget": {
                     tierName: "🎒 Budget Backpacker",
-                    price: "₹3,499",
-                    budgetValue: 3499,
+                    price: "₹6,999",
+                    budgetValue: 6999,
                     transportType: "🚆 Superfast Train / 🚌 Sleeper Bus",
                     transportDetails: "Panchaganga Superfast Express (16595) Sleeper/3AC or AC Sleeper Bus",
                     departureHub: "KSR Bengaluru (SBC) / Dadar (DR)",
@@ -2880,8 +3451,8 @@ const FACTORY_DATA = {
             tiers: {
                 "budget": {
                     tierName: "🎒 Budget Backpacker",
-                    price: "₹2,999",
-                    budgetValue: 2999,
+                    price: "₹5,999",
+                    budgetValue: 5999,
                     transportType: "🚌 Overnight Multi-Axle AC Sleeper",
                     transportDetails: "KSRTC Airavat Club Class / Private Sleeper Coach",
                     departureHub: "Madiwala St. John's / Koyambedu Chennai",
@@ -2895,8 +3466,8 @@ const FACTORY_DATA = {
                 },
                 "mid": {
                     tierName: "✨ Mid-Tier Best Value",
-                    price: "₹5,499",
-                    budgetValue: 5499,
+                    price: "₹36,999",
+                    budgetValue: 36999,
                     transportType: "✈️ Flight to Chennai (MAA) + 🚖 ECR Cab",
                     transportDetails: "Direct Flight to MAA + Pre-booked AC Sedan on scenic ECR Road",
                     departureHub: "Airport T2 (BLR) / T3 (DEL) / T2 (BOM)",
@@ -2979,8 +3550,8 @@ const FACTORY_DATA = {
             tiers: {
                 "budget": {
                     tierName: "🎒 Budget Backpacker",
-                    price: "₹12,999",
-                    budgetValue: 12999,
+                    price: "₹32,999",
+                    budgetValue: 32999,
                     transportType: "✈️ Economy Flight + 🚆 KL Express & KTM Train",
                     transportDetails: "Batik Air / AirAsia Economy + KTM Electric Train to Penang",
                     departureHub: "T2 / T3 International Terminal",
@@ -2994,8 +3565,8 @@ const FACTORY_DATA = {
                 },
                 "mid": {
                     tierName: "✨ Mid-Tier Best Value",
-                    price: "₹21,999",
-                    budgetValue: 21999,
+                    price: "₹58,999",
+                    budgetValue: 58999,
                     transportType: "✈️ Direct Flight + 🚆 ETS Platinum Train",
                     transportDetails: "Malaysia Airlines Direct Flight + ETS Platinum Class",
                     departureHub: "T2 / T3 International Airport",
@@ -3009,8 +3580,8 @@ const FACTORY_DATA = {
                 },
                 "luxury": {
                     tierName: "🌟 Luxury Creator Escape",
-                    price: "₹44,999",
-                    budgetValue: 44999,
+                    price: "₹1,29,000",
+                    budgetValue: 129000,
                     transportType: "✈️ Business Class Flight + 🚖 Luxury Vellfire MPV",
                     transportDetails: "Malaysia Airlines Business Class + Dedicated Private Vellfire MPV",
                     departureHub: "VIP Business Lounge",
@@ -3078,8 +3649,8 @@ const FACTORY_DATA = {
             tiers: {
                 "budget": {
                     tierName: "🎒 Budget Backpacker",
-                    price: "₹15,999",
-                    budgetValue: 15999,
+                    price: "₹34,999",
+                    budgetValue: 34999,
                     transportType: "✈️ Connecting Economy Flight + 🚤 Longtail",
                     transportDetails: "AirAsia Flight + Shared Airport Van & Traditional Longtail",
                     departureHub: "T2 / T3 International Airport",
@@ -3093,8 +3664,8 @@ const FACTORY_DATA = {
                 },
                 "mid": {
                     tierName: "✨ Mid-Tier Best Value",
-                    price: "₹28,999",
-                    budgetValue: 28999,
+                    price: "₹64,999",
+                    budgetValue: 64999,
                     transportType: "✈️ Direct Flight + 🚖 Van & Private Longtail",
                     transportDetails: "IndiGo / Thai Airways Flight + Private AC Van to Pier",
                     departureHub: "T2 / T3 International Airport",
@@ -3551,13 +4122,13 @@ function runSmartMatch() {
     let recSub = `Handcrafted itinerary matched for ${orgData.name} in the ${tier.toUpperCase()} class.`;
 
     if (tier === 'budget') {
-        recTitle = `🎒 Budget Explorer — From ₹2,999/person (${orgData.code})`;
+        recTitle = `🎒 Budget Explorer — From ₹6,999 - ₹8,999/person (${orgData.code})`;
         recSub = `Overnight AC Sleeper Bus / Train + Social Backpacker Hostel (Zostel) + Self-Drive Scooty pass.`;
     } else if (tier === 'mid') {
-        recTitle = `✨ Mid-Tier Best Value — From ₹6,499 - ₹8,999 (${orgData.code})`;
+        recTitle = `✨ Mid-Tier Best Value — From ₹16,999 - ₹24,999 (${orgData.code})`;
         recSub = `Direct Flight + AC Cab transfer + Curated Boutique Hotel + Cafe breakfasts & audio guide.`;
     } else if (tier === 'luxury') {
-        recTitle = `🌟 Luxury Creator Escape — From ₹18,999+ (${orgData.code})`;
+        recTitle = `🌟 Luxury Creator Escape — From ₹39,999 - ₹54,999+ (${orgData.code})`;
         recSub = `Premium Direct Flight + Dedicated Innova Crysta Chauffeur + 5-Star Oceanfront Villa + VIP Sunset tables.`;
     }
 
@@ -3576,11 +4147,18 @@ function inquireSmartMatchWhatsApp() {
     const budget = document.getElementById('smartBudgetVal').textContent;
     const title = document.getElementById('smartResultTitle').textContent;
 
-    const msg = `Hey ComeTripWithMe! ✦ I'm interested in the *${tier.toUpperCase()}* segment trip:\n\n` +
-                `🛫 Departing From: ${org} (${store.data.origins[org].name})\n` +
-                `✨ Travel Class: ${tier.toUpperCase()} (Flight/Bus/Train + Stays)\n` +
-                `💰 Budget Target: ${budget}/person\n` +
-                `📋 Selected Route: ${title}\n\n` +
+    const msg = `Hey ComeTripWithMe! ✦ I'm interested in the *${tier.toUpperCase()}* segment trip:
+
+` +
+                `🛫 Departing From: ${org} (${store.data.origins[org].name})
+` +
+                `✨ Travel Class: ${tier.toUpperCase()} (Flight/Bus/Train + Stays)
+` +
+                `💰 Budget Target: ${budget}/person
+` +
+                `📋 Selected Route: ${title}
+
+` +
                 `Please share available departure slots and booking details!`;
 
     openWhatsAppLink(msg);
@@ -3696,7 +4274,7 @@ function openTripDetailModal(tripId) {
 
         <!-- Booking Actions -->
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button class="gold-btn" style="flex:1;" onclick="bookTripAndActivateLivePass('${trip.id}')">
+            <button class="gold-btn" style="flex:1;" onclick="startTripBookingFlow('${trip.id}')">
                 <i class="fa-solid fa-ticket"></i> Book ${tier.tierName.split(' ')[0]} (${tier.price}) & Activate Pass
             </button>
             <button class="glass-btn" onclick="store.toggleWishlist('${trip.id}'); openTripDetailModal('${trip.id}');">
@@ -4274,14 +4852,24 @@ function sendCustomPlannerWhatsApp() {
     const budget = document.getElementById('planBudgetInput').value || 'Standard Tier';
     const notes = document.getElementById('planNotesInput').value || 'None';
 
-    const msg = `✦ *NEW TRIP INQUIRY — ComeTripWithMe* ✦\n\n` +
-                `🛫 *Departing From:* ${orgData.name} (${orgData.code})\n` +
-                `✨ *Travel Class:* ${tier}\n` +
-                `📍 *Destination:* ${dest}\n` +
-                `👥 *Squad Size:* ${squad}\n` +
-                `🗓️ *Dates:* ${date}\n` +
-                `💰 *Budget Target:* ${budget}\n` +
-                `📝 *Stay & Transit Preferences:* ${notes}\n\n` +
+    const msg = `✦ *NEW TRIP INQUIRY — ComeTripWithMe* ✦
+
+` +
+                `🛫 *Departing From:* ${orgData.name} (${orgData.code})
+` +
+                `✨ *Travel Class:* ${tier}
+` +
+                `📍 *Destination:* ${dest}
+` +
+                `👥 *Squad Size:* ${squad}
+` +
+                `🗓️ *Dates:* ${date}
+` +
+                `💰 *Budget Target:* ${budget}
+` +
+                `📝 *Stay & Transit Preferences:* ${notes}
+
+` +
                 `Please send available dates and the verified itinerary!`;
 
     openWhatsAppLink(msg);
@@ -4292,7 +4880,12 @@ function sendCustomPlannerEmail() {
     const dest = document.getElementById('planDestSelect').value;
     const squad = document.getElementById('planSquadSelect').value;
     const subject = encodeURIComponent(`Booking Inquiry: ${org} to ${dest} for ${squad}`);
-    const body = encodeURIComponent(`Hi ComeTripWithMe team,\n\nI want to plan a custom trip from ${org} to ${dest}.\nPlease share available options for Luxury, Mid-Tier, and Budget classes.\n\nThank you!`);
+    const body = encodeURIComponent(`Hi ComeTripWithMe team,
+
+I want to plan a custom trip from ${org} to ${dest}.
+Please share available options for Luxury, Mid-Tier, and Budget classes.
+
+Thank you!`);
     window.location.href = `mailto:${store.data.branding.email}?subject=${subject}&body=${body}`;
 }
 
@@ -4752,6 +5345,903 @@ window.addEventListener('DOMContentLoaded', () => {
 
     console.log("✨ ComeTripWithMe 3-Tier Travel Segment Engine (Luxury · Mid-Tier · Budget) loaded.");
 });
+
+// ==================== COMETRIPWITHME API & STATE ENGINE ====================
+const API_BASE = (window.location.port === '8000' ? '' : 'http://localhost:8000') + '/api/v1';
+
+// Active session and current user state
+store.currentUser = null;
+try {
+    const savedUser = localStorage.getItem('cometrip_auth_user');
+    if (savedUser) store.currentUser = JSON.parse(savedUser);
+} catch(e) {
+    store.currentUser = null;
+}
+
+// Current booking flow memory
+let pendingBookingTripId = null;
+let currentBookingData = null;
+let currentPaymentOrderData = null;
+let activeChatLegId = null;
+let chatRefreshInterval = null;
+
+function updateAuthUI() {
+    const headerBtn = document.getElementById('headerAuthBtn');
+    const headerLabel = document.getElementById('headerAuthLabel');
+    const masterLabel = document.getElementById('masterUserLabel');
+
+    if (store.currentUser) {
+        const shortName = store.currentUser.display_name.split(' ')[0];
+        if (headerLabel) headerLabel.textContent = shortName;
+        if (masterLabel) masterLabel.textContent = `${shortName} (Account)`;
+        if (headerBtn) {
+            headerBtn.style.borderColor = 'var(--accent-green)';
+            headerBtn.style.color = '#86EFAC';
+        }
+    } else {
+        if (headerLabel) headerLabel.textContent = 'Login';
+        if (masterLabel) masterLabel.textContent = 'Login / Profile';
+        if (headerBtn) {
+            headerBtn.style.borderColor = 'var(--gold-primary)';
+            headerBtn.style.color = 'var(--gold-light)';
+        }
+    }
+}
+
+function handleHeaderAuthClick() {
+    if (store.currentUser) {
+        openUserProfileModal();
+    } else {
+        openAuthModal('login');
+    }
+}
+
+function openAuthModal(mode = 'login', nextTripId = null) {
+    if (nextTripId) pendingBookingTripId = nextTripId;
+    switchAuthTab(mode);
+    openModal('authModal');
+}
+
+function switchAuthTab(tab) {
+    const tabLogin = document.getElementById('authTabLogin');
+    const tabRegister = document.getElementById('authTabRegister');
+    const formLogin = document.getElementById('loginForm');
+    const formRegister = document.getElementById('registerForm');
+    const title = document.getElementById('authModalTitle');
+    const alertBox = document.getElementById('authAlertBox');
+    if (alertBox) alertBox.style.display = 'none';
+
+    if (tab === 'login') {
+        tabLogin.classList.add('active');
+        tabRegister.classList.remove('active');
+        formLogin.style.display = 'block';
+        formRegister.style.display = 'none';
+        title.textContent = 'Sign In to Your Account';
+    } else {
+        tabRegister.classList.add('active');
+        tabLogin.classList.remove('active');
+        formRegister.style.display = 'block';
+        formLogin.style.display = 'none';
+        title.textContent = 'Create Verified Traveler Account';
+    }
+}
+
+function quickFillDemoUser() {
+    document.getElementById('loginIdInput').value = 'karthik.traveler@example.com';
+    document.getElementById('loginPasswordInput').value = 'securepassword2026';
+    showToast('Credentials filled! Click "Sign In" to proceed.');
+}
+
+async function handleAuthLoginSubmit(event) {
+    event.preventDefault();
+    const loginId = document.getElementById('loginIdInput').value.trim();
+    const password = document.getElementById('loginPasswordInput').value;
+    const alertBox = document.getElementById('authAlertBox');
+
+    try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ login_id: loginId, password: password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Login failed');
+
+        store.currentUser = data;
+        localStorage.setItem('cometrip_auth_user', JSON.stringify(data));
+        updateAuthUI();
+        closeModal('authModal');
+        showToast(`✨ Welcome back, ${data.display_name}!`);
+
+        if (pendingBookingTripId) {
+            const tripToBook = pendingBookingTripId;
+            pendingBookingTripId = null;
+            openPreBookingItineraryModal(tripToBook);
+        }
+    } catch(err) {
+        if (alertBox) {
+            alertBox.style.display = 'block';
+            alertBox.style.background = 'rgba(220, 80, 60, 0.2)';
+            alertBox.style.color = '#FFA090';
+            alertBox.style.border = '1px solid rgba(220, 80, 60, 0.4)';
+            alertBox.textContent = err.message;
+        }
+    }
+}
+
+async function handleAuthRegisterSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('regNameInput').value.trim();
+    const email = document.getElementById('regEmailInput').value.trim();
+    const phone = document.getElementById('regPhoneInput').value.trim();
+    const city = document.getElementById('regCityInput').value;
+    const password = document.getElementById('regPasswordInput').value;
+    const alertBox = document.getElementById('authAlertBox');
+
+    try {
+        const res = await fetch(`${API_BASE}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                display_name: name,
+                email: email,
+                phone: phone,
+                city: city,
+                password: password
+            })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Registration failed');
+
+        store.currentUser = data;
+        localStorage.setItem('cometrip_auth_user', JSON.stringify(data));
+        updateAuthUI();
+        closeModal('authModal');
+        showToast(`🎉 Account created! Welcome, ${data.display_name}.`);
+
+        if (pendingBookingTripId) {
+            const tripToBook = pendingBookingTripId;
+            pendingBookingTripId = null;
+            openPreBookingItineraryModal(tripToBook);
+        }
+    } catch(err) {
+        if (alertBox) {
+            alertBox.style.display = 'block';
+            alertBox.style.background = 'rgba(220, 80, 60, 0.2)';
+            alertBox.style.color = '#FFA090';
+            alertBox.style.border = '1px solid rgba(220, 80, 60, 0.4)';
+            alertBox.textContent = err.message;
+        }
+    }
+}
+
+async function openUserProfileModal() {
+    if (!store.currentUser) {
+        openAuthModal('login');
+        return;
+    }
+
+    const body = document.getElementById('profileModalBody');
+    document.getElementById('profileModalUserName').textContent = store.currentUser.display_name;
+
+    body.innerHTML = `
+        <div style="text-align:center; padding:10px 0 16px;">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size:24px; color:var(--gold-primary);"></i>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Loading account & bookings...</p>
+        </div>
+    `;
+    openModal('userProfileModal');
+
+    try {
+        const res = await fetch(`${API_BASE}/auth/me?user_id=${store.currentUser.id}`);
+        const data = await res.json();
+        const bookings = data.bookings || [];
+
+        body.innerHTML = `
+            <div style="background:var(--bg-dark); border:1px solid var(--glass-border); border-radius:var(--radius-lg); padding:16px; margin-bottom:16px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                    <div>
+                        <h3 style="font-family:var(--font-heading); font-size:18px; font-weight:800; color:#fff;">${data.display_name}</h3>
+                        <p style="font-size:12px; color:var(--gold-light); margin-top:2px;">📍 ${data.city} · Verified Creator Traveler</p>
+                        <p style="font-size:11px; color:var(--text-secondary); margin-top:4px;">✉️ ${data.email || 'No email'} · 📞 ${data.phone || 'No phone'}</p>
+                    </div>
+                    <span class="gold-badge" style="font-size:10px;"><i class="fa-solid fa-shield-halved"></i> Active</span>
+                </div>
+            </div>
+
+            <h4 style="font-family:var(--font-heading); font-size:14px; font-weight:800; color:var(--gold-light); margin-bottom:10px;">
+                <i class="fa-solid fa-suitcase"></i> My Booked Trips (${bookings.length})
+            </h4>
+
+            <div style="display:flex; flex-direction:column; gap:10px; max-height:280px; overflow-y:auto; margin-bottom:16px;">
+                ${bookings.length === 0 ? `
+                    <div style="text-align:center; padding:24px; color:var(--text-muted); font-size:12px;">
+                        No trips booked yet. Select any itinerary from Explore to preview and book!
+                    </div>
+                ` : bookings.map(b => `
+                    <div class="glass-panel" style="padding:14px; margin-bottom:0; border-color:${b.status === 'CONFIRMED' ? 'rgba(60, 160, 130, 0.4)' : 'rgba(232, 201, 122, 0.3)'};">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                            <span style="font-family:var(--font-mono); font-size:11px; color:#38BDF8;">${b.booking_reference}</span>
+                            <span class="leg-status-badge leg-status-${b.status}">${b.status}</span>
+                        </div>
+                        <h4 style="font-size:14px; font-weight:800; color:#fff;">${b.trip_title} (${b.tier})</h4>
+                        <div style="font-size:11px; color:var(--text-secondary); margin:4px 0;">
+                            🗓️ ${b.travel_date} · 🛫 ${b.departure_city} · 👥 ${b.travelers_count} Traveler(s) · ₹${b.total_amount.toLocaleString('en-IN')}
+                        </div>
+                        <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+                            <button class="gold-btn" style="padding:6px 12px; font-size:11px;" onclick="closeModal('userProfileModal'); openTripLiveTrackingModal('${b.booking_reference}')">
+                                <i class="fa-solid fa-satellite-dish"></i> Live Trip Tracking
+                            </button>
+                            <button class="glass-btn" style="padding:6px 12px; font-size:11px;" onclick="closeModal('userProfileModal'); openActiveBoardingPassModal('${b.booking_reference}')">
+                                <i class="fa-solid fa-qrcode"></i> Digital Pass
+                            </button>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <button class="glass-btn" style="border-color:rgba(220, 80, 60, 0.5); color:#FFA090;" onclick="handleUserLogout()">
+                    <i class="fa-solid fa-power-off"></i> Logout
+                </button>
+                <button class="glass-btn" onclick="closeModal('userProfileModal')">Close</button>
+            </div>
+        `;
+    } catch(err) {
+        body.innerHTML = `<p style="color:red; font-size:12px;">Failed to load profile: ${err.message}</p>`;
+    }
+}
+
+function handleUserLogout() {
+    store.currentUser = null;
+    localStorage.removeItem('cometrip_auth_user');
+    updateAuthUI();
+    closeModal('userProfileModal');
+    showToast('Logged out successfully.');
+}
+
+// ==================== AUTH GUARD & PRE-BOOKING ITINERARY MODAL ====================
+
+function startTripBookingFlow(tripId) {
+    if (!store.currentUser) {
+        showToast('🔒 Please sign in to your profile first to book trips and receive live updates.');
+        openAuthModal('login', tripId);
+        return;
+    }
+    closeModal('tripDetailModal');
+    openPreBookingItineraryModal(tripId);
+}
+
+let activeBookingTripState = {
+    tripId: null,
+    tierKey: 'mid',
+    travelersCount: 2,
+    discountAmount: 2000,
+    voucherCode: 'EARLYBIRD'
+};
+
+function openPreBookingItineraryModal(tripId) {
+    const trip = store.getTrip(tripId);
+    if (!trip) return;
+
+    activeBookingTripState.tripId = trip.id;
+    activeBookingTripState.tierKey = store.getTripTier(trip.id) || 'mid';
+    const tier = trip.tiers[activeBookingTripState.tierKey] || trip.tiers['mid'];
+
+    document.getElementById('preBookTripTitle').textContent = `${trip.name} · Complete Itinerary`;
+    renderPreBookingModalContent();
+    openModal('preBookingModal');
+}
+
+function updatePreBookingTravelers(delta) {
+    activeBookingTripState.travelersCount = Math.max(1, Math.min(8, activeBookingTripState.travelersCount + delta));
+    renderPreBookingModalContent();
+}
+
+function setPreBookingTier(tierKey) {
+    activeBookingTripState.tierKey = tierKey;
+    store.setTripTier(activeBookingTripState.tripId, tierKey);
+    renderPreBookingModalContent();
+}
+
+function renderPreBookingModalContent() {
+    const trip = store.getTrip(activeBookingTripState.tripId);
+    const tier = trip.tiers[activeBookingTripState.tierKey] || trip.tiers['mid'];
+    const body = document.getElementById('preBookingModalBody');
+    const u = store.currentUser || { display_name: '', email: '', phone: '' };
+
+    const count = activeBookingTripState.travelersCount;
+    const baseUnitFare = tier.budgetValue || 18999;
+    const subtotal = baseUnitFare * count;
+    const discount = count > 1 ? 2000 : 0;
+    const gst = Math.round((subtotal - discount) * 0.05);
+    const finalTotal = subtotal - discount + gst;
+
+    body.innerHTML = `
+        <!-- Top Class & Destination Summary -->
+        <div style="background:var(--bg-dark); border:1px solid var(--glass-border); border-radius:var(--radius-lg); padding:16px; margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+                <div>
+                    <span class="gold-badge" style="font-size:10px;">${trip.duration} · ${store.selectedOrigin} DEPARTURE</span>
+                    <h3 style="font-family:var(--font-heading); font-size:18px; font-weight:800; color:#fff; margin-top:4px;">${trip.name}</h3>
+                </div>
+                <div style="text-align:right;">
+                    <span style="font-size:11px; color:var(--text-muted);">Selected Travel Class:</span>
+                    <div style="font-size:15px; font-weight:800; color:var(--gold-primary);">${tier.tierName} (${tier.price}/person)</div>
+                </div>
+            </div>
+
+            <!-- Tier Switcher -->
+            <div class="tier-pill-selector" style="margin:0;">
+                <button class="tier-pill-btn ${activeBookingTripState.tierKey === 'budget' ? 'active-tier-budget' : ''}" onclick="setPreBookingTier('budget')">
+                    🎒 Budget Backpacker
+                </button>
+                <button class="tier-pill-btn ${activeBookingTripState.tierKey === 'mid' ? 'active-tier-mid' : ''}" onclick="setPreBookingTier('mid')">
+                    ✨ Mid-Tier Best Value
+                </button>
+                <button class="tier-pill-btn ${activeBookingTripState.tierKey === 'luxury' ? 'active-tier-luxury' : ''}" onclick="setPreBookingTier('luxury')">
+                    🌟 Luxury Creator
+                </button>
+            </div>
+        </div>
+
+        <!-- COMPLETE DAY-BY-DAY ROUTE ITINERARY (Visible Before Booking) -->
+        <div style="margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <h4 style="font-family:var(--font-heading); font-size:14px; font-weight:800; color:var(--gold-light);">
+                    <i class="fa-solid fa-map-location-dot"></i> Verified Day-by-Day Route Itinerary
+                </h4>
+                <span style="font-size:11px; color:var(--text-muted);">${trip.days.length} Days Full Schedule</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:10px; max-height:280px; overflow-y:auto; padding-right:4px;">
+                ${trip.days.map(d => `
+                    <div class="prebooking-day-card">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <span style="font-size:12px; font-weight:800; color:var(--gold-primary);">Day ${d.dayNumber}: ${d.title}</span>
+                            <span class="gold-badge" style="font-size:9px;">${d.stops.length} Verified Stops</span>
+                        </div>
+                        <p style="font-size:11px; color:var(--text-secondary); line-height:1.4; margin-bottom:6px;">${d.summary}</p>
+                        
+                        ${d.creatorSecretTip ? `
+                            <div class="insider-tip-box" style="margin:6px 0; font-size:10px; padding:6px 10px;">
+                                <strong>✦ Creator Tip:</strong> ${d.creatorSecretTip}
+                            </div>
+                        ` : ''}
+
+                        <div style="display:flex; flex-direction:column; gap:6px;">
+                            ${d.stops.map(s => `
+                                <div class="prebooking-stop-item">
+                                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                                        <strong>📍 ${s.name}</strong>
+                                        <span style="color:var(--gold-light); font-size:10px;">${s.timing} · ${s.category}</span>
+                                    </div>
+                                    ${s.interStopTransit ? `
+                                        <div style="font-size:10px; color:#38BDF8; margin-top:2px;">
+                                            <i class="fa-solid fa-route"></i> ${s.interStopTransit}
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+
+        <!-- Inclusions & Stay Voucher -->
+        <div style="background:var(--bg-dark); border:1px solid var(--glass-border); border-radius:var(--radius-md); padding:12px; margin-bottom:16px;">
+            <div style="font-size:12px; font-weight:800; color:#fff; margin-bottom:6px;">
+                <i class="fa-solid fa-hotel"></i> Stay: ${tier.stayName} (${tier.stayType})
+            </div>
+            <div style="font-size:11px; color:var(--text-secondary); margin-bottom:6px;">
+                <i class="fa-solid fa-car"></i> Transport: ${tier.transportDetails} (${tier.transferMode})
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                ${tier.inclusions.map(inc => `<span class="tag-pill" style="font-size:10px;">✓ ${inc}</span>`).join('')}
+            </div>
+        </div>
+
+        <!-- Traveler Form -->
+        <div style="background:var(--bg-dark); border:1px solid var(--glass-border); border-radius:var(--radius-md); padding:14px; margin-bottom:16px;">
+            <h4 style="font-size:13px; font-weight:800; color:#fff; margin-bottom:10px;">
+                <i class="fa-solid fa-user-group"></i> Traveler Details
+            </h4>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span style="font-size:12px; color:var(--text-secondary);">Number of Travelers:</span>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <button class="filter-chip" onclick="updatePreBookingTravelers(-1)">-</button>
+                    <span style="font-weight:800; font-size:14px; min-width:20px; text-align:center;">${count}</span>
+                    <button class="filter-chip" onclick="updatePreBookingTravelers(1)">+</button>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <div class="auth-form-group">
+                    <label class="auth-label">Primary Traveler Name</label>
+                    <input type="text" class="auth-input" id="pbLeadName" value="${u.display_name || ''}" placeholder="Full Name" required>
+                </div>
+                <div class="auth-form-group">
+                    <label class="auth-label">WhatsApp Phone Number</label>
+                    <input type="tel" class="auth-input" id="pbLeadPhone" value="${u.phone || ''}" placeholder="+91..." required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transparent Realistic Pricing Breakdown -->
+        <div style="background:rgba(232, 201, 122, 0.08); border:1px solid var(--gold-primary); border-radius:var(--radius-md); padding:14px; margin-bottom:18px;">
+            <div style="font-size:11px; font-weight:800; color:var(--gold-light); letter-spacing:1px; margin-bottom:8px; text-transform:uppercase;">
+                Transparent Fare Breakdown (${count} Traveler${count > 1 ? 's' : ''})
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+                <span style="color:var(--text-secondary);">Base Package Fare (₹${baseUnitFare.toLocaleString('en-IN')} × ${count})</span>
+                <span style="font-weight:700;">₹${subtotal.toLocaleString('en-IN')}</span>
+            </div>
+            ${discount > 0 ? `
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:#86EFAC; margin-bottom:4px;">
+                    <span>Squad Discount (Promo code applied)</span>
+                    <span>-₹${discount.toLocaleString('en-IN')}</span>
+                </div>
+            ` : ''}
+            <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-muted); margin-bottom:8px;">
+                <span>Tour Operator GST & Tax (5%)</span>
+                <span>+₹${gst.toLocaleString('en-IN')}</span>
+            </div>
+            <div style="border-top:1px solid var(--glass-border); padding-top:8px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-weight:800; font-size:14px; color:#fff;">Total Payable Amount</span>
+                <span style="font-family:var(--font-heading); font-size:20px; font-weight:900; color:var(--gold-primary);">
+                    ₹${finalTotal.toLocaleString('en-IN')}
+                </span>
+            </div>
+        </div>
+
+        <button class="gold-btn" style="width:100%; padding:14px;" onclick="proceedToPaymentGateway()">
+            <i class="fa-solid fa-lock"></i> Proceed to Secure Payment Gateway (₹${finalTotal.toLocaleString('en-IN')})
+        </button>
+    `;
+}
+
+async function proceedToPaymentGateway() {
+    const leadName = document.getElementById('pbLeadName').value.trim();
+    const leadPhone = document.getElementById('pbLeadPhone').value.trim();
+    if (!leadName || !leadPhone) {
+        showToast('Please fill primary traveler name and phone number.');
+        return;
+    }
+
+    const trip = store.getTrip(activeBookingTripState.tripId);
+    const tier = trip.tiers[activeBookingTripState.tierKey] || trip.tiers['mid'];
+    const count = activeBookingTripState.travelersCount;
+    const baseUnitFare = tier.budgetValue || 18999;
+    const subtotal = baseUnitFare * count;
+    const discount = count > 1 ? 2000 : 0;
+    const gst = Math.round((subtotal - discount) * 0.05);
+    const finalTotal = subtotal - discount + gst;
+
+    const payload = {
+        session_id: `session_${Date.now()}`,
+        user_id: store.currentUser.id,
+        trip_id: trip.id,
+        trip_title: trip.name,
+        tier: activeBookingTripState.tierKey.toUpperCase(),
+        departure_city: store.selectedOrigin + " (" + store.selectedOrigin + ")",
+        travel_date: "Upcoming Friday",
+        travelers_count: count,
+        traveler_details: [
+            { name: leadName, phone: leadPhone, email: store.currentUser.email || 'traveler@cometripwithme.com', age: 26 }
+        ],
+        base_price: subtotal,
+        discount_amount: discount,
+        voucher_code: discount > 0 ? "EARLYBIRD" : null,
+        gst_tax: gst,
+        total_amount: finalTotal,
+        itinerary_snapshot: {
+            tripName: trip.name,
+            duration: trip.duration,
+            tier: tier.tierName,
+            days: trip.days
+        }
+    };
+
+    try {
+        showToast('Initiating secure booking with payment gateway...');
+        const bookRes = await fetch(`${API_BASE}/bookings/initiate`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const bookData = await bookRes.json();
+        if (!bookRes.ok) throw new Error(bookData.detail || 'Failed to initiate booking');
+        currentBookingData = bookData;
+
+        // Create Razorpay Order
+        const orderRes = await fetch(`${API_BASE}/payments/create-order`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                booking_id: bookData.booking_id,
+                amount_in_rupees: finalTotal
+            })
+        });
+        const orderData = await orderRes.json();
+        currentPaymentOrderData = orderData;
+
+        closeModal('preBookingModal');
+        openPaymentGatewayModal(bookData, orderData, finalTotal);
+    } catch(err) {
+        showToast(`Booking error: ${err.message}`);
+    }
+}
+
+// ==================== RAZORPAY PAYMENT GATEWAY MODAL ====================
+
+function openPaymentGatewayModal(bookingData, orderData, totalAmount) {
+    document.getElementById('rzpModalAmountTitle').textContent = `Pay ₹${totalAmount.toLocaleString('en-IN')}`;
+    document.getElementById('rzpOrderRefBadge').textContent = bookingData.booking_reference;
+
+    const body = document.getElementById('paymentGatewayModalBody');
+    body.innerHTML = `
+        <div style="font-size:12px; color:var(--text-secondary); margin-bottom:14px;">
+            Booking: <strong>${bookingData.trip_title}</strong> (${bookingData.tier})<br>
+            Order ID: <code style="color:#38BDF8;">${orderData.razorpay_order_id}</code>
+        </div>
+
+        <!-- Payment Method Options -->
+        <div class="payment-method-tile selected" id="tileUPI" onclick="selectPaymentMethodTile('upi')">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <i class="fa-solid fa-qrcode" style="font-size:18px; color:var(--gold-primary);"></i>
+                <div>
+                    <div style="font-weight:700; font-size:13px; color:#fff;">UPI Instant QR / Apps</div>
+                    <div style="font-size:11px; color:var(--text-muted);">GPay, PhonePe, Paytm, BHIM</div>
+                </div>
+            </div>
+            <i class="fa-solid fa-circle-check" style="color:var(--gold-primary);"></i>
+        </div>
+
+        <div id="upiQrSection" style="text-align:center;">
+            <div class="payment-qr-wrapper">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=cometripwithme@razorpay%26pn=ComeTripWithMe%26am=${totalAmount}%26cu=INR" alt="UPI QR" style="width:160px; height:160px; display:block;">
+            </div>
+            <p style="font-size:11px; color:var(--text-muted);">Scan with any UPI app to pay ₹${totalAmount.toLocaleString('en-IN')}</p>
+        </div>
+
+        <div class="payment-method-tile" id="tileCard" onclick="selectPaymentMethodTile('card')">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <i class="fa-solid fa-credit-card" style="font-size:18px; color:#38BDF8;"></i>
+                <div>
+                    <div style="font-weight:700; font-size:13px; color:#fff;">Credit / Debit Card</div>
+                    <div style="font-size:11px; color:var(--text-muted);">Visa, MasterCard, RuPay</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:16px;">
+            <button class="gold-btn" style="width:100%; padding:14px; font-size:14px;" onclick="simulatePaymentCapture()">
+                <i class="fa-solid fa-shield-check"></i> Complete Test Payment & Unlock Live Trip Tracker
+            </button>
+            <p style="text-align:center; font-size:10px; color:var(--text-muted); margin-top:8px;">
+                🔒 256-Bit SSL Encrypted Razorpay Sandbox Checkout
+            </p>
+        </div>
+    `;
+
+    openModal('paymentGatewayModal');
+}
+
+function selectPaymentMethodTile(method) {
+    document.querySelectorAll('.payment-method-tile').forEach(t => t.classList.remove('selected'));
+    const qr = document.getElementById('upiQrSection');
+    if (method === 'upi') {
+        document.getElementById('tileUPI').classList.add('selected');
+        if (qr) qr.style.display = 'block';
+    } else {
+        document.getElementById('tileCard').classList.add('selected');
+        if (qr) qr.style.display = 'none';
+    }
+}
+
+async function simulatePaymentCapture() {
+    if (!currentBookingData || !currentPaymentOrderData) return;
+
+    try {
+        showToast('Verifying payment signature with Razorpay backend...');
+        const verifyRes = await fetch(`${API_BASE}/payments/verify`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                booking_id: currentBookingData.booking_id,
+                razorpay_order_id: currentPaymentOrderData.razorpay_order_id,
+                razorpay_payment_id: `pay_sandbox_${Date.now()}`,
+                razorpay_signature: "mock_signature_success",
+                payment_method: "upi"
+            })
+        });
+        const verifyData = await verifyRes.json();
+        if (!verifyRes.ok) throw new Error(verifyData.detail || 'Payment verification failed');
+
+        closeModal('paymentGatewayModal');
+        showToast('🎉 Payment Successful! Booking Confirmed & Live Trip Tracking Activated!');
+
+        // Update local booking cache
+        store.data.userBooking.bookingId = currentBookingData.booking_reference;
+        store.data.userBooking.bookedTripId = currentBookingData.trip_id;
+        store.data.userBooking.selectedTier = currentBookingData.tier.toLowerCase().includes('lux') ? 'luxury' : (currentBookingData.tier.toLowerCase().includes('bud') ? 'budget' : 'mid');
+        store.save();
+
+        // IMMEDIATELY OPEN POST-PAYMENT LIVE UPDATES INTERFACE!
+        setTimeout(() => {
+            openTripLiveTrackingModal(currentBookingData.booking_reference);
+        }, 400);
+    } catch(err) {
+        showToast(`Payment error: ${err.message}`);
+    }
+}
+
+// ==================== POST-PAYMENT LIVE UPDATES MISSION CONTROL ====================
+
+async function openTripLiveTrackingModal(bookingRef = null) {
+    const ref = bookingRef || (currentBookingData ? currentBookingData.booking_reference : (store.data.userBooking.bookingId || "CTWM-2026-MKI0"));
+    const body = document.getElementById('tripLiveTrackingModalBody');
+
+    body.innerHTML = `
+        <div style="text-align:center; padding:30px 0;">
+            <i class="fa-solid fa-satellite-dish fa-spin" style="font-size:28px; color:#38BDF8;"></i>
+            <p style="font-size:13px; color:var(--text-secondary); margin-top:10px;">Connecting to live dispatch & vehicle telemetry...</p>
+        </div>
+    `;
+    openModal('tripLiveTrackingModal');
+
+    try {
+        const passRes = await fetch(`${API_BASE}/bookings/${ref}`);
+        const passData = await passRes.json();
+        if (!passRes.ok) throw new Error(passData.detail || 'Failed to fetch trip tracking');
+
+        const legsRes = await fetch(`${API_BASE}/bookings/${ref}/legs`);
+        const legs = await legsRes.json();
+
+        document.getElementById('liveTrackingTripTitle').textContent = `${passData.trip_title} · Live Trip Updates`;
+
+        body.innerHTML = `
+            <!-- Live Mission Control HUD -->
+            <div class="tracker-hud-banner">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
+                    <div>
+                        <div style="font-size:10px; color:#38BDF8; font-weight:800; letter-spacing:1px; text-transform:uppercase;">
+                            LIVE TRIP DISPATCH · PNR ${passData.booking_reference}
+                        </div>
+                        <h2 style="font-family:var(--font-heading); font-size:20px; font-weight:900; color:#fff; margin-top:2px;">
+                            ${passData.trip_title} (${passData.tier})
+                        </h2>
+                        <div style="font-size:12px; color:var(--gold-light); margin-top:4px;">
+                            🗓️ Date: ${passData.travel_date} · 🛫 Origin: ${passData.departure_city}
+                        </div>
+                    </div>
+                    <div>
+                        <span class="gold-badge" style="background:rgba(60, 160, 130, 0.2); color:#86EFAC; border-color:rgba(60, 160, 130, 0.4);">
+                            ● LIVE & ACTIVE
+                        </span>
+                    </div>
+                </div>
+
+                <div style="margin-top:14px; background:rgba(0,0,0,0.4); padding:10px 14px; border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                    <div>
+                        <span style="font-size:11px; color:var(--text-muted);">Next Upcoming Leg:</span>
+                        <div style="font-size:13px; font-weight:700; color:#fff;">Leg 1: Pickup Cab to Departure Hub</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <span style="font-size:11px; color:#38BDF8; font-weight:700;">Chauffeur Assigned (ETA 8 mins)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sequential Instances of the Trip -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h4 style="font-family:var(--font-heading); font-size:15px; font-weight:800; color:var(--gold-light);">
+                    <i class="fa-solid fa-timeline"></i> Sequential Trip Instances & Driver Dispatch
+                </h4>
+                <span style="font-size:11px; color:var(--text-muted);">${legs.length} Total Legs</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px;">
+                ${legs.map(leg => `
+                    <div class="trip-leg-card ${leg.leg_index === 1 ? 'active-leg' : ''}">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+                            <div>
+                                <span class="leg-status-badge leg-status-${leg.status}">${leg.status}</span>
+                                <h4 style="font-size:14px; font-weight:800; color:#fff; margin-top:4px;">${leg.title}</h4>
+                            </div>
+                            <span style="font-size:11px; color:var(--gold-light); font-weight:700;">${leg.scheduled_time || 'On Schedule'}</span>
+                        </div>
+
+                        <div style="font-size:11px; color:var(--text-secondary); margin-bottom:6px;">
+                            📍 <strong>Pickup:</strong> ${leg.pickup_location}<br>
+                            🏁 <strong>Dropoff:</strong> ${leg.dropoff_location}
+                        </div>
+
+                        <!-- Driver Info Box (Number updated according to destination) -->
+                        <div class="driver-info-box">
+                            <div>
+                                <div style="font-size:12px; font-weight:800; color:#fff;">
+                                    <i class="fa-solid fa-id-badge"></i> ${leg.driver_name || 'Driver Assigned'}
+                                </div>
+                                <div style="font-size:11px; color:var(--text-muted);">
+                                    🚗 ${leg.vehicle_model} · <span style="font-family:var(--font-mono); color:#7DD3FC;">${leg.vehicle_number}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="driver-phone-chip">
+                                    <i class="fa-solid fa-phone"></i> ${leg.driver_phone || '+91 97423 11023'}
+                                </span>
+                            </div>
+                        </div>
+
+                        ${leg.notes ? `
+                            <p style="font-size:11px; color:var(--text-muted); font-style:italic; margin-bottom:10px;">
+                                💬 ${leg.notes}
+                            </p>
+                        ` : ''}
+
+                        <!-- Action Controls: Text Driver & Update Number -->
+                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <button class="gold-btn" style="flex:1; padding:8px 12px; font-size:11px;" onclick="openDriverChatModal('${leg.id}', '${leg.title}', '${leg.driver_name}', '${leg.driver_phone}', '${leg.vehicle_model}')">
+                                <i class="fa-solid fa-message"></i> Text Driver ${leg.messages_count > 0 ? `(${leg.messages_count})` : ''}
+                            </button>
+                            <a href="tel:${leg.driver_phone}" class="glass-btn" style="padding:8px 12px; font-size:11px; text-decoration:none;">
+                                <i class="fa-solid fa-phone"></i> Call Driver
+                            </a>
+                            <button class="glass-btn" style="padding:8px 12px; font-size:11px; border-color:rgba(245, 158, 11, 0.4); color:#FCD34D;" onclick="openOperatorDriverModal('${leg.id}', '${leg.title}', '${leg.driver_name}', '${leg.driver_phone}', '${leg.vehicle_model}', '${leg.vehicle_number}', '${leg.status}')">
+                                <i class="fa-solid fa-pen-to-square"></i> Update Driver & Phone
+                            </button>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    } catch(err) {
+        body.innerHTML = `
+            <div style="text-align:center; padding:20px; color:#FFA090;">
+                <p>Unable to load live tracker: ${err.message}</p>
+                <button class="glass-btn" style="margin-top:12px;" onclick="closeModal('tripLiveTrackingModal')">Close</button>
+            </div>
+        `;
+    }
+}
+
+// ==================== IN-APP DRIVER TEXT MESSAGING ====================
+
+async function openDriverChatModal(legId, title, driverName, driverPhone, vehicle) {
+    activeChatLegId = legId;
+    document.getElementById('chatDriverName').textContent = driverName;
+    document.getElementById('chatDriverSub').textContent = `${vehicle} · ${driverPhone}`;
+
+    openModal('driverChatModal');
+    await loadDriverChatMessages(legId);
+
+    if (chatRefreshInterval) clearInterval(chatRefreshInterval);
+    chatRefreshInterval = setInterval(() => {
+        if (activeChatLegId) loadDriverChatMessages(activeChatLegId, false);
+    }, 4000);
+}
+
+async function loadDriverChatMessages(legId, scroll = true) {
+    try {
+        const res = await fetch(`${API_BASE}/bookings/legs/${legId}/messages`);
+        const messages = await res.json();
+        const feed = document.getElementById('chatMessagesFeed');
+
+        if (messages.length === 0) {
+            feed.innerHTML = `
+                <div style="text-align:center; padding:20px; color:var(--text-muted); font-size:11px;">
+                    No messages yet. Send a text to coordinate pickup location, baggage, or AC temperature!
+                </div>
+            `;
+            return;
+        }
+
+        feed.innerHTML = messages.map(m => `
+            <div class="chat-bubble ${m.sender_type.toLowerCase()}">
+                <div style="font-size:9px; opacity:0.8; margin-bottom:2px; font-weight:700;">
+                    ${m.sender_name} · ${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                </div>
+                <div>${m.message_text}</div>
+            </div>
+        `).join('');
+
+        if (scroll) {
+            feed.scrollTop = feed.scrollHeight;
+        }
+    } catch(e) {
+        console.error(e);
+    }
+}
+
+async function handleSendDriverChatMessage(event) {
+    event.preventDefault();
+    const input = document.getElementById('chatMessageInput');
+    const text = input.value.trim();
+    if (!text || !activeChatLegId) return;
+
+    input.value = '';
+    await sendDriverMessageText(text);
+}
+
+function sendQuickChatMessage(text) {
+    if (!activeChatLegId) return;
+    sendDriverMessageText(text);
+}
+
+async function sendDriverMessageText(text) {
+    const senderName = store.currentUser ? store.currentUser.display_name.split(' ')[0] : 'Traveler';
+
+    try {
+        const res = await fetch(`${API_BASE}/bookings/legs/${activeChatLegId}/messages`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sender_name: senderName,
+                sender_type: 'USER',
+                message_text: text
+            })
+        });
+        const messages = await res.json();
+        loadDriverChatMessages(activeChatLegId, true);
+    } catch(err) {
+        showToast(`Failed to send message: ${err.message}`);
+    }
+}
+
+// ==================== OPERATOR DRIVER & PHONE NUMBER UPDATE ====================
+
+function openOperatorDriverModal(legId, title, driverName, driverPhone, vehicleModel, vehicleNumber, status) {
+    document.getElementById('opLegId').value = legId;
+    document.getElementById('opLegTitle').value = title;
+    document.getElementById('opDriverName').value = driverName || '';
+    document.getElementById('opDriverPhone').value = driverPhone || '';
+    document.getElementById('opVehicleModel').value = vehicleModel || '';
+    document.getElementById('opVehicleNumber').value = vehicleNumber || '';
+    document.getElementById('opLegStatus').value = status || 'ASSIGNED';
+    openModal('operatorDriverModal');
+}
+
+async function handleOperatorDriverSubmit(event) {
+    event.preventDefault();
+    const legId = document.getElementById('opLegId').value;
+    const name = document.getElementById('opDriverName').value.trim();
+    const phone = document.getElementById('opDriverPhone').value.trim();
+    const vehicle = document.getElementById('opVehicleModel').value.trim();
+    const plate = document.getElementById('opVehicleNumber').value.trim();
+    const status = document.getElementById('opLegStatus').value;
+    const notes = document.getElementById('opNotes').value.trim();
+
+    try {
+        const res = await fetch(`${API_BASE}/bookings/legs/${legId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                driver_name: name,
+                driver_phone: phone,
+                vehicle_model: vehicle,
+                vehicle_number: plate,
+                status: status,
+                notes: notes
+            })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Failed to update driver');
+
+        closeModal('operatorDriverModal');
+        showToast('✅ Driver phone number & dispatch info updated for destination!');
+        openTripLiveTrackingModal();
+    } catch(err) {
+        showToast(`Update error: ${err.message}`);
+    }
+}
+
+// Hook into page load
+window.addEventListener('DOMContentLoaded', () => {
+    updateAuthUI();
+});
+
 </script>
 
 </body>
@@ -4760,5 +6250,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_template)
-
-print(f"Generated 3-tier index.html with {len(html_template)} characters.")
+print("Generated index.html")

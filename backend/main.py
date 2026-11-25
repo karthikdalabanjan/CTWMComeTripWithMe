@@ -3,11 +3,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse
 from backend.config import settings
-from backend.database import engine, Base
-from backend.routers import auth, trips, bookings, payments, testing
+from backend.database import engine, Base, ensure_db_schema
+from backend.routers import auth, trips, bookings, payments, testing, agents, hr, support
 
 # Initialize database schema automatically
 Base.metadata.create_all(bind=engine)
+ensure_db_schema()
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -30,24 +31,55 @@ app.include_router(trips.router, prefix=settings.API_V1_STR)
 app.include_router(bookings.router, prefix=settings.API_V1_STR)
 app.include_router(payments.router, prefix=settings.API_V1_STR)
 app.include_router(testing.router, prefix=settings.API_V1_STR)
+app.include_router(agents.router, prefix=settings.API_V1_STR)
+app.include_router(hr.router, prefix=settings.API_V1_STR)
+app.include_router(support.router, prefix=settings.API_V1_STR)
 
-@app.get("/", tags=["Health"])
+@app.get("/", response_class=HTMLResponse, tags=["Consumer Traveler App"])
 def root():
+    """Serves the primary ComeTripWithMe Consumer Traveler Web Application."""
+    return web_app()
+
+@app.get("/status", tags=["Health & Service Info"])
+@app.get("/api", tags=["Health & Service Info"])
+def api_status():
+    """Returns the backend API system status and microservice routing map."""
     return {
         "status": "online",
         "service": settings.PROJECT_NAME,
         "version": settings.VERSION,
+        "traveler_app": "/",
+        "cloud_platform": "/platform",
         "docs_url": "/docs",
         "testing_dashboard": "/dashboard",
+        "autonomous_agents": f"{settings.API_V1_STR}/agents/status",
         "payment_gateway": {
             "provider": "Razorpay",
             "mode": "Sandbox Mock Mode" if not settings.RAZORPAY_KEY_ID else "Razorpay Test/Live Mode"
         }
     }
 
-@app.get("/health", tags=["Health"])
+@app.get("/health", tags=["Health & Service Info"])
 def health_check():
     return {"status": "healthy"}
+
+@app.get("/platform", response_class=HTMLResponse, tags=["Operations Platform"])
+def operations_platform():
+    """Serves the Master Cloud Operations Platform & Autonomous Agents Hub."""
+    plat_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "platform.html")
+    if os.path.exists(plat_path):
+        with open(plat_path, "r", encoding="utf-8") as f:
+            return f.read()
+    return "<h1>ComeTripWithMe Platform Loading...</h1>"
+
+@app.get("/app", response_class=HTMLResponse, tags=["Web App"])
+def web_app():
+    """Serves the ComeTripWithMe Single Page Application."""
+    app_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "index.html")
+    if os.path.exists(app_path):
+        with open(app_path, "r", encoding="utf-8") as f:
+            return f.read()
+    return "<h1>ComeTripWithMe App loading...</h1>"
 
 @app.get("/dashboard", response_class=HTMLResponse, tags=["Testing Dashboard"])
 def testing_dashboard():

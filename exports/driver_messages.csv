@@ -1,0 +1,9 @@
+id,leg_id,sender_type,sender_name,message_text,created_at
+ed0abbc2-b28d-45d9-8e1f-a2774cb8d662,8ac26844-7d9d-4237-9ef8-933996c4454e,USER,Karthik,"Hi, I have landed at Mopa airport! Waiting near Pillar 6 with my bags. Please turn on AC.",2026-10-28 08:13:18.834659
+2f6fb8ef-1529-49d0-9687-463258f6cce6,8ac26844-7d9d-4237-9ef8-933996c4454e,DRIVER,Santosh Naik (Goa Mopa Chauffeur),Welcome! I am waiting outside Pillar 4 with your name placard. Please take your time with luggage.,2026-10-28 08:13:18.836347
+464ac721-692d-41d7-8885-521ecf50d93c,dde8bef5-fe00-4559-8e23-57a7bee0d05b,USER,Karthik,Hi Sandeep! We just landed at Mopa. Where are you parked?,2026-10-28 08:19:39.965208
+2e0edec4-4fc7-4c2e-98c2-9dc5e3df8d89,dde8bef5-fe00-4559-8e23-57a7bee0d05b,DRIVER,Sandeep Naik (Mopa Airport Goa),Hello! I am parked right near Goa Airport Arrival Exit (Pillar 6) with hazard lights on. Vehicle: Maruti Suzuki Ertiga AC (GA-03-AA-9988).,2026-10-28 08:19:39.967108
+5e08a016-b18c-4a40-ae7e-085433e4506f,e08b2915-2973-4027-bf2b-13dc180db3a2,USER,Iamfirs,Where are you parked?,2026-11-05 13:46:42.581628
+f1f0a1af-d0df-45b3-b231-6f3e982bbd55,e08b2915-2973-4027-bf2b-13dc180db3a2,DRIVER,Ramesh Gowda,"Hello! I am parked right near Traveler Home / Koramangala Hub, BLR with hazard lights on. Vehicle: Maruti Dzire AC (Silver) (KA-01-MJ-8821).",2026-11-05 13:46:42.585926
+8f1a5600-6db4-49aa-9cbe-185e7386db7a,e08b2915-2973-4027-bf2b-13dc180db3a2,USER,Iamfirs,Please turn on the AC,2026-11-05 13:46:48.976064
+31598593-6b9f-4414-ac8b-129382f7a9b5,e08b2915-2973-4027-bf2b-13dc180db3a2,DRIVER,Ramesh Gowda,Done! AC is already running and set to 22°C. Cold water bottles are kept in the rear seat.,2026-11-05 13:46:48.980392

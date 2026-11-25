@@ -1,0 +1,2 @@
+id,session_id,event_name,event_payload_json,created_at
+d61c1ba6-832f-4d58-ba78-344b247a04b3,tester_session_beta_8821,AUDIO_PLAYED,"{""story_id"": ""gokarna_story_1"", ""duration_seconds"": 45, ""playback_speed"": 1.0}",2026-10-26 14:43:28.096519

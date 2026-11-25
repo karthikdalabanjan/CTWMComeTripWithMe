@@ -115,3 +115,44 @@ def get_testing_dashboard_metrics(db: Session = Depends(get_db)):
             "payments_captured": captured_payments
         }
     }
+
+@router.get("/database/dump")
+def get_database_dump(db: Session = Depends(get_db)):
+    """
+    Returns complete real-time JSON dump of all tables in the database.
+    """
+    from backend.database import engine
+    from sqlalchemy import inspect, text
+
+    inspector = inspect(engine)
+    table_names = inspector.get_table_names()
+    dump = {}
+
+    with engine.connect() as conn:
+        for table in table_names:
+            result = conn.execute(text(f"SELECT * FROM {table}"))
+            cols = result.keys()
+            rows = result.fetchall()
+            items = []
+            for r in rows:
+                row_dict = {}
+                for idx, col in enumerate(cols):
+                    v = r[idx]
+                    if hasattr(v, 'isoformat'):
+                        v = v.isoformat()
+                    elif isinstance(v, str) and (col.endswith('_json') or col in ('day_plans_json', 'traveler_details_json', 'criteria_scores_json', 'device_info_json')):
+                        try:
+                            v = json.loads(v)
+                        except:
+                            pass
+                    row_dict[col] = v
+                items.append(row_dict)
+            dump[table] = items
+
+    from datetime import datetime
+    return {
+        "status": "success",
+        "timestamp": datetime.utcnow().isoformat(),
+        "total_tables": len(table_names),
+        "data": dump
+    }

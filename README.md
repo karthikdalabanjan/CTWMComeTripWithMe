@@ -118,6 +118,117 @@ npx vercel --prod
 
 ---
 
+## 💾 Database Architecture & Data Access
+
+### What Database is being used?
+1. **Local Development / Default Database**:
+   - **SQLite** database stored locally in the project root file:
+     📁 `cometripwithme.db` (SQLite 3)
+   - Zero setup, requires no server processes, and automatically provisions and migrates all tables on startup.
+2. **Production Cloud Database (PostgreSQL / Supabase Ready)**:
+   - The application uses **SQLAlchemy 2.0 ORM** which natively connects to **PostgreSQL**.
+   - Simply set `DATABASE_URL` in your `.env` or deployment environment:
+     ```env
+     DATABASE_URL=postgresql://postgres:[PASSWORD]@db.srladqmrbnrkyvjsqywp.supabase.co:5432/postgres
+     ```
+   - Complete PostgreSQL SQL DDL schema is provided in [`supabase_schema.sql`](file:///Users/karthikdalabanjan/Downloads/cometripwithme%20(1)/supabase_schema.sql).
+
+### How to Get Data of Everything
+You have three simple ways to retrieve and inspect all data across all tables:
+
+#### 1. Instant CLI Data Exporter (JSON + CSV)
+Run the built-in database extraction script:
+```bash
+python3 export_db.py
+```
+This automatically dumps all 9 database tables into the `exports/` folder:
+- **`exports/database_dump.json`**: Unified pretty JSON file containing every table and record.
+- **`exports/users.csv`**: User accounts, emails, phone numbers, avatars, home cities.
+- **`exports/bookings.csv`**: Bookings, travel dates, PNR references, totals, itinerary snapshots.
+- **`exports/trip_legs.csv`**: Sequential trip instances (pickup cabs, flights, destination cabs, hotels).
+- **`exports/driver_messages.csv`**: Full text message chat histories between travelers and chauffeurs.
+- **`exports/payments.csv`**: Razorpay payment records, order IDs, payment IDs, verification signatures.
+- **`exports/custom_itineraries.csv`**: User-customized day-by-day plans.
+- **`exports/test_feedback.csv`**: 6-criteria scores and tester feedback.
+- **`exports/wishlist_items.csv`**: Saved trip items.
+
+#### 2. Live API Endpoint (Browser or cURL)
+Call the real-time database dump endpoint:
+```bash
+curl http://localhost:8000/api/v1/testing/database/dump
+```
+Or open [http://localhost:8000/api/v1/testing/database/dump](http://localhost:8000/api/v1/testing/database/dump) directly in your browser.
+
+#### 3. Visual SQLite GUI Viewer
+You can open `cometripwithme.db` directly using any GUI tool:
+- **DB Browser for SQLite** (Free: [sqlitebrowser.org](https://sqlitebrowser.org))
+- **VS Code Extension**: *SQLite Viewer* or *Database Client*
+
+---
+
+## 🛠️ Complete Tech Stack
+
+| Layer | Technologies & Libraries | Purpose |
+| :--- | :--- | :--- |
+| **Backend API** | **Python 3.12**, **FastAPI 0.110+**, **Uvicorn** | High-performance asynchronous REST API, auto OpenAPI/Swagger docs at `/docs` |
+| **Database & ORM** | **SQLAlchemy 2.0**, **SQLite 3** (local), **PostgreSQL** (cloud) | Schema definitions, migrations, relational queries, auto-connection pooling |
+| **Payment Gateway** | **Razorpay Python SDK**, HMAC-SHA256 | UPI QR, Google Pay, PhonePe, Cards, NetBanking, webhook verification, sandbox mock mode |
+| **Web Frontend** | **Reactive Vanilla JS (ES6+)**, **HTML5**, **CSS3 (Glassmorphism)** | Zero-build Single Page App (SPA), device simulator, audio guides, interactive tracking |
+| **Typography & Icons** | **Google Fonts** (*Outfit*, *Plus Jakarta Sans*, *JetBrains Mono*), **FontAwesome 6** | Luxury brand aesthetic and iconography |
+| **Audio Guide Engine** | Web **SpeechSynthesis API**, Web Audio API | Live creator narration with playback speed controls (1.0x, 1.25x) |
+| **Native Android** | **Kotlin**, **Jetpack Compose**, **Room DB**, **Coroutines / Flow** | Native Android mobile application (API 24+) in `/app` |
+| **AI Integration** | **Google Gemini AI SDK** | Intelligent travel planner and creator recommendation copilot |
+| **Deployment Tools** | **Docker**, **Docker Compose**, **Procfile**, **Render**, **Netlify** | Production containerization and 1-click cloud deployments |
+
+---
+
+## 🚀 Full Stack Production Deployment Guide
+
+The app is completely configured for 1-click or containerized deployment across multiple platforms:
+
+### Option 1: Docker & Docker Compose (Recommended for Any VPS / Cloud Server)
+Run the entire stack (FastAPI backend + PostgreSQL database + Web frontend):
+```bash
+# Build and run containers in background
+docker compose up -d --build
+```
+- Web Application & API: `http://localhost:8000`
+- Swagger UI Docs: `http://localhost:8000/docs`
+- PostgreSQL Port: `5432`
+
+To stop:
+```bash
+docker compose down
+```
+
+### Option 2: 1-Click Deployment on Render
+A pre-configured [`render.yaml`](file:///Users/karthikdalabanjan/Downloads/cometripwithme%20(1)/render.yaml) blueprint is included in the project:
+1. Push this repository to GitHub or GitLab.
+2. Log in to [Render.com](https://render.com) and click **New > Blueprint**.
+3. Select your repository. Render will automatically read `render.yaml` and provision:
+   - A free **PostgreSQL Database** (`cometripwithme-db`).
+   - A free **Web Service** running `uvicorn backend.main:app`.
+4. Add your `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` in the Render Environment Variables tab.
+
+### Option 3: Railway / Fly.io / Heroku
+The included [`Procfile`](file:///Users/karthikdalabanjan/Downloads/cometripwithme%20(1)/Procfile) specifies the web startup process:
+```bash
+web: uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000}
+```
+1. Connect your GitHub repository to Railway or Fly.io.
+2. Add a PostgreSQL plugin or attach Supabase.
+3. Railway automatically detects `Dockerfile` or `Procfile` and deploys your full-stack app.
+
+### Option 4: Supabase (Database) + Netlify (Frontend)
+1. **Database**: Create a project on [Supabase](https://supabase.com). Paste [`supabase_schema.sql`](file:///Users/karthikdalabanjan/Downloads/cometripwithme%20(1)/supabase_schema.sql) in the Supabase SQL Editor and run it.
+2. **Backend**: Host the FastAPI server on Render/Railway with `DATABASE_URL=postgresql://postgres:[PASSWORD]@...supabase.co:5432/postgres`.
+3. **Frontend**: The repository has [`netlify.toml`](file:///Users/karthikdalabanjan/Downloads/cometripwithme%20(1)/netlify.toml). Simply run:
+   ```bash
+   npx netlify-cli deploy --prod --dir=.
+   ```
+
+---
+
 ## ⚡ FastAPI Backend & Payment Gateway
 
 The project includes a production-ready **Python FastAPI** backend located in [`backend/`](file:///Users/karthikdalabanjan/Downloads/cometripwithme%20%281%29/backend) for data storage, Razorpay payments, and beta testing telemetry:

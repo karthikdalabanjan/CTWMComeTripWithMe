@@ -314,6 +314,7 @@ class TripRepository(
                                     title = "The True Story of Anjuna & The 70s Hippie Trail",
                                     durationSeconds = 110,
                                     scriptText = "You're standing on the iconic red laterite cliffs of Anjuna. In the late 1960s, world travelers arrived here on old Enfield motorcycles from Europe. Notice the volcanic rocks below. When the tide hits them right around 5:30 PM, the sea spray catches the sunset in brilliant gold."
+
                                 )
                             ),
                             StopLocation(

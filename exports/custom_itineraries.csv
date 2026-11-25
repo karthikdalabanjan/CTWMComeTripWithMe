@@ -1,0 +1,3 @@
+id,user_id,session_id,destination,duration_days,vibe,budget_tier,estimated_price,day_plans_json,created_at
+53ee8ffc-cab4-44c0-8826-bcc018e387bc,,tester_session_beta_8821,Gokarna Beaches & Cliffside Trek,3,CHILL,MID_TIER,11500,"[{""day"": 1, ""title"": ""Kudle Beach Sunset & Cliff Cafe"", ""stops"": [""Kudle Beach"", ""Namaste Cafe""]}, {""day"": 2, ""title"": ""Om Beach Trek & Dolphin View"", ""stops"": [""Om Beach"", ""Half Moon Beach""]}, {""day"": 3, ""title"": ""Mirjan Fort & Coastal Drive"", ""stops"": [""Mirjan Fort""]}]",2026-10-26 14:43:27.010311
+5764b3b6-af31-4894-9929-6203c8b2eed5,,sess_123,Goa Secret Cliffs,4,PARTY,MID_TIER,18999,"[{""day"": 1, ""title"": ""Chapora fort"", ""stops"": [""Chapora sunrise""]}]",2026-10-28 08:19:39.925510

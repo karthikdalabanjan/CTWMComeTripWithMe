@@ -1,0 +1,52 @@
+name: ComeTripWithMe Cloud CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test_and_validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: Run Backend Diagnostic & Agent Tests
+        run: |
+          python -c "from fastapi.testclient import TestClient; from backend.main import app; c = TestClient(app); r = c.get('/'); assert r.status_code == 200; r = c.get('/api/v1/agents/status'); assert r.status_code == 200; print('✓ CI Core Health Check & Autonomous Agents: Passed!')"
+
+      - name: Verify Database Schema
+        run: |
+          python export_db.py
+
+  docker_build_check:
+    needs: test_and_validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: cometripwithme:latest
+

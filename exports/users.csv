@@ -1,0 +1,7 @@
+id,phone,email,display_name,is_beta_tester,tester_group,device_info,created_at,updated_at,password_hash,avatar_url,city
+53e06929-9430-4917-a071-d7c6b04f9586,,,Tester Alice,1,public_beta,{},2026-10-26 13:46:37.773492,2026-10-26 13:46:37.773496,,,
+affdaf6c-d303-4e37-8eee-945cd7bc34dd,,tester.ksd@example.com,Karthik Beta Tester,1,public_beta,"{""device"": ""MacBook Pro"", ""os"": ""macOS 15"", ""browser"": ""Chrome 122""}",2026-10-26 14:43:27.004547,2026-10-26 14:43:27.004552,,,
+f855b07c-1b3a-47f9-8e03-fb807411cb54,+91 97423 11023,karthik.traveler@example.com,Karthik Dalabanjan,1,verified_member,,2026-10-28 08:13:18.805315,2026-10-28 08:13:18.805320,ea5021c8b2831884fbe410feb70528feac6f78a118a4df52030e4f266646bdb4,,Bengaluru
+b85ed6db-5840-4235-946a-927f330b1609,+91 97423 99999,karthik.e2e@example.com,Karthik Dalabanjan,1,verified_member,,2026-10-28 08:19:39.915138,2026-10-28 08:19:39.915147,115503669d63a7c715d8df3c6f36ba1cdb6aa82230b7b83154881f95c21d3583,,Bengaluru
+b3abc46c-509c-48e1-b3b9-d39237b0f50a,,ksd199924@gmail.com,Ksd199924,1,verified_member,,2026-11-05 13:39:59.760369,2026-11-05 13:39:59.760378,bc2969b153204486e83758da51954e1c078816cb4b901197e750fb3b913788b8,,Bengaluru
+bf279ea3-2aa8-4c7c-ba2d-28ce36fb63e3,,iamfirs@tester.ever,Iamfirs,1,verified_member,,2026-11-05 13:44:38.559795,2026-11-05 13:44:38.559801,abb79dd67b18c08ec2e63e173bccb9c0c7ef9e1a8d4eb646aed0547d87240029,,Bengaluru

@@ -14,6 +14,9 @@ CREATE TABLE IF NOT EXISTS public.users (
     phone VARCHAR(20) UNIQUE,
     email VARCHAR(255) UNIQUE,
     display_name VARCHAR(100),
+    password_hash VARCHAR(255),
+    avatar_url VARCHAR(500),
+    city VARCHAR(100) DEFAULT 'Bengaluru',
     is_beta_tester BOOLEAN DEFAULT TRUE,
     tester_group VARCHAR(50) DEFAULT 'public_beta',
     device_info JSONB DEFAULT '{}'::jsonb,
@@ -56,6 +59,7 @@ CREATE TABLE IF NOT EXISTS public.bookings (
     gst_tax NUMERIC(10, 2) NOT NULL,
     total_amount NUMERIC(10, 2) NOT NULL,
     status VARCHAR(30) DEFAULT 'INITIATED', -- INITIATED, PENDING_PAYMENT, CONFIRMED, FAILED, CANCELLED
+    itinerary_snapshot_json JSONB,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
@@ -63,6 +67,41 @@ CREATE TABLE IF NOT EXISTS public.bookings (
 CREATE INDEX IF NOT EXISTS idx_bookings_ref ON public.bookings(booking_reference);
 CREATE INDEX IF NOT EXISTS idx_bookings_session ON public.bookings(session_id);
 CREATE INDEX IF NOT EXISTS idx_bookings_status ON public.bookings(status);
+
+-- 3b. Trip Legs / Instances
+CREATE TABLE IF NOT EXISTS public.trip_legs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    booking_id UUID NOT NULL REFERENCES public.bookings(id) ON DELETE CASCADE,
+    leg_index INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    leg_type VARCHAR(50) NOT NULL,
+    status VARCHAR(50) DEFAULT 'ASSIGNED',
+    scheduled_time VARCHAR(100),
+    pickup_location VARCHAR(255),
+    dropoff_location VARCHAR(255),
+    driver_name VARCHAR(100),
+    driver_phone VARCHAR(50),
+    vehicle_model VARCHAR(100),
+    vehicle_number VARCHAR(50),
+    otp_code VARCHAR(20),
+    notes TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_trip_legs_booking ON public.trip_legs(booking_id);
+
+-- 3c. Traveler & Driver Text Messages
+CREATE TABLE IF NOT EXISTS public.driver_messages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    leg_id UUID NOT NULL REFERENCES public.trip_legs(id) ON DELETE CASCADE,
+    sender_type VARCHAR(20) NOT NULL, -- USER, DRIVER, SYSTEM
+    sender_name VARCHAR(100) NOT NULL,
+    message_text TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_driver_messages_leg ON public.driver_messages(leg_id);
 
 -- 4. Payments (Razorpay Integration)
 CREATE TABLE IF NOT EXISTS public.payments (
@@ -124,6 +163,33 @@ CREATE TABLE IF NOT EXISTS public.wishlist_items (
     UNIQUE(session_id, trip_id)
 );
 
+-- 8. HR & Stakeholders Directory
+CREATE TABLE IF NOT EXISTS public.stakeholders (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    full_name VARCHAR(150) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    phone VARCHAR(50) NOT NULL,
+    role_category VARCHAR(50) DEFAULT 'CORE_TEAM', -- CORE_TEAM, CREATOR, CHAUFFEUR, HOTEL_PARTNER, ACTIVITY_VENDOR, INVESTOR_ADVISOR
+    designation VARCHAR(100) NOT NULL,
+    department_or_destination VARCHAR(100) DEFAULT 'General',
+    status VARCHAR(30) DEFAULT 'ACTIVE', -- ACTIVE, ONBOARDING, ON_LEAVE, INACTIVE
+    employment_type VARCHAR(50) DEFAULT 'FULL_TIME', -- FULL_TIME, CONTRACTOR, CREATOR_PARTNER, FLEET_PARTNER, ADVISORY
+    emergency_contact_name VARCHAR(150),
+    emergency_contact_phone VARCHAR(50),
+    payout_details VARCHAR(255),
+    compensation_model VARCHAR(255),
+    joined_date VARCHAR(50),
+    documents_verified BOOLEAN DEFAULT TRUE,
+    social_handle VARCHAR(100),
+    notes TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_stakeholders_role ON public.stakeholders(role_category);
+CREATE INDEX IF NOT EXISTS idx_stakeholders_dept ON public.stakeholders(department_or_destination);
+CREATE INDEX IF NOT EXISTS idx_stakeholders_status ON public.stakeholders(status);
+
 -- ==============================================================================
 -- Row-Level Security (RLS) setup (optional / open for beta testing)
 -- ==============================================================================
@@ -134,6 +200,9 @@ ALTER TABLE public.test_feedback ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.custom_itineraries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.telemetry_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.wishlist_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.trip_legs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.driver_messages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.stakeholders ENABLE ROW LEVEL SECURITY;
 
 -- Allow read & write for public API during beta testing
 CREATE POLICY "Public read for beta" ON public.bookings FOR SELECT USING (true);
@@ -150,3 +219,6 @@ CREATE POLICY "Public read telemetry" ON public.telemetry_events FOR ALL USING (
 CREATE POLICY "Public read wishlist" ON public.wishlist_items FOR ALL USING (true);
 CREATE POLICY "Public read payments" ON public.payments FOR ALL USING (true);
 CREATE POLICY "Public read users" ON public.users FOR ALL USING (true);
+CREATE POLICY "Public read trip legs" ON public.trip_legs FOR ALL USING (true);
+CREATE POLICY "Public read driver messages" ON public.driver_messages FOR ALL USING (true);
+CREATE POLICY "Public read stakeholders" ON public.stakeholders FOR ALL USING (true);
