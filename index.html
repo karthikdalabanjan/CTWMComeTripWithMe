@@ -2123,6 +2123,160 @@
             transform: scale(1.15);
         }
 
+        /* ==================== TOP RATED PACKAGES STYLES ==================== */
+        .top-rated-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .top-rated-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .top-rated-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px var(--gold-glow);
+        }
+        .top-rated-img-wrap {
+            position: relative;
+            height: 160px;
+            overflow: hidden;
+        }
+        .top-rated-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .top-rated-card:hover .top-rated-img {
+            transform: scale(1.05);
+        }
+        .top-rated-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(7, 9, 14, 0.88);
+            backdrop-filter: blur(10px);
+            color: #FFE8A3;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .top-rated-price-tag {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #030407;
+            font-weight: 900;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        .top-rated-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        /* ==================== HOMEPAGE ROUTE BUILDER STYLES ==================== */
+        .home-route-builder-card {
+            background: linear-gradient(180deg, var(--bg-card-elevated) 0%, var(--bg-card) 100%);
+            border: 1px solid var(--glass-border-strong);
+            border-radius: var(--radius-xl);
+            padding: 22px;
+            margin-bottom: 28px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 25px rgba(232, 201, 122, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+        .home-route-builder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(232, 201, 122, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .route-step-group {
+            margin-bottom: 16px;
+        }
+        .route-step-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .route-pills-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .route-pill-btn {
+            background: var(--bg-dark);
+            border: 1px solid var(--glass-border-subtle);
+            color: var(--text-secondary);
+            padding: 8px 14px;
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .route-pill-btn:hover {
+            border-color: var(--gold-primary);
+            color: #fff;
+        }
+        .route-pill-btn.active {
+            background: var(--gold-container);
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+            font-weight: 700;
+        }
+        .route-pref-tag {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--glass-border-subtle);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .route-pref-tag.selected {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38BDF8;
+            color: #7DD3FC;
+        }
+
     </style>
 </head>
 <body>
@@ -2143,7 +2297,7 @@
         <button class="control-btn" id="btnMasterLiveTracker" onclick="openTripLiveTrackingModal()" style="background:rgba(56,189,248,0.15); border-color:rgba(56,189,248,0.4); color:#38BDF8;">
             <i class="fa-solid fa-route"></i> Live Trip Updates
         </button>
-        <button class="control-btn live-pass-btn" id="btnLivePass" onclick="openActiveBoardingPassModal()">
+        <button class="control-btn live-pass-btn" id="btnLivePass" onclick="openActiveBoardingPassModal()" style="display:none;">
             <i class="fa-solid fa-ticket"></i> Pass & QR
         </button>
         <a href="/platform" target="_blank" class="control-btn" style="border-color:var(--accent-purple); color:#C084FC; text-decoration:none;">
@@ -2184,9 +2338,6 @@
                         <i class="fa-solid fa-user"></i>
                         <span id="headerAuthLabel">Login</span>
                     </button>
-                    <button class="icon-circle-btn" onclick="openInstagramChannel('@cometriipwme')" title="Instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                    </button>
                     <button class="icon-circle-btn whatsapp-accent" onclick="openWhatsAppInquiry()" title="WhatsApp Inquiry">
                         <i class="fa-brands fa-whatsapp"></i>
                     </button>
@@ -2224,11 +2375,252 @@
                             <h1 class="hero-title">Creator Travel Across Luxury, Mid-Tier & Budget Segments</h1>
                             <p class="hero-desc">Choose between 5-Star Resorts + Innova Cabs (Luxury), Boutique Hotels + Flights (Mid-Tier), or Social Hostels + Sleeper Coaches (Budget).</p>
                             <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                                <button class="gold-btn" onclick="openActiveBoardingPassModal()">
+                                <!-- Shown only after user logs in -->
+                                <button class="gold-btn" id="btnHeroLivePass" onclick="openActiveBoardingPassModal()" style="display:none;">
                                     <i class="fa-solid fa-ticket"></i> Live Booking Pass ✦
                                 </button>
-                                <button class="glass-btn" onclick="switchTab('planner')">
-                                    <i class="fa-solid fa-compass"></i> Custom Route Builder
+                                <!-- Shown when user is not logged in -->
+                                <button class="gold-btn" id="btnHeroSignIn" onclick="openAuthModal('login')">
+                                    <i class="fa-solid fa-user-plus"></i> Sign In to Book & View Passes ✦
+                                </button>
+                                <button class="glass-btn" onclick="scrollToRouteBuilder()">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> Custom Route Builder
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ================= TOP RATED PACKAGES & TRIPS ================= -->
+                    <div class="section-title-wrap" style="margin-top:20px;">
+                        <div>
+                            <span class="gold-badge" style="margin-bottom:6px;"><i class="fa-solid fa-star" style="color:var(--gold-primary);"></i> 4.9+ HIGHEST RATED EXPERIENCES</span>
+                            <h2 class="section-title"><span class="sparkle">✦</span> Top Rated Packages & Trips</h2>
+                            <p class="section-subtitle">Ranked #1 by traveler community reviews, verified creator food trails & seamless transfers</p>
+                        </div>
+                    </div>
+
+                    <div class="top-rated-grid" id="topRatedTripsGrid">
+                        <!-- Top Rated Trip 1: Goa Long Weekend -->
+                        <div class="top-rated-card" onclick="openTripDetailModal('goa')">
+                            <div class="top-rated-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80" class="top-rated-img" alt="Goa Long Weekend">
+                                <div class="top-rated-badge">
+                                    <i class="fa-solid fa-star" style="color:#F59E0B;"></i> 4.98 <span style="color:var(--text-muted); font-size:10px;">(2,410+ reviews)</span>
+                                </div>
+                                <span class="top-rated-price-tag">From ₹8,999</span>
+                            </div>
+                            <div class="top-rated-body">
+                                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+                                    <h3 style="font-family:var(--font-heading); font-size:16px; font-weight:800; color:#fff; margin:0;">Goa Long Weekend</h3>
+                                    <span class="gold-badge" style="font-size:10px; background:rgba(232,201,122,0.15); color:var(--gold-light);">#1 Bestseller</span>
+                                </div>
+                                <div style="font-size:11px; color:var(--gold-light); margin-bottom:6px;">
+                                    <i class="fa-solid fa-clock"></i> 4D · 3N · Direct Flights / Sleeper AC + Innova Chauffeur
+                                </div>
+                                <p style="font-size:11px; color:var(--text-secondary); line-height:1.4; margin-bottom:10px;">
+                                    North Goa secret cliff viewpoints, Thalassa sunset table booking, bakery food crawl & South Goa kayaking.
+                                </p>
+                                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
+                                    <span class="tag-pill">🎒 Budget ₹8,999</span>
+                                    <span class="tag-pill">✨ Mid-Tier ₹19,499</span>
+                                    <span class="tag-pill">🌟 Luxury ₹42,999</span>
+                                </div>
+                                <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:11px; color:#22C55E; font-weight:700;"><i class="fa-solid fa-check"></i> Free Rescheduling</span>
+                                    <button class="gold-btn" style="padding:6px 14px; font-size:11px;">Book Package ➔</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top Rated Trip 2: Thailand & Krabi -->
+                        <div class="top-rated-card" onclick="openTripDetailModal('thailand')">
+                            <div class="top-rated-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80" class="top-rated-img" alt="Thailand & Krabi">
+                                <div class="top-rated-badge">
+                                    <i class="fa-solid fa-star" style="color:#F59E0B;"></i> 4.96 <span style="color:var(--text-muted); font-size:10px;">(1,840+ reviews)</span>
+                                </div>
+                                <span class="top-rated-price-tag">From ₹14,999</span>
+                            </div>
+                            <div class="top-rated-body">
+                                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+                                    <h3 style="font-family:var(--font-heading); font-size:16px; font-weight:800; color:#fff; margin:0;">Thailand & Krabi Islands VIP</h3>
+                                    <span class="gold-badge" style="font-size:10px; background:rgba(56,189,248,0.15); color:#7DD3FC;">International</span>
+                                </div>
+                                <div style="font-size:11px; color:var(--gold-light); margin-bottom:6px;">
+                                    <i class="fa-solid fa-clock"></i> 5D · 4N · Suvarnabhumi Flight + Private Commuter Van
+                                </div>
+                                <p style="font-size:11px; color:var(--text-secondary); line-height:1.4; margin-bottom:10px;">
+                                    Bangkok Chinatown 40-yr wok street food crawl, private sunset longtail boat in Railay, and cliffside infinity pool resort.
+                                </p>
+                                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
+                                    <span class="tag-pill">🎒 Budget ₹14,999</span>
+                                    <span class="tag-pill">✨ Mid-Tier ₹26,999</span>
+                                    <span class="tag-pill">🌟 Luxury ₹54,999</span>
+                                </div>
+                                <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:11px; color:#22C55E; font-weight:700;"><i class="fa-solid fa-check"></i> Visa Assistance</span>
+                                    <button class="gold-btn" style="padding:6px 14px; font-size:11px;">Book Package ➔</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top Rated Trip 3: Himachal Pradesh -->
+                        <div class="top-rated-card" onclick="openTripDetailModal('himachal')">
+                            <div class="top-rated-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80" class="top-rated-img" alt="Himachal Mountain Trail">
+                                <div class="top-rated-badge">
+                                    <i class="fa-solid fa-star" style="color:#F59E0B;"></i> 4.94 <span style="color:var(--text-muted); font-size:10px;">(1,290+ reviews)</span>
+                                </div>
+                                <span class="top-rated-price-tag">From ₹6,499</span>
+                            </div>
+                            <div class="top-rated-body">
+                                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+                                    <h3 style="font-family:var(--font-heading); font-size:16px; font-weight:800; color:#fff; margin:0;">Himachal Parvati Trail</h3>
+                                    <span class="gold-badge" style="font-size:10px; background:rgba(34,197,94,0.15); color:#86EFAC;">Mountain Pick</span>
+                                </div>
+                                <div style="font-size:11px; color:var(--gold-light); margin-bottom:6px;">
+                                    <i class="fa-solid fa-clock"></i> 5D · 4N · Volvo AC Sleeper / Bhuntar Flight + 4x4 Cab
+                                </div>
+                                <p style="font-size:11px; color:var(--text-secondary); line-height:1.4; margin-bottom:10px;">
+                                    Kasol riverside woodfire cafes, Tosh pine forest trek, natural Manikaran hot springs, and heated chalet stay.
+                                </p>
+                                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
+                                    <span class="tag-pill">🎒 Budget ₹6,499</span>
+                                    <span class="tag-pill">✨ Mid-Tier ₹14,999</span>
+                                    <span class="tag-pill">🌟 Luxury ₹32,999</span>
+                                </div>
+                                <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:11px; color:#22C55E; font-weight:700;"><i class="fa-solid fa-check"></i> 4x4 Mountain Fleet</span>
+                                    <button class="gold-btn" style="padding:6px 14px; font-size:11px;">Book Package ➔</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top Rated Trip 4: Gokarna Coast -->
+                        <div class="top-rated-card" onclick="openTripDetailModal('gokarna')">
+                            <div class="top-rated-img-wrap">
+                                <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=800&q=80" class="top-rated-img" alt="Gokarna Coast">
+                                <div class="top-rated-badge">
+                                    <i class="fa-solid fa-star" style="color:#F59E0B;"></i> 4.95 <span style="color:var(--text-muted); font-size:10px;">(980+ reviews)</span>
+                                </div>
+                                <span class="top-rated-price-tag">From ₹5,499</span>
+                            </div>
+                            <div class="top-rated-body">
+                                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+                                    <h3 style="font-family:var(--font-heading); font-size:16px; font-weight:800; color:#fff; margin:0;">Gokarna Beach & Scooty Trail</h3>
+                                    <span class="gold-badge" style="font-size:10px; background:rgba(232,201,122,0.15); color:var(--gold-light);">Serene Escape</span>
+                                </div>
+                                <div style="font-size:11px; color:var(--gold-light); margin-bottom:6px;">
+                                    <i class="fa-solid fa-clock"></i> 3D · 2N · Express Sleeper / Hubballi Taxi + Scooty
+                                </div>
+                                <p style="font-size:11px; color:var(--text-secondary); line-height:1.4; margin-bottom:10px;">
+                                    Om Beach to Half Moon cliff trek, private beach shacks, Namaste Cafe breakfast, and pristine sunset silence.
+                                </p>
+                                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
+                                    <span class="tag-pill">🎒 Budget ₹5,499</span>
+                                    <span class="tag-pill">✨ Mid-Tier ₹11,999</span>
+                                    <span class="tag-pill">🌟 Luxury ₹24,999</span>
+                                </div>
+                                <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-size:11px; color:#22C55E; font-weight:700;"><i class="fa-solid fa-check"></i> Scooty Included</span>
+                                    <button class="gold-btn" style="padding:6px 14px; font-size:11px;">Book Package ➔</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ================= HOMEPAGE CUSTOM ROUTE BUILDER ================= -->
+                    <div class="home-route-builder-card" id="homeRouteBuilderCard">
+                        <div class="section-title-wrap" style="margin-bottom:12px;">
+                            <div>
+                                <span class="gold-badge" style="background:rgba(56,189,248,0.15); border-color:rgba(56,189,248,0.4); color:#38BDF8; margin-bottom:6px;">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> INTERACTIVE ROUTE DESIGNER
+                                </span>
+                                <h2 class="section-title" style="font-size:20px;"><span class="sparkle">✦</span> Custom Route Builder</h2>
+                                <p class="section-subtitle">Design a custom travel route tailored to your exact departure hub, preferred travel tier, and squad</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 1: Origin Hub -->
+                        <div class="route-step-group">
+                            <label class="route-step-label"><i class="fa-solid fa-plane-departure" style="color:var(--gold-primary);"></i> 1. Select Departure Hub (From)</label>
+                            <div class="route-pills-row" id="homeRouteOriginPills">
+                                <button type="button" class="route-pill-btn active" onclick="setHomeRouteOrigin('BLR', this)">BLR · Bengaluru</button>
+                                <button type="button" class="route-pill-btn" onclick="setHomeRouteOrigin('DEL', this)">DEL · Delhi</button>
+                                <button type="button" class="route-pill-btn" onclick="setHomeRouteOrigin('BOM', this)">BOM · Mumbai</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Destination -->
+                        <div class="route-step-group">
+                            <label class="route-step-label"><i class="fa-solid fa-location-dot" style="color:var(--gold-primary);"></i> 2. Choose Destination (To)</label>
+                            <select class="match-input-select" id="homeRouteDestSelect" onchange="calculateHomeRouteEstimate()">
+                                <option value="Goa (Mopa & South Goa)">Goa (Mopa & South Goa)</option>
+                                <option value="Thailand & Krabi Islands">Thailand & Krabi Islands</option>
+                                <option value="Himachal Pradesh (Kasol & Parvati)">Himachal Pradesh (Kasol & Parvati)</option>
+                                <option value="Gokarna Coast & Beach Shacks">Gokarna Coast & Beach Shacks</option>
+                                <option value="Pondicherry & French Quarter">Pondicherry & French Quarter</option>
+                                <option value="Meghalaya & Living Root Bridges">Meghalaya & Living Root Bridges</option>
+                            </select>
+                        </div>
+
+                        <!-- Step 3: Travel Segment -->
+                        <div class="route-step-group">
+                            <label class="route-step-label"><i class="fa-solid fa-layer-group" style="color:var(--gold-primary);"></i> 3. Select Travel Segment Class</label>
+                            <div class="route-pills-row" id="homeRouteTierPills">
+                                <button type="button" class="route-pill-btn" onclick="setHomeRouteTier('budget', this)">🎒 Budget (Hostel + Sleeper)</button>
+                                <button type="button" class="route-pill-btn active" onclick="setHomeRouteTier('mid', this)">✨ Mid-Tier (Boutique + Flight)</button>
+                                <button type="button" class="route-pill-btn" onclick="setHomeRouteTier('luxury', this)">🌟 Luxury (5-Star + Innova)</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Squad & Dates -->
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+                            <div>
+                                <label class="route-step-label"><i class="fa-solid fa-users" style="color:var(--gold-primary);"></i> Squad Size</label>
+                                <select class="match-input-select" id="homeRouteSquadSelect" onchange="calculateHomeRouteEstimate()">
+                                    <option value="2">2 Travelers (Duo / Couple)</option>
+                                    <option value="1">1 Solo Traveler</option>
+                                    <option value="4">Squad of 3-5</option>
+                                    <option value="6">Group of 6+</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="route-step-label"><i class="fa-solid fa-calendar-day" style="color:var(--gold-primary);"></i> Travel Date</label>
+                                <input type="text" class="match-input-text" id="homeRouteDateInput" placeholder="e.g. Next Weekend / Nov 28" oninput="calculateHomeRouteEstimate()">
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Preferences Tags -->
+                        <div class="route-step-group">
+                            <label class="route-step-label"><i class="fa-solid fa-heart" style="color:var(--gold-primary);"></i> Experience Preferences</label>
+                            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                                <span class="route-pref-tag selected" onclick="toggleRoutePref(this)">🏖️ Secret Beach Shacks</span>
+                                <span class="route-pref-tag selected" onclick="toggleRoutePref(this)">🍜 Local Food Crawls</span>
+                                <span class="route-pref-tag" onclick="toggleRoutePref(this)">🍸 Rooftop Speakeasies</span>
+                                <span class="route-pref-tag" onclick="toggleRoutePref(this)">🛶 Private Sunset Boat</span>
+                                <span class="route-pref-tag" onclick="toggleRoutePref(this)">🏔️ 4x4 Mountain Treks</span>
+                                <span class="route-pref-tag" onclick="toggleRoutePref(this)">💆 5-Star Spa & Wellness</span>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Instant Route Estimate Banner -->
+                        <div style="background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); border-radius:var(--radius-md); padding:14px; margin-top:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                            <div>
+                                <span style="font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">ESTIMATED CUSTOM ITINERARY TOTAL</span>
+                                <div style="font-size:20px; font-weight:900; color:var(--gold-light);" id="homeRoutePriceEst">
+                                    ₹18,999 <span style="font-size:12px; font-weight:500; color:var(--text-secondary);">/ person</span>
+                                </div>
+                                <div style="font-size:11px; color:#38BDF8; margin-top:2px;" id="homeRouteTransportEst">
+                                    ✈️ Direct Flight + 🚖 Innova Chauffeur + 🏨 Boutique Resort Handover
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                                <button class="gold-btn" style="padding:10px 18px; font-size:12px;" onclick="bookCustomHomeRoute()">
+                                    <i class="fa-solid fa-bolt"></i> Book Custom Route ✦
+                                </button>
+                                <button class="glass-btn" style="padding:10px 14px; font-size:12px;" onclick="inquireCustomRouteWhatsApp()">
+                                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Designer
                                 </button>
                             </div>
                         </div>
@@ -2334,10 +2726,9 @@
                         </div>
 
                         <div class="footer-social-chips">
-                            <span class="gold-badge" onclick="openInstagramChannel('@cometriipwme')" style="cursor:pointer;">📸 @cometriipwme</span>
-                            <span class="gold-badge" onclick="openInstagramChannel('@beyondbengalurufoods')" style="cursor:pointer;">🍜 @beyondbengalurufoods</span>
-                            <span class="gold-badge" onclick="openYouTubeChannel()" style="cursor:pointer;">▶ YouTube</span>
-                            <span class="gold-badge" onclick="openWhatsAppInquiry()" style="cursor:pointer;">💬 WhatsApp</span>
+                            <span class="gold-badge" onclick="openWhatsAppInquiry()" style="cursor:pointer;"><i class="fa-brands fa-whatsapp"></i> 24/7 WhatsApp Concierge</span>
+                            <span class="gold-badge" onclick="openYouTubeChannel()" style="cursor:pointer;">▶ Travel Guides</span>
+                            <span class="gold-badge" style="cursor:default;">✦ Verified Creator Network</span>
                         </div>
                         <p style="font-size:10px; color:var(--text-tertiary);">© 2025 ComeTripWithMe · Handcrafted in Bengaluru</p>
                     </div>
@@ -4322,6 +4713,144 @@ function viewSpotlight(id) {
     }
 }
 
+// ==================== HOMEPAGE CUSTOM ROUTE BUILDER ENGINE ====================
+let homeRouteState = {
+    origin: 'BLR',
+    destination: 'Goa (Mopa & South Goa)',
+    tier: 'mid',
+    squad: 2,
+    date: 'Next Weekend',
+    preferences: ['🏖️ Secret Beach Shacks', '🍜 Local Food Crawls']
+};
+
+function scrollToRouteBuilder() {
+    const el = document.getElementById('homeRouteBuilderCard');
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el.style.borderColor = 'var(--gold-primary)';
+        setTimeout(() => {
+            el.style.borderColor = '';
+        }, 1500);
+    }
+}
+
+function setHomeRouteOrigin(hub, btn) {
+    homeRouteState.origin = hub;
+    const parent = document.getElementById('homeRouteOriginPills');
+    if (parent) {
+        parent.querySelectorAll('.route-pill-btn').forEach(b => b.classList.remove('active'));
+    }
+    if (btn) btn.classList.add('active');
+    calculateHomeRouteEstimate();
+}
+
+function setHomeRouteTier(tier, btn) {
+    homeRouteState.tier = tier;
+    const parent = document.getElementById('homeRouteTierPills');
+    if (parent) {
+        parent.querySelectorAll('.route-pill-btn').forEach(b => b.classList.remove('active'));
+    }
+    if (btn) btn.classList.add('active');
+    calculateHomeRouteEstimate();
+}
+
+function toggleRoutePref(el) {
+    el.classList.toggle('selected');
+    const prefName = el.textContent.trim();
+    if (el.classList.contains('selected')) {
+        if (!homeRouteState.preferences.includes(prefName)) {
+            homeRouteState.preferences.push(prefName);
+        }
+    } else {
+        homeRouteState.preferences = homeRouteState.preferences.filter(p => p !== prefName);
+    }
+    calculateHomeRouteEstimate();
+}
+
+function calculateHomeRouteEstimate() {
+    const destSelect = document.getElementById('homeRouteDestSelect');
+    if (destSelect) homeRouteState.destination = destSelect.value;
+    
+    const squadSelect = document.getElementById('homeRouteSquadSelect');
+    if (squadSelect) homeRouteState.squad = parseInt(squadSelect.value, 10) || 2;
+    
+    const dateInput = document.getElementById('homeRouteDateInput');
+    if (dateInput && dateInput.value.trim()) {
+        homeRouteState.date = dateInput.value.trim();
+    }
+
+    const basePrices = {
+        'Goa (Mopa & South Goa)': { budget: 8999, mid: 18999, luxury: 42999 },
+        'Thailand & Krabi Islands': { budget: 14999, mid: 26999, luxury: 54999 },
+        'Himachal Pradesh (Kasol & Parvati)': { budget: 6499, mid: 14999, luxury: 32999 },
+        'Gokarna Coast & Beach Shacks': { budget: 5499, mid: 11999, luxury: 24999 },
+        'Pondicherry & French Quarter': { budget: 5999, mid: 12999, luxury: 25999 },
+        'Meghalaya & Living Root Bridges': { budget: 9999, mid: 19999, luxury: 38999 }
+    };
+
+    const destKey = homeRouteState.destination || 'Goa (Mopa & South Goa)';
+    const matrix = basePrices[destKey] || basePrices['Goa (Mopa & South Goa)'];
+    let unitPrice = matrix[homeRouteState.tier] || matrix.mid;
+
+    if (homeRouteState.origin === 'DEL' && (destKey.includes('Goa') || destKey.includes('Gokarna'))) {
+        unitPrice += 1500;
+    } else if (homeRouteState.origin === 'BOM' && destKey.includes('Himachal')) {
+        unitPrice += 1200;
+    }
+
+    const priceEl = document.getElementById('homeRoutePriceEst');
+    if (priceEl) {
+        priceEl.innerHTML = `₹${unitPrice.toLocaleString('en-IN')} <span style="font-size:12px; font-weight:500; color:var(--text-secondary);">/ person (x${homeRouteState.squad} = ₹${(unitPrice * homeRouteState.squad).toLocaleString('en-IN')})</span>`;
+    }
+
+    const transportEl = document.getElementById('homeRouteTransportEst');
+    if (transportEl) {
+        let desc = '';
+        if (homeRouteState.tier === 'budget') {
+            desc = `🚌 Overnight Sleeper / Train + 🛵 Scooty Pass + 🛏️ Verified Social Hostel (${homeRouteState.origin} ➔ ${destKey.split(' ')[0]})`;
+        } else if (homeRouteState.tier === 'luxury') {
+            desc = `🌟 5-Star Luxury Resort + 🚖 Dedicated Innova Chauffeur + ✈️ Priority Direct Flight (${homeRouteState.origin} ➔ ${destKey.split(' ')[0]})`;
+        } else {
+            desc = `✈️ Direct Flight + 🚖 Airport Chauffeur + 🏨 Boutique Villa Stay (${homeRouteState.origin} ➔ ${destKey.split(' ')[0]})`;
+        }
+        transportEl.textContent = desc;
+    }
+}
+
+function bookCustomHomeRoute() {
+    if (!store.currentUser) {
+        showToast('🔒 Please sign in first to customize and book your route.');
+        openAuthModal('login');
+        return;
+    }
+
+    let tripId = 'goa';
+    if (homeRouteState.destination.includes('Thailand')) tripId = 'thailand';
+    else if (homeRouteState.destination.includes('Himachal')) tripId = 'himachal';
+    else if (homeRouteState.destination.includes('Gokarna')) tripId = 'gokarna';
+    else if (homeRouteState.destination.includes('Pondicherry')) tripId = 'pondicherry';
+
+    activeBookingTripState.tripId = tripId;
+    activeBookingTripState.tierKey = homeRouteState.tier;
+    store.selectedOrigin = homeRouteState.origin;
+
+    openPreBookingItineraryModal(tripId);
+}
+
+function inquireCustomRouteWhatsApp() {
+    const org = homeRouteState.origin || 'BLR';
+    const dest = homeRouteState.destination || 'Custom Route';
+    const tier = (homeRouteState.tier || 'mid').toUpperCase();
+    const squad = homeRouteState.squad || 2;
+    const date = homeRouteState.date || 'Upcoming';
+    const prefs = (homeRouteState.preferences || []).join(', ') || 'Custom highlights';
+    const traveler = store.currentUser ? store.currentUser.display_name : 'Traveler';
+
+    const text = encodeURIComponent(`Hi ComeTripWithMe Designers! I'm ${traveler}. I want to customize a travel route:\n- From: ${org}\n- To: ${dest}\n- Travel Tier: ${tier}\n- Squad: ${squad} people\n- Travel Date: ${date}\n- Preferences: ${prefs}\nCould you share an exclusive quote and driver/stay breakdown?`);
+
+    window.open(`https://wa.me/919999999999?text=${text}`, '_blank');
+}
+
 // Smart Match Engine
 function updateBudgetSliderVal(val) {
     document.getElementById('smartBudgetVal').textContent = '₹' + parseInt(val).toLocaleString('en-IN');
@@ -4523,8 +5052,20 @@ function bookTripAndActivateLivePass(tripId) {
     openActiveBoardingPassModal();
 }
 
-function openActiveBoardingPassModal() {
+function openActiveBoardingPassModal(bookingRef = null) {
+    if (!store.currentUser) {
+        showToast("Please sign in to view your live booking pass.");
+        openAuthModal('login');
+        return;
+    }
+
     const b = store.data.userBooking;
+    if (store.currentUser && store.currentUser.display_name) {
+        b.passengerName = store.currentUser.display_name;
+    }
+    if (bookingRef) {
+        b.bookingId = bookingRef;
+    }
     const trip = store.getTrip(b.bookedTripId || 'goa');
     const tierKey = b.selectedTier || 'mid';
     const tier = trip.tiers[tierKey] || trip.tiers['mid'];
@@ -4603,12 +5144,15 @@ function openActiveBoardingPassModal() {
             </div>
         </div>
 
-        <div style="display:flex; gap:10px;">
-            <button class="gold-btn" style="flex:1;" onclick="closeModal('boardingPassModal'); startLiveGuideForTrip('${trip.id}');">
-                <i class="fa-solid fa-route"></i> Open Live Interactive Pocket Guide
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="gold-btn" style="flex:1;" onclick="closeModal('boardingPassModal'); openTripLiveTrackingModal('${b.bookingId}');">
+                <i class="fa-solid fa-satellite-dish"></i> Live Trip Tracking & Driver Chat
+            </button>
+            <button class="glass-btn" onclick="closeModal('boardingPassModal'); startLiveGuideForTrip('${trip.id}');">
+                <i class="fa-solid fa-compass"></i> Pocket Guide
             </button>
             <button class="glass-btn" onclick="inquireTripWhatsApp('${trip.id}')">
-                <i class="fa-brands fa-whatsapp"></i> Contact Host
+                <i class="fa-brands fa-whatsapp"></i> Host
             </button>
         </div>
     `;
@@ -5584,6 +6128,9 @@ function updateAuthUI() {
     const headerBtn = document.getElementById('headerAuthBtn');
     const headerLabel = document.getElementById('headerAuthLabel');
     const masterLabel = document.getElementById('masterUserLabel');
+    const heroPassBtn = document.getElementById('btnHeroLivePass');
+    const heroSignInBtn = document.getElementById('btnHeroSignIn');
+    const masterLivePassBtn = document.getElementById('btnLivePass');
 
     if (store.currentUser) {
         const shortName = store.currentUser.display_name.split(' ')[0];
@@ -5593,6 +6140,9 @@ function updateAuthUI() {
             headerBtn.style.borderColor = 'var(--accent-green)';
             headerBtn.style.color = '#86EFAC';
         }
+        if (heroPassBtn) heroPassBtn.style.display = 'inline-flex';
+        if (heroSignInBtn) heroSignInBtn.style.display = 'none';
+        if (masterLivePassBtn) masterLivePassBtn.style.display = 'inline-flex';
     } else {
         if (headerLabel) headerLabel.textContent = 'Login';
         if (masterLabel) masterLabel.textContent = 'Login / Profile';
@@ -5600,6 +6150,9 @@ function updateAuthUI() {
             headerBtn.style.borderColor = 'var(--gold-primary)';
             headerBtn.style.color = 'var(--gold-light)';
         }
+        if (heroPassBtn) heroPassBtn.style.display = 'none';
+        if (heroSignInBtn) heroSignInBtn.style.display = 'inline-flex';
+        if (masterLivePassBtn) masterLivePassBtn.style.display = 'none';
     }
 }
 
@@ -6842,6 +7395,9 @@ async function escalateToHumanSupport() {
 // Hook into page load
 window.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
+    if (typeof calculateHomeRouteEstimate === 'function') {
+        calculateHomeRouteEstimate();
+    }
 });
 
 </script>
